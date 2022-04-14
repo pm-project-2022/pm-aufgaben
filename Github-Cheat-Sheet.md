@@ -62,7 +62,8 @@ Listet alle Branches auf
 git branch branchname
 ```
 erstellt neuen Branch  
-```git checkout branchname
+```
+git checkout branchname
 ```
 wechselt zu dem Branch mit dem angegeben Namen   
 ```
