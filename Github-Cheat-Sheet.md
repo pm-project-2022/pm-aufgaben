@@ -2,7 +2,7 @@
 
 ## Setup Git-User
 
-`git config --global user.name "username"` Setzt den Usernamen in Git  
+```git config --global user.name "username"``` Setzt den Usernamen in Git  
 `git config --global user.email "emailadress"` Setzt die Email-Adresse des Users in Git  
 
 ---
