@@ -14,6 +14,6 @@ public class ConsoleFormatter extends SimpleFormatter {
         return "------------\n" + "Logger: " + record.getLoggerName() + "\n" + "Level: " + record.getLevel() + "\n"
                 + "Class: " + record.getSourceClassName() + "\n" +
                 "Method: " + record.getSourceMethodName() + "\n" + "Message: " + record.getMessage() + "\n"
-                + "------------\n";
+                + "------------\n\n";
     }
 }
