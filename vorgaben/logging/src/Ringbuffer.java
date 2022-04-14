@@ -1,3 +1,6 @@
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Simple Ringbuffer for String objects.
@@ -5,6 +8,7 @@
 public class Ringbuffer {
     private final String[] buffer;
     private int start, elements;
+    private Logger logger;
 
     /**
      * Constructor for the buffer which creates the String array for the storage.
@@ -13,12 +17,28 @@ public class Ringbuffer {
      * @throws IllegalArgumentException when the size is below or equal to 0
      */
     public Ringbuffer(int size) {
+        loggerInit();
         if (size <= 0) {
             System.err.println("The Size of the buffer needs to be at least 1.");
             throw new IllegalArgumentException("The Size of the buffer needs to be at least 1.");
         }
         System.out.println("Creating array with size of " + size + " for storage.");
         buffer = new String[size];
+    }
+
+    /**
+     * Initiates the logger
+     */
+    private void loggerInit(){
+        this.logger = Logger.getLogger(Ringbuffer.class.getName());
+        this.logger.setUseParentHandlers(false);
+        this.logger.setLevel(Level.ALL);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.ALL);
+        consoleHandler.setFormatter(new ConsoleFormatter());
+        this.logger.addHandler(consoleHandler);
+
+
     }
 
     /**
