@@ -19,9 +19,9 @@ public class Ringbuffer {
     public Ringbuffer(int size) {
         loggerInit();
         if (size <= 0) {
-            this.logger.warning("The Size of the buffer needs to be at least 1.");
+            this.logger.severe("The Size of the buffer needs to be at least 1.");
             //System.err.println("The Size of the buffer needs to be at least 1.");
-            throw new IllegalArgumentException("The Size of the buffer needs to be at least 1.");
+            //throw new IllegalArgumentException("The Size of the buffer needs to be at least 1.");
         }
         
         this.logger.info("Creating array with size of " + size + " for storage.");
@@ -40,8 +40,6 @@ public class Ringbuffer {
         consoleHandler.setLevel(Level.ALL);
         consoleHandler.setFormatter(new ConsoleFormatter());
         this.logger.addHandler(consoleHandler);
-
-
     }
 
     /**
@@ -52,12 +50,12 @@ public class Ringbuffer {
      */
     public void add(String element) {
         if (elements == buffer.length) {
-            this.logger.warning("The Current Buffer is already full.");
+            //this.logger.warning("The Current Buffer is already full.");
             //System.err.println("The Current Buffer is already full.");
             throw new IllegalStateException("The Current Buffer is already full.");
         }
         
-        this.logger.info("Adding " + element + " to buffer on position " + (start + elements) % buffer.length);
+        this.logger.info("Adding '" + element + "' to buffer on position " + (start + elements) % buffer.length);
         //System.out.println("Adding " + element + " to buffer on position " + (start + elements) % buffer.length);
         buffer[(start + elements) % buffer.length] = element;
         this.logger.fine("Increasing Element count by 1 to " + (elements + 1));
@@ -75,7 +73,6 @@ public class Ringbuffer {
         this.logger.info("Currently the buffer does contain: " + elements + " elements");
         //System.out.println("Currently the buffer does contain: " + elements + " elements");
         if (elements == 0) {
-            this.logger.warning("The Current Buffer does not contain any element.");
             //System.err.println("The Current Buffer does not contain any element.");
             throw new IllegalStateException("The Current Buffer does not contain any element.");
         }
@@ -86,7 +83,7 @@ public class Ringbuffer {
         //System.out.println("Moving the start pointer from " + start + " to " + (start + 1) % buffer.length);
         start = (start + 1) % buffer.length;
         this.logger.fine("Decreasing Element count by 1 to " + (elements - 1));
-        System.out.println("Decreasing Element count by 1 to " + (elements - 1));
+        //System.out.println("Decreasing Element count by 1 to " + (elements - 1));
         elements--;
         return s;
     }
