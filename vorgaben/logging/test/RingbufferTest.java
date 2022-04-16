@@ -4,25 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 class RingbufferTest {
     Ringbuffer buffer;
-    Logger logger;
-    ConsoleHandler consoleHandler;
 
     @BeforeEach
     void setUp() {
         buffer = new Ringbuffer(2);
-        logger = Logger.getLogger(RingbufferTest.class.getName());
-        logger.setUseParentHandlers(false);
-        logger.setLevel(Level.ALL);
-        consoleHandler = new ConsoleHandler();
-        consoleHandler.setLevel(Level.ALL);
-        consoleHandler.setFormatter(new ConsoleFormatter());
-        logger.addHandler(consoleHandler);
     }
 
     @Test
@@ -43,7 +30,6 @@ class RingbufferTest {
         assertDoesNotThrow(() -> buffer.add("1"));
         assertDoesNotThrow(() -> buffer.add("2"));
         IllegalStateException thrown = Assertions.assertThrows(IllegalStateException.class, () -> buffer.add(""));
-        logger.severe(thrown.getMessage());
         assertEquals("The Current Buffer is already full.", thrown.getMessage());
     }
 
@@ -58,7 +44,6 @@ class RingbufferTest {
     @Test
     void removeEmpty() {
         IllegalStateException thrown = Assertions.assertThrows(IllegalStateException.class, () -> buffer.remove());
-        logger.severe(thrown.getMessage());
         assertEquals("The Current Buffer does not contain any element.", thrown.getMessage());
     }
 

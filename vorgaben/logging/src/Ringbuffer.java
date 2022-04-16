@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +32,7 @@ public class Ringbuffer {
     }
 
     /**
-     * Initiates the logger
+     * Initiates the logger and the console/filehandler
      */
     private void loggerInit(){
         this.logger = Logger.getLogger(Ringbuffer.class.getName());
@@ -40,6 +42,16 @@ public class Ringbuffer {
         consoleHandler.setLevel(Level.ALL);
         consoleHandler.setFormatter(new ConsoleFormatter());
         this.logger.addHandler(consoleHandler);
+        try {
+            FileHandler fileHandler = new FileHandler("log.csv", true);
+            fileHandler.setLevel(Level.WARNING);
+            fileHandler.setFormatter(new FileFormatter());
+            this.logger.addHandler(fileHandler);
+        } catch (SecurityException e) {
+            this.logger.severe(e.getMessage());
+        } catch (IOException e) {
+            this.logger.severe(e.getMessage());
+        } 
     }
 
     /**
@@ -50,7 +62,7 @@ public class Ringbuffer {
      */
     public void add(String element) {
         if (elements == buffer.length) {
-            //this.logger.warning("The Current Buffer is already full.");
+            this.logger.warning("The Current Buffer is already full.");
             //System.err.println("The Current Buffer is already full.");
             throw new IllegalStateException("The Current Buffer is already full.");
         }
@@ -74,6 +86,7 @@ public class Ringbuffer {
         //System.out.println("Currently the buffer does contain: " + elements + " elements");
         if (elements == 0) {
             //System.err.println("The Current Buffer does not contain any element.");
+            this.logger.warning("The Current Buffer does not contain any element.");
             throw new IllegalStateException("The Current Buffer does not contain any element.");
         }
         String s = buffer[start];
