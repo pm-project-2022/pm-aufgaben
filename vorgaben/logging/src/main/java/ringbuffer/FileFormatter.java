@@ -1,3 +1,5 @@
+package ringbuffer;
+
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 

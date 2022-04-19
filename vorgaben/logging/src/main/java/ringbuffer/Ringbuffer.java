@@ -1,3 +1,5 @@
+package ringbuffer;
+
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
@@ -11,6 +13,8 @@ public class Ringbuffer {
     private final String[] buffer;
     private int start, elements;
     private Logger logger;
+    private ConsoleHandler consoleHandler;
+    private FileHandler fileHandler, fileHandler2;
 
     /**
      * Constructor for the buffer which creates the String array for the storage.
@@ -23,7 +27,7 @@ public class Ringbuffer {
         if (size <= 0) {
             this.logger.severe("The Size of the buffer needs to be at least 1.");
             //System.err.println("The Size of the buffer needs to be at least 1.");
-            //throw new IllegalArgumentException("The Size of the buffer needs to be at least 1.");
+            throw new IllegalArgumentException("The Size of the buffer needs to be at least 1.");
         }
         
         this.logger.info("Creating array with size of " + size + " for storage.");
@@ -38,15 +42,19 @@ public class Ringbuffer {
         this.logger = Logger.getLogger(Ringbuffer.class.getName());
         this.logger.setUseParentHandlers(false);
         this.logger.setLevel(Level.ALL);
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setLevel(Level.ALL);
-        consoleHandler.setFormatter(new ConsoleFormatter());
+        this.consoleHandler = new ConsoleHandler();
+        this.consoleHandler.setLevel(Level.ALL);
+        this.consoleHandler.setFormatter(new ConsoleFormatter());
         this.logger.addHandler(consoleHandler);
         try {
-            FileHandler fileHandler = new FileHandler("log.csv", true);
-            fileHandler.setLevel(Level.WARNING);
-            fileHandler.setFormatter(new FileFormatter());
+            this.fileHandler = new FileHandler("logWarningsSevere.csv", true);
+            this.fileHandler2 = new FileHandler("logAll.txt", true);
+            this.fileHandler.setLevel(Level.WARNING);
+            this.fileHandler2.setLevel(Level.ALL);
+            this.fileHandler.setFormatter(new FileFormatter());
+            this.fileHandler2.setFormatter(new FileFormatter());
             this.logger.addHandler(fileHandler);
+            this.logger.addHandler(fileHandler2);
         } catch (SecurityException e) {
             this.logger.severe(e.getMessage());
         } catch (IOException e) {
