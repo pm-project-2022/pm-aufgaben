@@ -1,3 +1,5 @@
+package computerfactory;
+
 public class Cpu {
     private int cores;
     private float frequency;
