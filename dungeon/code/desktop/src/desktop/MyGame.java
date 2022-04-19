@@ -1,16 +1,19 @@
 package desktop;
 
 import com.badlogic.gdx.Gdx;
+
+import EntityController.MyHero;
 import controller.MainController;
 import level.generator.LevelLoader.LevelLoader;
 import level.generator.dungeong.graphg.NoSolutionException;
 
 public class MyGame extends MainController {
+    private MyHero hero;
 
     @Override
     protected void setup() {
         levelAPI.setGenerator(new LevelLoader());
-        // load the first level
+        hero = new MyHero(painter, batch);
         try {
             levelAPI.loadLevel();
         } catch (NoSolutionException e) {
@@ -18,6 +21,8 @@ public class MyGame extends MainController {
                     "Es konnte kein Level geladen werden, bitte den \"assets\" Ordner überprüfen.");
             Gdx.app.exit();
         }
+        camera.follow(hero);
+        entityController.add(hero);
     }
 
     @Override
@@ -27,7 +32,9 @@ public class MyGame extends MainController {
     protected void endFrame() {}
 
     @Override
-    public void onLevelLoad() {}
+    public void onLevelLoad() {
+        hero.setLevel(levelAPI.getCurrentLevel());
+    }
 
     public static void main(String[] args) {
         // start the game
