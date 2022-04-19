@@ -1,3 +1,5 @@
+package computerfactory;
+
 public class Ram {
     private int size;
 
