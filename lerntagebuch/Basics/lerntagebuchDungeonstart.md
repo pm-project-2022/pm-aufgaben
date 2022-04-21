@@ -1,8 +1,8 @@
 ---
 title: "Lerntagebuch zur Bearbeitung der Dungeon-Aufgaben Dungeon-Start"
 author:
--   "Jan Rau (EMAIL)"
--   "kenny-Joe Koch (EMAIL)"
+-   "Jan Rau (jan_niklas.rau@fh-bielefeld.de)"
+-   "kenny-Joe Koch (kenny-joe.koch@fh-bielefeld.de)"
 -   "Jan-Henrik Capsius (jan-henrik.capsius@fh-bielefeld.de)"
 hidden: true
 ---
