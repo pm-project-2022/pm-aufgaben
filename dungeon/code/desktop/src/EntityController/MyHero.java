@@ -22,8 +22,8 @@ import tools.Point;
  */
 
 public class MyHero extends Animatable {
-    private Animation idleAnimation, idleMirrorAnimation, runAnimation, runMirrorAnimation;
-    private boolean movementState = false, viewDirection = true;
+    private Animation idleAnimation, idleMirrorAnimation, runAnimation, runMirrorAnimation,activeAnimation;
+    private boolean movementState, viewDirection;
     private Point position;
     private Level currentLevel;
     private Logger logger;
@@ -32,7 +32,7 @@ public class MyHero extends Animatable {
     /**
      * Constructor for the hero. Sets the movementState to false and viewDirection
      * to true, which triggers the normal idleAnimation at start. Also initiates the animations.
-     * 
+     *
      * @param painter necessary for the super class
      * @param batch   necessary for the super class
      */
@@ -45,6 +45,7 @@ public class MyHero extends Animatable {
         idleMirrorAnimation();
         runAnimation();
         runMirrorAnimation();
+        this.activeAnimation = idleAnimation;
     }
 
     /**
@@ -126,32 +127,46 @@ public class MyHero extends Animatable {
         if (keyPressed()) {
             this.movementState = true;
 
+            // Wenn die Taste W gedrückt ist, bewege dich nach oben
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
                 newPosition.y += movementSpeed;
             }
-
+            // Wenn die Taste S gedrückt ist, bewege dich nach unten
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
                 newPosition.y -= movementSpeed;
             }
-
+            // Wenn die Taste D gedrückt ist, bewege dich nach rechts
             if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                newPosition.x += movementSpeed;
                 this.viewDirection = true;
+                newPosition.x += movementSpeed;
             }
             // Wenn die Taste A gedrückt ist, bewege dich nach links
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                newPosition.x -= movementSpeed;
                 this.viewDirection = false;
+                newPosition.x -= movementSpeed;
             }
-
             if (currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()) {
                 this.position = newPosition;
             }
 
-        } else {
-            this.movementState = false;
         }
-
+        animations();
+    }
+    private void animations(){
+        if(keyPressed()){
+            if(viewDirection){
+                this.activeAnimation = runAnimation;
+            }
+            else{
+                this.activeAnimation = runMirrorAnimation;
+            }
+        } else {
+            if (this.viewDirection) {
+                this.activeAnimation = this.idleAnimation;
+            } else {
+                this.activeAnimation = this.idleMirrorAnimation;
+            }
+        }
     }
 
     /**
@@ -183,23 +198,6 @@ public class MyHero extends Animatable {
 
     @Override
     public Animation getActiveAnimation() {
-        if (this.movementState) {
-            if (this.viewDirection) {
-                // logger.info("guckt nach rechts und läuft hoch runter oder nach rechts");
-                return runAnimation;
-            } else {
-                // logger.info("guckt nach links und läuft hoch runter oder nach links");
-                return runMirrorAnimation;
-            }
-        } else {
-            if (this.viewDirection) {
-                // logger.info("guckt nach rechts und steht");
-                return idleAnimation;
-            } else {
-                // logger.info("guckt nach links und steht");
-                return idleMirrorAnimation;
-            }
-        }
+        return activeAnimation;
     }
-
 }
