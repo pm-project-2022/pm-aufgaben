@@ -200,4 +200,5 @@ public class MyHero extends Animatable {
     public Animation getActiveAnimation() {
         return activeAnimation;
     }
+
 }
