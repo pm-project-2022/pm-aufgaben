@@ -6,33 +6,32 @@ import helper.PointAndBoolean;
 import level.elements.Level;
 import tools.Point;
 
-public class PatrolY implements IMovementBehaviour {
-    boolean runDirectionY;
-
-    public PatrolY(){
-        this.runDirectionY = true;
+public class PatrolX implements IMovementBehaviour {
+    boolean runDirectionX;
+    
+    public PatrolX(){
+        this.runDirectionX = true;
     }
 
     @Override
     public PointAndBoolean getMovementBehaviour(Point currentPosition, StatusValues stats, Level currentLevel) {
         Point newPosition = new Point(currentPosition);
-        if(this.runDirectionY){
-            newPosition.y += stats.getMovementspeed();
+        if(this.runDirectionX){
+            newPosition.x += stats.getMovementspeed();
             if(currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()){
-                return new PointAndBoolean(true, newPosition);
+                return new PointAndBoolean(this.runDirectionX, newPosition);
             }else{
-                this.runDirectionY = false;
-                return new PointAndBoolean(true, currentPosition);
+                this.runDirectionX = false;
+                return new PointAndBoolean(this.runDirectionX, currentPosition);
             }
         }else{
-            newPosition.y -= stats.getMovementspeed();
+            newPosition.x -= stats.getMovementspeed();
             if(currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()){
-                return new PointAndBoolean(true, newPosition);
+                return new PointAndBoolean(this.runDirectionX, newPosition);
             }else{
-                this.runDirectionY = true;
-                return new PointAndBoolean(true, currentPosition);
+                this.runDirectionX = true;
+                return new PointAndBoolean(this.runDirectionX, currentPosition);
             }
         }
     }
-    
 }
