@@ -4,15 +4,12 @@ import basiselements.Animatable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Logger;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import EntityController.Statuswerte.StatusValues;
-import Logger.RunAnimationConsoleFormatter;
 import graphic.Animation;
 import graphic.Painter;
 import level.elements.Level;
@@ -27,8 +24,6 @@ public class MyHero extends Animatable {
     private boolean movementState, viewDirection;
     private Point position;
     private Level currentLevel;
-    private Logger logger;
-    private ConsoleHandler consoleHandler;
     private StatusValues stats;
 
     /**
@@ -42,23 +37,11 @@ public class MyHero extends Animatable {
         super(painter, batch);
         this.movementState = false;
         this.viewDirection = true;
-        initLogger();
         initAnimation();
         this.stats = new StatusValues(true, 100000,100000,100000,100000,100000,100000,100000,0, 0.2f);
         this.activeAnimation = idleAnimation;
     }
     
-    /**
-     * Logger for the movement
-     */
-    private void initLogger() {
-        this.logger = Logger.getLogger(MyHero.class.getName());
-        this.logger.setUseParentHandlers(false);
-        this.consoleHandler = new ConsoleHandler();
-        this.consoleHandler.setFormatter(new RunAnimationConsoleFormatter());
-        this.logger.addHandler(consoleHandler);
-    }
-
     /**
      * Inits animations
      */
