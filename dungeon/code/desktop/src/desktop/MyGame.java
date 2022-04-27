@@ -1,6 +1,7 @@
 package desktop;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 
@@ -12,6 +13,8 @@ import EntityController.Monster.NormalMonster.NormalMonsterQuantity;
 import EntityController.Monster.SmallMonster.Imp;
 import EntityController.Monster.SmallMonster.SmallMonsterNameList;
 import EntityController.Monster.SmallMonster.SmallMonsterQuantity;
+import EntityController.MovementBehaviour.IMovementBehaviour;
+import EntityController.MovementBehaviour.SimpleMovementBehaviour.PatrolX;
 import EntityController.MovementBehaviour.SimpleMovementBehaviour.PatrolY;
 import controller.MainController;
 import level.generator.LevelLoader.LevelLoader;
@@ -99,11 +102,20 @@ public class MyGame extends MainController {
     }
 
     private Monster monFac(String monName) {
+        IMovementBehaviour behaviour;
+        Random random = new Random();
+        int i = random.nextInt(2 + 1) + 1;
+        if(i == 1){
+            behaviour = new PatrolY();
+        }else{
+            behaviour = new PatrolX();
+        }
+
         if(monName.equals("Imp")){
-            return new Imp(painter, batch, this.hero, this.floor, new PatrolY());
+            return new Imp(painter, batch, this.hero, this.floor, behaviour);
         }
         if(monName.equals("Chort")){
-            return new Chort(painter, batch, hero, this.floor, new PatrolY());
+            return new Chort(painter, batch, hero, this.floor, behaviour);
         }
         return null;
     }
