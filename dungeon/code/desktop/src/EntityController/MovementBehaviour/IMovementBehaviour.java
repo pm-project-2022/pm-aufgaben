@@ -6,5 +6,5 @@ import tools.Point;
 
 public interface IMovementBehaviour {
     
-    Point getMovementBehaviour(Point currentPosition, StatusValues stats, Level curenntLevel);
+    Point getMovementBehaviour(Point currentPosition, StatusValues stats, Level currentLevel);
 }
