@@ -1,5 +1,6 @@
 package EntityController.MovementBehaviour.SimpleMovementBehaviour;
 
+import EntityController.Hero.MyHero;
 import EntityController.MovementBehaviour.IMovementBehaviour;
 import EntityController.Statuswerte.StatusValues;
 import helper.PointAndBoolean;
@@ -14,10 +15,15 @@ public class PatrolX implements IMovementBehaviour {
     }
 
     @Override
-    public PointAndBoolean getMovementBehaviour(Point currentPosition, StatusValues stats, Level currentLevel) {
+    public PointAndBoolean getMovementBehaviour(Point currentPosition, StatusValues stats, Level currentLevel, MyHero hero) {
         Point newPosition = new Point(currentPosition);
         if(this.runDirectionX){
             newPosition.x += stats.getMovementspeed();
+
+            if(currentLevel.getTileAt(newPosition.toCoordinate()) == hero.getLevel().getTileAt(hero.getPosition().toCoordinate())){
+                newPosition.x -= 1.0f;
+            }
+
             if(currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()){
                 return new PointAndBoolean(this.runDirectionX, newPosition);
             }else{
@@ -26,6 +32,10 @@ public class PatrolX implements IMovementBehaviour {
             }
         }else{
             newPosition.x -= stats.getMovementspeed();
+            if(currentLevel.getTileAt(newPosition.toCoordinate()) == hero.getLevel().getTileAt(hero.getPosition().toCoordinate())){
+                newPosition.x += 1.0f;
+            }
+
             if(currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()){
                 return new PointAndBoolean(this.runDirectionX, newPosition);
             }else{
