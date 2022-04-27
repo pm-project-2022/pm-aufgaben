@@ -2,6 +2,7 @@ package EntityController.MovementBehaviour.SimpleMovementBehaviour;
 
 import EntityController.MovementBehaviour.IMovementBehaviour;
 import EntityController.Statuswerte.StatusValues;
+import helper.PointAndBoolean;
 import level.elements.Level;
 import tools.Point;
 
@@ -13,23 +14,23 @@ public class PatrolY implements IMovementBehaviour {
     }
 
     @Override
-    public Point getMovementBehaviour(Point currentPosition, StatusValues stats, Level currentLevel) {
+    public PointAndBoolean getMovementBehaviour(Point currentPosition, StatusValues stats, Level currentLevel) {
         Point newPosition = new Point(currentPosition);
         if(this.runDirectionY){
             newPosition.y += stats.getMovementspeed();
             if(currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()){
-                return newPosition;
+                return new PointAndBoolean(true, newPosition);
             }else{
                 this.runDirectionY = false;
-                return currentPosition;
+                return new PointAndBoolean(true, currentPosition);
             }
         }else{
             newPosition.y -= stats.getMovementspeed();
             if(currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()){
-                return newPosition;
+                return new PointAndBoolean(true, newPosition);
             }else{
                 this.runDirectionY = true;
-                return currentPosition;
+                return new PointAndBoolean(true, currentPosition);
             }
         }
     }
