@@ -38,7 +38,7 @@ public class MyHero extends Animatable {
         this.movementState = false;
         this.viewDirection = true;
         initAnimation();
-        this.stats = new StatusValues(true, 100000,100000,100000,100000,100000,100000,100000,0, 0.2f);
+        this.stats = new StatusValues(true, 100000,100000,50,100000,50,100000,100000,0, 0.2f);
         this.activeAnimation = idleAnimation;
     }
     
@@ -113,14 +113,14 @@ public class MyHero extends Animatable {
         currentLevel = level;
         position = level.getStartTile().getCoordinate().toPoint();
     }
-
+    /**
+     * getter for level
+     * @return current level
+     */
     public Level getLevel() {
         return this.currentLevel;
     }
 
-    /**
-     * updates the position, movementstate and viewdirection of the hero
-     */
     
     @Override
     public void update() {
@@ -154,7 +154,9 @@ public class MyHero extends Animatable {
         animations();
     }
     
-
+     /**
+     * manages and sets animations
+     */
     private void animations(){
         if(keyPressed()){
             if(viewDirection){
@@ -183,6 +185,18 @@ public class MyHero extends Animatable {
             return true;
         } else {
             return false;
+        }
+    }
+
+     /**
+     * method for view direction of character
+     * @return returns viewdirection of hero
+     */
+    public boolean lookingLeft() {
+        if (!this.viewDirection) {
+            return false;
+        } else {
+            return true;
         }
     }
 
