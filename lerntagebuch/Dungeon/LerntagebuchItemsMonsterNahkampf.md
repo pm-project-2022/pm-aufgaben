@@ -33,7 +33,7 @@ Zuerst wird die Hitchance ermittelt. Hat der Held mehr `Accurancy` als das Monst
 In der Schadensberechnung wird ermittelt, ob der Held mehr `Strength` als das Monster `Defense`. Sollte das eintreten, wird der Schaden berechnet. Andernfalls macht der Held dem Monster per default lediglich 1 Schaden.  
 Sollte der Angriff erfolgreich gewesen sein, wird das Monster zurückgeworfen (sofern möglich) und wechselt in das Idle-Behaviour. 
 
-Für habe am Anfang der Woche angefangen daran jeden Tag für mehrere Stunden zu arbeiten. 
+Wir haben am Anfang der Woche angefangen und daran jeden Tag für mehrere Stunden zu arbeiten. 
 
 
 # Postmortem
