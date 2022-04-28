@@ -97,58 +97,114 @@ public class StatusValues {
         this.manaPoints = manaPoints;
     }
 
+    /**
+     * getter for strength
+     * @return strength
+     */
     public int getStrength() {
         return this.strength;
     }
 
+    /**
+     * setter for strength
+     * @param strength amount of strength
+     */
     public void setStrength(int strength) {
         this.strength = strength;
     }
 
+    /**
+     * getter for defense
+     * @return defense
+     */
     public int getdefense() {
         return this.defense;
     }
 
+    /**
+     * setter fpr defense
+     * @param defense amount of defense
+     */
     public void setdefense(int defense) {
         this.defense = defense;
     }
 
+    /**
+     * getter for accuracy
+     * @return accuracy
+     */
     public int getAccuracy() {
         return this.accuracy;
     }
 
+    /**
+     * setter for accuracy
+     * @param accuracy amount of accuracy
+     */
     public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
     }
 
+    /**
+     * getter for evasion
+     * @return evasion
+     */
     public int getEvasion() {
         return this.evasion;
     }
 
+    /**
+     * setter for evasion
+     * @param evasion amount of evasion
+     */
     public void setEvasion(int evasion) {
         this.evasion = evasion;
     }
 
+    /**
+     * getter for exp
+     * @return exp
+     */
     public int getExp() {
         return this.exp;
     }
 
+    /**
+     * setter for exp
+     * @param exp amount of exp
+     */
     public void setExp(int exp) {
         this.exp = exp;
     }
 
+    /**
+     * getter for level
+     * @return level
+     */
     public int getLevel() {
         return this.level;
     }
 
+    /**
+     * setter for level
+     * @param level level
+     */
     public void setLevel(int level) {
         this.level = level;
     }
 
+    /**
+     * getter movementspeed
+     * @return movementSpeed
+     */
     public float getMovementspeed() {
         return this.movementSpeed;
     }
 
+    /**
+     * setter for movementSpeed
+     * @param movementSpeed amount of movementSpeed
+     */
     public void setMovementspeed(float movementSpeed) {
         this.movementSpeed = movementSpeed;
     }
