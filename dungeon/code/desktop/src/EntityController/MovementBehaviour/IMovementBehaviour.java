@@ -2,12 +2,23 @@ package EntityController.MovementBehaviour;
 
 import EntityController.Hero.MyHero;
 import EntityController.Monster.Monster;
-import EntityController.Statuswerte.StatusValues;
 import helper.PointAndBoolean;
-import level.elements.Level;
-import tools.Point;
+
+
+/**
+ * interface for the movement behaviour
+ */
 
 public interface IMovementBehaviour {
     
-    PointAndBoolean getMovementBehaviour(Point currentPosition, StatusValues stats, Level currentLevel, MyHero hero, Monster monster);
+    /**
+     * template methode for the movement behaviour
+     * @param currentPosition of the monster
+     * @param stats stats of the monster
+     * @param currentLevel
+     * @param hero
+     * @param monster
+     * @return
+     */
+    PointAndBoolean getMovementBehaviour(Monster monster);
 }
