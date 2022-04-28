@@ -67,16 +67,22 @@ public class MyGame extends MainController {
 
     }
 
+    /**
+     * Startmethod to init Monster on leveload
+     */
     private void initMonster() {
         this.monster.clear();
         createMonster();
         this.floor += 1;
     }
 
+    /**
+     * creates small and normal monster and ad them to the entity controller
+     */
     private void createMonster() {
         for (int i = 0; i < new SmallMonsterQuantity(this.floor).getQuantity(); i++) {
             int ranMon = 0;
-            Monster monster = MonsterFactory.monFac(painter, batch, this.smallMonsterNames.getMonsterList().get(ranMon), this.hero, this.floor);
+            Monster monster = MonsterFactory.monFac(painter, batch, this.smallMonsterNames.getMonsterList().get(ranMon), hero, floor);
             monster.setLevel(levelAPI.getCurrentLevel());
             entityController.add(monster);
             this.monster.add(monster);
@@ -89,7 +95,6 @@ public class MyGame extends MainController {
             this.monster.add(monster);
         }
 
-        System.out.println("Anzahl Monster:" + this.monster.size());
     }
 
     public static void main(String[] args) {
