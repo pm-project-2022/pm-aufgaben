@@ -20,9 +20,9 @@ import tools.Point;
  */
 
 public abstract class Monster extends Animatable {
-    //manages the animationd
+    //manages the animation
     protected Animation idleAnimation, idleMirrorAnimation, runAnimation, runMirrorAnimation, activeAnimation;
-    private boolean runDirection;
+    
 
     //manages the monster behaviour
     protected IMovementBehaviour movementBehaviour;
@@ -65,12 +65,20 @@ public abstract class Monster extends Animatable {
         this.position = point;
     }
 
-    @Override
-    public void update() {
-        pAb = this.movementBehaviour.getMovementBehaviour(position, stats, currentLevel, this.hero, this);
-        this.position = pAb.getPoint();
-        this.runDirection = pAb.getRunDirection();
-        animations();
+    /**
+     * getter for current level
+     * @return current level
+     */
+    public Level getCurrentLevel(){
+        return this.currentLevel;
+    }
+
+    /**
+     * getter for hero
+     * @return current hero
+     */
+    public MyHero getHero(){
+        return this.hero;
     }
 
     @Override
@@ -81,15 +89,25 @@ public abstract class Monster extends Animatable {
             return false;
         }
     }
+    
+    
+    @Override
+    public void update() {
+        pAb = this.movementBehaviour.getMovementBehaviour(this);
+        this.position = pAb.getPoint();
+        animations();
+    }
+
+    
 
     /**
      * Manages the animations depending on the states
      */
     private void animations() {
         if(this.pAb.getCollision()){
-            this.movementBehaviour = new Idle(this.runDirection);
+            this.movementBehaviour = new Idle(this.pAb.getRunDirection());
 
-            if(this.runDirection){
+            if(this.pAb.getRunDirection()){
                 this.activeAnimation = idleAnimation;
             }else{
                 this.activeAnimation = idleMirrorAnimation;
@@ -98,7 +116,7 @@ public abstract class Monster extends Animatable {
             return;
         }
 
-        if (this.runDirection) {
+        if (pAb.getRunDirection()) {
             this.activeAnimation = this.runAnimation;
         } else {
             this.activeAnimation = this.runMirrorAnimation;

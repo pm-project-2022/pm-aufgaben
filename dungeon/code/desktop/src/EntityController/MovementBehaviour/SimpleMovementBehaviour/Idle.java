@@ -1,12 +1,9 @@
 package EntityController.MovementBehaviour.SimpleMovementBehaviour;
 
 import EntityController.Fight.Fight;
-import EntityController.Hero.MyHero;
 import EntityController.Monster.Monster;
 import EntityController.MovementBehaviour.IMovementBehaviour;
-import EntityController.Statuswerte.StatusValues;
 import helper.PointAndBoolean;
-import level.elements.Level;
 import tools.Point;
 
 public class Idle implements IMovementBehaviour {
@@ -19,33 +16,32 @@ public class Idle implements IMovementBehaviour {
     }
 
     @Override
-    public PointAndBoolean getMovementBehaviour(Point currentPosition, StatusValues stats, Level currentLevel,
-            MyHero hero, Monster monster) {
-        Point newPosition = new Point(currentPosition);
+    public PointAndBoolean getMovementBehaviour(Monster monster) {
+        Point newPosition = new Point(monster.getPosition());
         if (this.runDirection) {
-            if (currentLevel.getTileAt(newPosition.toCoordinate()) == hero.getLevel()
-                    .getTileAt(hero.getPosition().toCoordinate())) {
+            if (monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()) == monster.getHero().getLevel()
+                    .getTileAt(monster.getHero().getPosition().toCoordinate())) {
                 newPosition.x -= 1.0f;
-                new Fight(monster, hero).fight();
+                new Fight(monster).fight();
             }
 
-            if (currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()) {
+            if (monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()).isAccessible()) {
                 return new PointAndBoolean(this.runDirection, this.collision, newPosition);
             } else {
-                return new PointAndBoolean(this.runDirection, this.collision, currentPosition);
+                return new PointAndBoolean(this.runDirection, this.collision, monster.getPosition());
 
             }
         } else {
-            if (currentLevel.getTileAt(newPosition.toCoordinate()) == hero.getLevel()
-                    .getTileAt(hero.getPosition().toCoordinate())) {
+            if (monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()) == monster.getHero().getLevel()
+                    .getTileAt(monster.getHero().getPosition().toCoordinate())) {
                 newPosition.x += 1.0f;
-                new Fight(monster, hero).fight();
+                new Fight(monster).fight();
             }
 
-            if (currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()) {
+            if (monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()).isAccessible()) {
                 return new PointAndBoolean(this.runDirection, this.collision, newPosition);
             } else {
-                return new PointAndBoolean(this.runDirection, this.collision, currentPosition);
+                return new PointAndBoolean(this.runDirection, this.collision, monster.getPosition());
 
             }
 
