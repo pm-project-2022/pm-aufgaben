@@ -6,6 +6,10 @@ import EntityController.MovementBehaviour.IMovementBehaviour;
 import helper.PointAndBoolean;
 import tools.Point;
 
+/**
+ * Makes the monster run along the Y axis
+ */
+
 public class PatrolY implements IMovementBehaviour {
     boolean runDirectionY;
     boolean collision;
@@ -21,9 +25,10 @@ public class PatrolY implements IMovementBehaviour {
             newPosition.y += monster.getStats().getMovementspeed();
 
             if(monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()) == monster.getHero().getLevel().getTileAt(monster.getHero().getPosition().toCoordinate())){
-                newPosition.y -= 1.0f;
-                this.collision = true;
-                new Fight(monster).fight();
+                if (new Fight(monster).fight()) {
+                    newPosition.y -= 1.0f;
+                    this.collision = true;
+                }
             }
 
             if(monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()).isAccessible()){
@@ -36,9 +41,10 @@ public class PatrolY implements IMovementBehaviour {
             newPosition.y -= monster.getStats().getMovementspeed();
 
             if(monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()) == monster.getHero().getLevel().getTileAt(monster.getHero().getPosition().toCoordinate())){
-                newPosition.y += 1.0f;
-                this.collision = true;
-                new Fight(monster).fight();
+                if (new Fight(monster).fight()) {
+                    newPosition.x += 1.0f;
+                    this.collision = true;
+                }
             }
 
             if(monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()).isAccessible()){
