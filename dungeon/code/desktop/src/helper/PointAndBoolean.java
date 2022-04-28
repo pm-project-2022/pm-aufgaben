@@ -4,16 +4,22 @@ import tools.Point;
 
 
 public class PointAndBoolean {
-    boolean bool;
+    boolean runDirection;
+    boolean collision;
     Point point;
 
-    public PointAndBoolean(boolean bool, Point p) {
-        this.bool = bool;
+    public PointAndBoolean(boolean runDirection, boolean collision, Point p) {
+        this.runDirection = runDirection;
+        this.collision = collision;
         this.point = p;
     }
 
-    public boolean getBoolean() {
-        return this.bool;
+    public boolean getRunDirection() {
+        return this.runDirection;
+    }
+
+    public boolean getCollision() {
+        return this.collision;
     }
 
    
