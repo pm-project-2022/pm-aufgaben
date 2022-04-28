@@ -40,7 +40,7 @@ public class Imp extends Monster {
     private void initMirrorIdleAnimation() {
         ArrayList<String> animation = new ArrayList<String>();
         animation.add("character/monster/smallmonster/imp/imp_idle_anim_mirrored_f0.png");
-        animation.add("character/monster/smallmonster/imp/imp_idle_anim_mirrored_f!.png");
+        animation.add("character/monster/smallmonster/imp/imp_idle_anim_mirrored_f1.png");
         animation.add("character/monster/smallmonster/imp/imp_idle_anim_mirrored_f2.png");
         animation.add("character/monster/smallmonster/imp/imp_idle_anim_mirrored_f3.png");
         this.idleMirrorAnimation = new Animation(animation, 8);

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import EntityController.Hero.MyHero;
 import EntityController.MovementBehaviour.IMovementBehaviour;
+import EntityController.MovementBehaviour.SimpleMovementBehaviour.Idle;
 import EntityController.Statuswerte.StatusValues;
 import basiselements.Animatable;
 import graphic.Animation;
@@ -16,10 +17,12 @@ import tools.Point;
 public abstract class Monster extends Animatable {
     // animations
     protected Animation idleAnimation, idleMirrorAnimation, runAnimation, runMirrorAnimation, activeAnimation;
-    private boolean runDirection, viewDirection;
+    private boolean runDirection;
 
     // behaviour
     IMovementBehaviour movementBehaviour;
+    IMovementBehaviour initialBehaviour;
+    PointAndBoolean pAb;
 
     protected Level currentLevel;
     protected Point position;
@@ -31,12 +34,11 @@ public abstract class Monster extends Animatable {
 
     public Monster(Painter painter, SpriteBatch batch, MyHero hero, int levelScaling, IMovementBehaviour iMB) {
         super(painter, batch);
-        // this.movementState = false;
-        // this.viewDirection = true;
         this.hero = hero;
         this.floorLevel = levelScaling;
         this.entity = false;
         this.movementBehaviour = iMB;
+        this.initialBehaviour = iMB;
     }
 
     public void setLevel(Level level) {
@@ -48,13 +50,34 @@ public abstract class Monster extends Animatable {
 
     @Override
     public void update() {
-        PointAndBoolean pAb = this.movementBehaviour.getMovementBehaviour(position, stats, currentLevel);
+        pAb = this.movementBehaviour.getMovementBehaviour(position, stats, currentLevel, this.hero, this);
         this.position = pAb.getPoint();
-        this.runDirection = pAb.getBoolean();
+        this.runDirection = pAb.getRunDirection();
         animations();
     }
 
+    @Override
+    public boolean removable() {
+        if(this.stats.getHealhtPoints() == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     private void animations() {
+        if(this.pAb.getCollision()){
+            this.movementBehaviour = new Idle(this.runDirection);
+
+            if(this.runDirection){
+                this.activeAnimation = idleAnimation;
+            }else{
+                this.activeAnimation = idleMirrorAnimation;
+            }
+            
+            return;
+        }
+
         if (this.runDirection) {
             this.activeAnimation = this.runAnimation;
         } else {

@@ -101,6 +101,10 @@ public class MyHero extends Animatable {
         this.runMirrorAnimation = new Animation(animation, 8);
     }
 
+    public StatusValues getStats(){
+        return this.stats;
+    }
+
     /**
      * setter for the level
      * @param level current level
