@@ -14,33 +14,50 @@ import level.elements.Level;
 import level.elements.room.Room;
 import tools.Point;
 
+
+/**
+ * Absctract class for monster
+ */
+
 public abstract class Monster extends Animatable {
-    // animations
+    //manages the animationd
     protected Animation idleAnimation, idleMirrorAnimation, runAnimation, runMirrorAnimation, activeAnimation;
     private boolean runDirection;
 
-    // behaviour
-    IMovementBehaviour movementBehaviour;
-    IMovementBehaviour initialBehaviour;
-    PointAndBoolean pAb;
-
+    //manages the monster behaviour
+    protected IMovementBehaviour movementBehaviour;
+    protected IMovementBehaviour initialBehaviour;
+    protected PointAndBoolean pAb;
     protected Level currentLevel;
     protected Point position;
     protected MyHero hero;
 
+    //manages the monster attributes
     protected StatusValues stats;
     protected int floorLevel;
     protected boolean entity;
 
-    public Monster(Painter painter, SpriteBatch batch, MyHero hero, int levelScaling, IMovementBehaviour iMB) {
+    /**
+     * Constructor for a monster
+     * @param painter
+     * @param batch
+     * @param hero playable hero
+     * @param levelScaling floor level
+     * @param iMB
+     */
+    public Monster(Painter painter, SpriteBatch batch, MyHero hero, int floor, IMovementBehaviour iMB) {
         super(painter, batch);
         this.hero = hero;
-        this.floorLevel = levelScaling;
+        this.floorLevel = floor;
         this.entity = false;
         this.movementBehaviour = iMB;
         this.initialBehaviour = iMB;
     }
 
+    /**
+     * sets the game level and spawns monster to a random room and position in the room
+     * @param level
+     */
     public void setLevel(Level level) {
         this.currentLevel = level;
         Room room = level.getRandomRoom();
@@ -65,6 +82,9 @@ public abstract class Monster extends Animatable {
         }
     }
 
+    /**
+     * Manages the animations depending on the states
+     */
     private void animations() {
         if(this.pAb.getCollision()){
             this.movementBehaviour = new Idle(this.runDirection);
@@ -85,6 +105,10 @@ public abstract class Monster extends Animatable {
         }
     }
 
+    /**
+     * getter for the attributes
+     * @return stats
+     */
     public StatusValues getStats() {
         return this.stats;
     }

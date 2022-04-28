@@ -1,5 +1,9 @@
 package EntityController.Statuswerte;
 
+/**
+ * Class to manage the attributes of the hero and the monster
+ */
+
 public class StatusValues {
     // Stores the hp and mana of a hero (monster only have hp)
     private int healhtPoints;
@@ -27,7 +31,7 @@ public class StatusValues {
     boolean entity;
 
     /**
-     * Stat constructor for heros and monster
+     * Stat constructor for heros and monster. if entity is true, the stats are for the hero, else they are for a monster
      * 
      * @param healhtPoints  startamount of hp
      * @param manaPoints    startamount of mana
@@ -61,18 +65,34 @@ public class StatusValues {
         }
     }
 
+    /**
+     * getter for hp
+     * @return hp
+     */
     public int getHealhtPoints() {
         return this.healhtPoints;
     }
 
+    /**
+     * setter for hp
+     * @param healhtPoints hp amount
+     */
     public void setHealhtPoints(int healhtPoints) {
         this.healhtPoints = healhtPoints;
     }
 
+    /**
+     * getter for manapoints
+     * @return manapoints
+     */
     public int getManaPoints() {
         return this.manaPoints;
     }
 
+    /**
+     * setter for mana points
+     * @param manaPoints amount of mana points
+     */
     public void setManaPoints(int manaPoints) {
         this.manaPoints = manaPoints;
     }
