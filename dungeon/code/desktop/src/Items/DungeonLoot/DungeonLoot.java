@@ -1,7 +1,6 @@
 package Items.DungeonLoot;
 
 import Items.Item;
-import basiselements.Entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
 import level.elements.Level;

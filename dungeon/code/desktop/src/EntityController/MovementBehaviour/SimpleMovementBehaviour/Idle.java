@@ -6,6 +6,9 @@ import EntityController.MovementBehaviour.IMovementBehaviour;
 import helper.PointAndBoolean;
 import tools.Point;
 
+/**
+ * Puts the monster into idle animation
+ */
 public class Idle implements IMovementBehaviour {
     boolean collision;
     boolean runDirection;
@@ -21,8 +24,9 @@ public class Idle implements IMovementBehaviour {
         if (this.runDirection) {
             if (monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()) == monster.getHero().getLevel()
                     .getTileAt(monster.getHero().getPosition().toCoordinate())) {
-                newPosition.x -= 1.0f;
-                new Fight(monster).fight();
+                if (new Fight(monster).fight()) {
+                    newPosition.x -= 1.0f;
+                }
             }
 
             if (monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()).isAccessible()) {
@@ -34,10 +38,10 @@ public class Idle implements IMovementBehaviour {
         } else {
             if (monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()) == monster.getHero().getLevel()
                     .getTileAt(monster.getHero().getPosition().toCoordinate())) {
-                newPosition.x += 1.0f;
-                new Fight(monster).fight();
+                if (new Fight(monster).fight()) {
+                    newPosition.x += 1.0f;
+                }
             }
-
             if (monster.getCurrentLevel().getTileAt(newPosition.toCoordinate()).isAccessible()) {
                 return new PointAndBoolean(this.runDirection, this.collision, newPosition);
             } else {
