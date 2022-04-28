@@ -1,6 +1,5 @@
 package EntityController.MovementBehaviour;
 
-import EntityController.Hero.MyHero;
 import EntityController.Monster.Monster;
 import helper.PointAndBoolean;
 
