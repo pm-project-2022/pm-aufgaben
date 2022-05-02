@@ -1,17 +1,15 @@
-package EntityController;
+package EntityController.Hero;
 
 import basiselements.Animatable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Logger;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import Logger.RunAnimationConsoleFormatter;
+import EntityController.Statuswerte.StatusValues;
 import graphic.Animation;
 import graphic.Painter;
 import level.elements.Level;
@@ -26,8 +24,7 @@ public class MyHero extends Animatable {
     private boolean movementState, viewDirection;
     private Point position;
     private Level currentLevel;
-    private Logger logger;
-    private ConsoleHandler consoleHandler;
+    private StatusValues stats;
 
     /**
      * Constructor for the hero. Sets the movementState to false and viewDirection
@@ -40,24 +37,21 @@ public class MyHero extends Animatable {
         super(painter, batch);
         this.movementState = false;
         this.viewDirection = true;
-        initLogger();
+        initAnimation();
+        this.stats = new StatusValues(true, 100000,100000,50,100000,50,100000,100000,0, 0.2f);
+        this.activeAnimation = idleAnimation;
+    }
+    
+    /**
+     * Inits animations
+     */
+
+     private void initAnimation() {
         idleAnimation();
         idleMirrorAnimation();
         runAnimation();
         runMirrorAnimation();
-        this.activeAnimation = idleAnimation;
-    }
-
-    /**
-     * Logger for the movement
-     */
-    private void initLogger() {
-        this.logger = Logger.getLogger(MyHero.class.getName());
-        this.logger.setUseParentHandlers(false);
-        this.consoleHandler = new ConsoleHandler();
-        this.consoleHandler.setFormatter(new RunAnimationConsoleFormatter());
-        this.logger.addHandler(consoleHandler);
-    }
+     }
 
     /**
      * Initiates the normal idleAnimation
@@ -107,6 +101,10 @@ public class MyHero extends Animatable {
         this.runMirrorAnimation = new Animation(animation, 8);
     }
 
+    public StatusValues getStats(){
+        return this.stats;
+    }
+
     /**
      * setter for the level
      * @param level current level
@@ -115,43 +113,50 @@ public class MyHero extends Animatable {
         currentLevel = level;
         position = level.getStartTile().getCoordinate().toPoint();
     }
-
     /**
-     * updates the position, movementstate and viewdirection of the hero
+     * getter for level
+     * @return current level
      */
+    public Level getLevel() {
+        return this.currentLevel;
+    }
+
+    
     @Override
     public void update() {
         Point newPosition = new Point(this.position);
-        float movementSpeed = 0.1f;
-
+        
         if (keyPressed()) {
             this.movementState = true;
 
             // Wenn die Taste W gedrückt ist, bewege dich nach oben
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                newPosition.y += movementSpeed;
+                newPosition.y += this.stats.getMovementspeed();
             }
             // Wenn die Taste S gedrückt ist, bewege dich nach unten
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                newPosition.y -= movementSpeed;
+                newPosition.y -= this.stats.getMovementspeed();
             }
             // Wenn die Taste D gedrückt ist, bewege dich nach rechts
             if (Gdx.input.isKeyPressed(Input.Keys.D)) {
                 this.viewDirection = true;
-                newPosition.x += movementSpeed;
+                newPosition.x += this.stats.getMovementspeed();
             }
             // Wenn die Taste A gedrückt ist, bewege dich nach links
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
                 this.viewDirection = false;
-                newPosition.x -= movementSpeed;
+                newPosition.x -= this.stats.getMovementspeed();
             }
             if (currentLevel.getTileAt(newPosition.toCoordinate()).isAccessible()) {
                 this.position = newPosition;
             }
-
         }
         animations();
     }
+    
+     /**
+     * manages and sets animations
+     */
     private void animations(){
         if(keyPressed()){
             if(viewDirection){
@@ -180,6 +185,18 @@ public class MyHero extends Animatable {
             return true;
         } else {
             return false;
+        }
+    }
+
+     /**
+     * method for view direction of character
+     * @return returns viewdirection of hero
+     */
+    public boolean lookingLeft() {
+        if (!this.viewDirection) {
+            return false;
+        } else {
+            return true;
         }
     }
 
