@@ -22,7 +22,7 @@ public class JUnit {
     }
 
     /**
-     * Parametrisierter Test mit gültigen Werte
+     * Parametrisierter Test mit gültigen Werten
      */
 
     @Parameter(0)
