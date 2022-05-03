@@ -73,8 +73,7 @@ public class Hero extends Moveable {
      * @return true if a button was pressed, false if not
      */
     private boolean movementKeyPressed() {
-        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.S)
-            || Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.D)) {
             return true;
         } else {
             return false;
@@ -114,8 +113,7 @@ public class Hero extends Moveable {
     private void pickUpItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             for (Item item : this.floorItems) {
-                if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == item.getCurrentFloor()
-                    .getTileAt(item.getPosition().toCoordinate()) && item.getIsOnFloor()) {
+                if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == item.getCurrentFloor().getTileAt(item.getPosition().toCoordinate()) && item.getIsOnFloor()) {
                     if (this.inventory.addItem(item)) {
                         item.setIsOnFloor(false);
                         item.setPickUp(true);
@@ -129,8 +127,7 @@ public class Hero extends Moveable {
 
     private void openChest() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
-            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == chests.get(0).getCurrentFloor()
-                .getTileAt(chests.get(0).getPosition().toCoordinate()) && chests.get(0).getIsOnFloor()) {
+            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == chests.get(0).getCurrentFloor().getTileAt(chests.get(0).getPosition().toCoordinate()) && chests.get(0).getIsOnFloor()) {
                 chests.get(0).setRemoveOrConsume(true);
                 chests.get(1).setIsOnFloor(true);
                 this.floorItems.add(chests.get(1));
@@ -141,8 +138,7 @@ public class Hero extends Moveable {
 
     private void stepOnTrap() {
         for (Item traps : traps) {
-            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == traps.getCurrentFloor()
-                .getTileAt(traps.getPosition().toCoordinate())) {
+            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == traps.getCurrentFloor().getTileAt(traps.getPosition().toCoordinate())) {
                 traps.setIsOnFloor(true);
                 attributes.setCurrentHP(attributes.getCurrentHP() - 1);
             }
@@ -150,14 +146,12 @@ public class Hero extends Moveable {
     }
 
     private void talkToNpc() {
-
         for (FriendlyNPC npc : npcs) {
-            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) ==
-                npc.getCurrentFloor().getTileAt(npc.getPosition().toCoordinate())) {
+            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == npc.getCurrentFloor().getTileAt(npc.getPosition().toCoordinate())) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
 
                     for (int i = 0; i < floorItems.size(); i++) {
-                        if (floorItems.get(i).getPickUp() == false) {
+                        if (!floorItems.get(i).getPickUp()) {
                             if (inventory.addItem(floorItems.get(i))) {
                                 floorItems.get(i).setIsOnFloor(false);
                                 floorItems.get(i).setPickUp(true);
