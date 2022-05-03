@@ -37,7 +37,7 @@ public abstract class BasicAttributes {
 
     /**
      * get current hp
-     * 
+     *
      * @return current hp
      */
     public int getCurrentHP() {
@@ -54,7 +54,7 @@ public abstract class BasicAttributes {
 
     /**
      * get current mana
-     * 
+     *
      * @return current mana
      */
     public int getCurrentMana() {
@@ -63,7 +63,7 @@ public abstract class BasicAttributes {
 
     /**
      * get current attackpower
-     * 
+     *
      * @return current attackpower
      */
     public int getAttackPower() {
@@ -77,7 +77,7 @@ public abstract class BasicAttributes {
 
     /**
      * get current defense power
-     * 
+     *
      * @return current defense power
      */
     public int getDefensePower() {
@@ -90,7 +90,7 @@ public abstract class BasicAttributes {
 
     /**
      * get current accuracy
-     * 
+     *
      * @return current accuracy
      */
     public int getAccuracy() {
@@ -103,7 +103,7 @@ public abstract class BasicAttributes {
 
     /**
      * get current evasion
-     * 
+     *
      * @return current evasion
      */
     public int getEvasion() {
@@ -116,7 +116,7 @@ public abstract class BasicAttributes {
 
     /**
      * get movementspeed of the monster or hero
-     * 
+     *
      * @return
      */
     public float getMovementSpeed() {
@@ -125,7 +125,7 @@ public abstract class BasicAttributes {
 
     /**
      * get max hp
-     * 
+     *
      * @return max hp
      */
     public int getMaxHP() {
@@ -134,7 +134,7 @@ public abstract class BasicAttributes {
 
     /**
      * set max hp
-     * 
+     *
      * @param maxHP new value for max hp
      */
     public void setMaxHP(int maxHP) {
@@ -143,7 +143,7 @@ public abstract class BasicAttributes {
 
     /**
      * set current mana
-     * 
+     *
      * @param currentMana new value for current mana
      */
     public void setCurrentMana(int currentMana) {
@@ -152,7 +152,7 @@ public abstract class BasicAttributes {
 
     /**
      * get max mana
-     * 
+     *
      * @return current mana
      */
     public int getMaxMana() {
@@ -161,7 +161,7 @@ public abstract class BasicAttributes {
 
     /**
      * set max hp
-     * 
+     *
      * @param maxMana new value for max hp
      */
     public void setMaxMana(int maxMana) {
@@ -170,7 +170,7 @@ public abstract class BasicAttributes {
 
     /**
      * set new level
-     * 
+     *
      * @param level new level
      */
     public void setLevel(int level) {
@@ -179,7 +179,7 @@ public abstract class BasicAttributes {
 
     /**
      * set current xp
-     * 
+     *
      * @param exp new value for current xp
      */
     public void setExp(int exp) {
@@ -188,7 +188,7 @@ public abstract class BasicAttributes {
 
     /**
      * get current xp for level up
-     * 
+     *
      * @return current xp
      */
     public int getExpForLvlUp() {
@@ -197,14 +197,17 @@ public abstract class BasicAttributes {
 
     /**
      * set xp for level up
-     * 
+     *
      * @param expForLvlUp new value for level up xp
      */
     public void setExpForLvlUp(int expForLvlUp) {
         this.expForLvlUp = expForLvlUp;
     }
 
-    
+    public int getLevel(){
+        return level;
+    }
+
     @Override
     public String toString() {
         return "HP: " + this.currentHP + "\nMaxHP: " + this.maxHP +  "\nMANA: " + this.currentMana + "\nMaxMana: " + this.maxMana + "\nAttackpower: " + this.attackPower

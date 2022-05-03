@@ -1,5 +1,3 @@
-package rsvflottespeiche;
-
 public class MitgliederVerwaltung {
 
     /**

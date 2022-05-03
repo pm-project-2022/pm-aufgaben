@@ -1,5 +1,3 @@
-package SpecialArrayList;
-
 import java.util.ArrayList;
 
 public class SpecialArrayList extends ArrayList<String> {

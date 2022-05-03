@@ -1,5 +1,3 @@
-package SpecialArrayList;
-
 import org.junit.*;
 import java.util.ArrayList;
 import static org.junit.Assume.assumeTrue;
@@ -15,7 +13,7 @@ public class JUnit {
     }
 
     /**
-     *
+     * Prüft ob Liste gefüllt ist
      */
     @Test
     public void assume(){

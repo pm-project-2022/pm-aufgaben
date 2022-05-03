@@ -1,6 +1,4 @@
-package rsvflottespeiche;
-
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.junit.Before;

@@ -30,7 +30,7 @@ public class Idle implements IMovement {
                 return new PointBooleanTransmitter(this.runDirection, this.idle, this.newPosition);
 
             } else {
-                return new PointBooleanTransmitter(this.runDirection, this.collision, this.newPosition);
+                return new PointBooleanTransmitter(this.runDirection, this.collision, monster.getPosition());
             }
 
         } else {
@@ -43,7 +43,7 @@ public class Idle implements IMovement {
                 return new PointBooleanTransmitter(this.runDirection, this.collision, this.newPosition);
 
             } else {
-                return new PointBooleanTransmitter(this.runDirection, this.collision, this.newPosition);
+                return new PointBooleanTransmitter(this.runDirection, this.collision, monster.getPosition());
             }
         }
     }
