@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="507455c6-51d9-4f29-92ee-bcdec5f9c889" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dungeon/code/assets/character/friendlyNPC/elf_f_idle_anim_f0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dungeon/code/assets/character/friendlyNPC/elf_f_idle_anim_f1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dungeon/code/assets/character/friendlyNPC/elf_f_idle_anim_f2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dungeon/code/assets/character/friendlyNPC/elf_f_idle_anim_f3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Entities/FriendlyNPCs/FriendlyNPC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Entities/FriendlyNPCs/FriendlyNpcFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Github-Cheat-Sheet.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Markdown-Cheat-Sheet.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/Entities/Moveable/Hero/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Entities/Moveable/Hero/Hero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/Inventory/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Inventory/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/desktop/MyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/desktop/MyGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/desktop/Traps/TrapFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Traps/TrapFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/desktop/Traps/Traps.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Traps/Traps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lerntagebuch.md" beforeDir="false" />
-    </list>
+    <list default="true" id="507455c6-51d9-4f29-92ee-bcdec5f9c889" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -163,7 +145,7 @@
       <workItem from="1651578598395" duration="20050000" />
       <workItem from="1651598836087" duration="223000" />
       <workItem from="1651599072165" duration="7297000" />
-      <workItem from="1651607401482" duration="6614000" />
+      <workItem from="1651607401482" duration="6842000" />
     </task>
     <servers />
   </component>
