@@ -1,15 +1,14 @@
 package Entities.Items;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Entities.BasicEntity;
 import Helper.PointBooleanTransmitter;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Animation;
 import graphic.Painter;
 import level.elements.Level;
 import tools.Point;
+
+import java.util.ArrayList;
 
 public class Item extends BasicEntity {
     protected Animation invisible;

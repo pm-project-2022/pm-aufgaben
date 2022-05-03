@@ -3,6 +3,7 @@ package Traps;
 import Entities.Items.Item;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
+
 import java.util.ArrayList;
 
 public class Traps extends Item {

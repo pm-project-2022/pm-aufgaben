@@ -1,11 +1,11 @@
 package Inventory;
 
+import Entities.Items.Item;
+import Entities.Moveable.Hero.Hero;
+
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import Entities.Items.Item;
-import Entities.Moveable.Hero.Hero;
 
 /**
  * Inventory of the hero

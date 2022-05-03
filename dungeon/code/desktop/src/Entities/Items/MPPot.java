@@ -1,11 +1,10 @@
 package Entities.Items;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Attribute.Items.ManaItems;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
+
+import java.util.ArrayList;
 
 
 public class MPPot extends Item{
@@ -23,5 +22,5 @@ public class MPPot extends Item{
         animation.add("potions/flask_blue.png");
         initIdleAnimation(animation);
     }
-    
+
 }

@@ -1,28 +1,27 @@
 package desktop;
 
-import java.util.ArrayList;
-
 import Entities.Chest.ChestFactory;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
+import Entities.Items.Item;
+import Entities.Items.ItemFactory;
+import Entities.Moveable.Hero.Classes.Knight;
+import Entities.Moveable.Hero.Hero;
+import Entities.Moveable.Monster.Monster;
+import Entities.Moveable.Monster.MonsterFactory;
 import HUD.ExpBar;
 import HUD.HealthBar;
 import HUD.ManaBar;
+import Traps.TrapFactory;
 import com.badlogic.gdx.Gdx;
-
-import Entities.Items.Item;
-import Entities.Items.ItemFactory;
-import Entities.Moveable.Hero.Hero;
-import Entities.Moveable.Hero.Classes.Knight;
-import Entities.Moveable.Monster.Monster;
-import Entities.Moveable.Monster.MonsterFactory;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import controller.MainController;
-import Traps.TrapFactory;
 import level.generator.LevelLoader.LevelLoader;
 import level.generator.dungeong.graphg.NoSolutionException;
 import tools.Point;
+
+import java.util.ArrayList;
 
 public class MyGame extends MainController {
     public Hero hero;

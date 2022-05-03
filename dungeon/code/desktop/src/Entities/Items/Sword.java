@@ -1,10 +1,9 @@
 package Entities.Items;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import graphic.Painter;
+
+import java.util.ArrayList;
 
 public class Sword extends Item {
 

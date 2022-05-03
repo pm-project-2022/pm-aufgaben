@@ -1,8 +1,8 @@
 package Entities.Fight;
 
-import java.util.Random;
-
 import Entities.Moveable.Monster.Monster;
+
+import java.util.Random;
 
 /**
  * Calculates a fight/attack between hero and monster
@@ -10,7 +10,7 @@ import Entities.Moveable.Monster.Monster;
 
 public class Fight {
     Monster monster;
-    
+
     //hitchance
     int hit;
 
@@ -55,7 +55,7 @@ public class Fight {
     }
 
     /**
-     * calculates damage if the hit was successfull
+     * calculates damage if the hit was successful
      * @return true
      */
 
@@ -65,15 +65,11 @@ public class Fight {
             int monHP = this.monster.getAttributes().getCurrentHP() + this.dmg;
             if (monHP < 0) {
                 this.monster.getAttributes().setCurrentHP(0);
-                System.out.println(this.monster.getAttributes().toString());
-
             } else {
                 this.monster.getAttributes().setCurrentHP(monHP);
-                System.out.println(this.monster.getAttributes().toString());
             }
         } else {
             this.monster.getAttributes().setCurrentHP(this.monster.getAttributes().getCurrentHP() - 1);
-            System.out.println(this.monster.getAttributes().toString());
         }
         return true;
 
