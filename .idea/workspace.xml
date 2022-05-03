@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="507455c6-51d9-4f29-92ee-bcdec5f9c889" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/dungeon/code/assets/character/friendlyNPC/elf_f_idle_anim_f0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dungeon/code/assets/character/friendlyNPC/elf_f_idle_anim_f1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dungeon/code/assets/character/friendlyNPC/elf_f_idle_anim_f2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dungeon/code/assets/character/friendlyNPC/elf_f_idle_anim_f3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Entities/FriendlyNPCs/FriendlyNPC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Entities/FriendlyNPCs/FriendlyNpcFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Github-Cheat-Sheet.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Markdown-Cheat-Sheet.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/Entities/Moveable/Hero/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Entities/Moveable/Hero/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/Inventory/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Inventory/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/desktop/MyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/desktop/MyGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/desktop/Traps/TrapFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Traps/TrapFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dungeon/code/desktop/src/desktop/Traps/Traps.java" beforeDir="false" afterPath="$PROJECT_DIR$/dungeon/code/desktop/src/Traps/Traps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lerntagebuch.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/dungeon/code">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="28eWPqPS7Nf0Kdkwv6Ke1GgpgrR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-18",
+    "last_opened_file_path": "C:/Users/janra/IdeaProjects/DungeonFork/dungeon/code/assets/character/friendlyNPC",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "two.files.diff.last.used.folder": "C:/Users/janra/DungeonFork/vorgaben/generics_2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\janra\IdeaProjects\DungeonFork\dungeon\code\assets\character\friendlyNPC" />
+      <recent name="C:\Users\janra\IdeaProjects\DungeonFork\dungeon\code\assets\ttf" />
+      <recent name="C:\Users\janra\IdeaProjects\DungeonFork\dungeon\code\assets\hud" />
+      <recent name="C:\Users\janra\IdeaProjects\DungeonFork\dungeon\code\assets\traps" />
+      <recent name="C:\Users\janra\IdeaProjects\DungeonFork\dungeon\code\assets\chest" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\janra\DungeonFork\vorgaben\junit_advanced_rsv2" />
+      <recent name="C:\Users\janra\DungeonFork\vorgaben\junit_advanced_rsv2\src" />
+      <recent name="C:\Users\janra\DungeonFork\vorgaben" />
+      <recent name="C:\Users\janra\DungeonFork\vorgaben\junit_basics2\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.MyGame">
+    <configuration name="MyGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="desktop.MyGame" />
+      <module name="code.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="desktop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JUnit (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="junit_basics" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="JUnit" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JUnit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="junit_advanced_rsv2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="JUnit" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MyGame" />
+        <item itemvalue="JUnit.JUnit" />
+        <item itemvalue="JUnit.JUnit (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="507455c6-51d9-4f29-92ee-bcdec5f9c889" name="Changes" comment="" />
+      <created>1651577513555</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651577513555</updated>
+      <workItem from="1651577515471" duration="762000" />
+      <workItem from="1651578331896" duration="166000" />
+      <workItem from="1651578598395" duration="20050000" />
+      <workItem from="1651598836087" duration="223000" />
+      <workItem from="1651599072165" duration="7297000" />
+      <workItem from="1651607401482" duration="6614000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

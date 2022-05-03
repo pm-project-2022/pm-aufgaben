@@ -105,7 +105,6 @@ public class Inventory {
      *
      * @return true if successful, false otherwise
      */
-
     public boolean dropItem() {
         for (int i = 0; i < this.inventory.length; i++) {
             if (this.inventory[i] != null && this.inventory[i].getIsEquipped()) {

@@ -3,6 +3,8 @@ package desktop;
 import java.util.ArrayList;
 
 import Entities.Chest.ChestFactory;
+import Entities.FriendlyNPCs.FriendlyNPC;
+import Entities.FriendlyNPCs.FriendlyNpcFactory;
 import HUD.ExpBar;
 import HUD.HealthBar;
 import HUD.ManaBar;
@@ -17,18 +19,20 @@ import Entities.Moveable.Monster.MonsterFactory;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import controller.MainController;
-import desktop.Traps.TrapFactory;
+import Traps.TrapFactory;
 import level.generator.LevelLoader.LevelLoader;
 import level.generator.dungeong.graphg.NoSolutionException;
 import tools.Point;
 
 public class MyGame extends MainController {
     public Hero hero;
+    private FriendlyNPC npc;
     private int currentFloor;
     private ArrayList<Monster> monster;
     private ArrayList<Item> items;
     private ArrayList<Item> chests;
     private ArrayList<Item> traps;
+    private ArrayList<FriendlyNPC> npcs;
     private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel;
 
     @Override
@@ -94,6 +98,9 @@ public class MyGame extends MainController {
                 for (Item traps : this.traps) {
                     entityController.remove(traps);
                 }
+                for (FriendlyNPC npc : this.npcs) {
+                    entityController.remove(npc);
+                }
 
                 if (currentFloor % 5 == 0) {
                     for (Item chests : this.chests) {
@@ -106,7 +113,7 @@ public class MyGame extends MainController {
                 this.monster.clear();
                 this.items.clear();
                 this.traps.clear();
-
+                this.npcs.clear();
                 levelAPI.loadLevel();
             } catch (NoSolutionException e) {
                 e.printStackTrace();
@@ -122,6 +129,7 @@ public class MyGame extends MainController {
         initItems();
         initChest();
         initTraps();
+        initNpc();
     }
 
     private void initMons() {
@@ -132,7 +140,7 @@ public class MyGame extends MainController {
         }
     }
 
-    public void initTraps() {
+    private void initTraps() {
         this.traps = TrapFactory.trapFac(painter, batch);
         for (Item traps : this.traps) {
             traps.setLevel(levelAPI.getCurrentLevel());
@@ -160,7 +168,15 @@ public class MyGame extends MainController {
             chests.get(1).setIsOnFloor(false);
             this.hero.setFloorChests(chests);
         }
+    }
 
+    private void initNpc(){
+        this.npcs = FriendlyNpcFactory.npcFac(painter,batch);
+        for(FriendlyNPC npc : npcs){
+            npc.setLevel(levelAPI.getCurrentLevel());
+            entityController.add(npc);
+        }
+        this.hero.setNpcs(npcs);
     }
 
 

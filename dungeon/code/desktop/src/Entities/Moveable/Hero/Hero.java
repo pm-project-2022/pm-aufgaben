@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entities.Chest.Chest;
+import Entities.FriendlyNPCs.FriendlyNPC;
+import Entities.Items.ItemFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,7 +25,9 @@ public class Hero extends Moveable {
     protected ArrayList<Item> availableItems;
     protected ArrayList<Item> chests;
     protected ArrayList<Item> traps;
+    protected ArrayList<FriendlyNPC> npcs;
     protected Inventory inventory;
+
 
     public Hero(Painter painter, SpriteBatch batch) {
         super(painter, batch);
@@ -32,6 +36,7 @@ public class Hero extends Moveable {
         this.floorItems = new ArrayList<>();
         this.chests = new ArrayList<>();
         this.traps = new ArrayList<>();
+        this.npcs = new ArrayList<>();
     }
 
     @Override
@@ -47,6 +52,7 @@ public class Hero extends Moveable {
         printStats();
         openChest();
         stepOnTrap();
+        talkToNpc();
     }
 
     /**
@@ -122,7 +128,7 @@ public class Hero extends Moveable {
         }
     }
 
-    public void stepOnTrap(){
+    private void stepOnTrap(){
         for(Item traps : traps){
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == traps.getCurrentFloor()
                 .getTileAt(traps.getPosition().toCoordinate())) {
@@ -132,7 +138,34 @@ public class Hero extends Moveable {
             }
         }
     }
+    private void talkToNpc(){
 
+        for(FriendlyNPC npc : npcs){
+            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) ==
+                npc.getCurrentFloor().getTileAt(npc.getPosition().toCoordinate())){
+                if(Gdx.input.isKeyJustPressed(Input.Keys.G)){
+                    System.out.println("Freundlicher Npc");
+
+                    for(int i = 0; i < floorItems.size();i++){
+                        if(floorItems.get(i).getPickUp()==false){
+                            inventory.addItem(floorItems.get(i));
+                            floorItems.get(i).setIsOnFloor(false);
+                            floorItems.get(i).setPickUp(true);
+                            floorItems.get(i).setPosition(this.currentPosition);
+                            npc.setPosition(this.currentFloor.getRandomRoom().getRandomFloorTile().getCoordinate().toPoint());
+                            break;
+                        }
+                        else{
+                            System.out.println("Keine Items mehr");
+                        }
+
+                    }
+
+
+                }
+            }
+        }
+    }
 
     private void updateInventoryItemPosition() {
         if (this.inventory.isEmpty()) {
@@ -218,6 +251,10 @@ public class Hero extends Moveable {
 
     public void setFloorTraps(ArrayList<Item> floorTraps){
         this.traps = floorTraps;
+    }
+
+    public void setNpcs(ArrayList<FriendlyNPC> npcs){
+        this.npcs = npcs;
     }
 
     public void setFloorChests(ArrayList<Item> chests) {
