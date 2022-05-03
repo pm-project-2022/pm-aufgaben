@@ -5,21 +5,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.HUDPainter;
 import tools.Point;
 
+public class ExpBar extends HUDElement {
 
-public class Background extends HUDElement {
-    private String texturePath;
-    private Point position;
+    protected String texturePath;
+    protected Point position;
 
-    /**
-     * paints a background for hearts
-     * @param painter render
-     * @param batch render
-     * @param position position on screen
-     */
-    public Background(HUDPainter painter, SpriteBatch batch, Point position) {
+    public ExpBar(HUDPainter painter, SpriteBatch batch, Point position) {
         super(painter, batch);
-        texturePath = "hud/scroll2.png";
         this.position = position;
+        this.texturePath = "hud/expbar.png";
     }
 
     @Override

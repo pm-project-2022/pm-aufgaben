@@ -5,20 +5,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.HUDPainter;
 import tools.Point;
 
-public class FullHeart extends HUDElement {
-    private String texturePath;
-    private Point position;
+public class ManaBar extends HUDElement {
 
-    /**
-     * paints a full heart
-     * @param painter render
-     * @param batch render
-     * @param position position on screen
-     */
-    public FullHeart(HUDPainter painter, SpriteBatch batch, Point position) {
+    protected String texturePath;
+    protected Point position;
+
+    public ManaBar(HUDPainter painter, SpriteBatch batch, Point position) {
         super(painter, batch);
-        texturePath = "hud/ui_heart_full.png";
         this.position = position;
+        this.texturePath = "hud/manabar.png";
     }
 
     @Override

@@ -41,7 +41,7 @@ public class Inventory {
 
     /**
      * add items to inventory
-     * 
+     *
      * @param item item added to inventory
      * @return return true if added, false it not
      */
@@ -70,7 +70,7 @@ public class Inventory {
 
     /**
      * checks if item is already in inventar
-     * 
+     *
      * @param item item checked
      * @return true if already in inventar, else if
      */
@@ -85,7 +85,7 @@ public class Inventory {
 
     /**
      * equips an item in the inventar
-     * 
+     *
      * @param i index of the inventory array
      */
     public void equipItem(int i) {
@@ -96,17 +96,19 @@ public class Inventory {
                 }
             }
             this.inventory[i].setEquipped(true);
+            log.info("Item equipped: " + this.inventory[i].getItemName());
         }
     }
 
     /**
      * drop item from inventory
+     *
      * @return true if successful, false otherwise
      */
-
     public boolean dropItem() {
         for (int i = 0; i < this.inventory.length; i++) {
             if (this.inventory[i] != null && this.inventory[i].getIsEquipped()) {
+                log.info("Item dropped: " +  this.inventory[i].getItemName());
                 this.inventory[i].setRemoveOrConsume(true);
                 this.inventory[i] = null;
                 this.amount[i] = 0;
@@ -119,6 +121,7 @@ public class Inventory {
 
     /**
      * consumes a item from the inventory
+     *
      * @param hero current hero
      */
     public void consumeItem(Hero hero) {
@@ -127,6 +130,7 @@ public class Inventory {
                 if (this.amount[i] == 1) {
                     giveStats(hero, i);
                     this.inventory[i].setRemoveOrConsume(true);
+                    log.info("Item benutzt: " + this.inventory[i].getItemName());
                     this.inventory[i] = null;
                     this.elements--;
                 } else {
@@ -141,7 +145,8 @@ public class Inventory {
 
     /**
      * give stats to hero when consume an item
-     * @param hero current hero
+     *
+     * @param hero  current hero
      * @param index consumed item
      */
     private void giveStats(Hero hero, int index) {
@@ -160,11 +165,9 @@ public class Inventory {
                 hero.getAttributes().setCurrentMana(mana);
             }
         } else if (this.inventory[index].getItemName().equals("Strength Orb")) {
-            hero.getAttributes().setAttackPower(
-                    hero.getAttributes().getAttackPower() + this.inventory[index].getAttributes().getAttackPower());
+            hero.getAttributes().setAttackPower(hero.getAttributes().getAttackPower() + this.inventory[index].getAttributes().getAttackPower());
         } else if (this.inventory[index].getItemName().equals("Mana Orb")) {
-            hero.getAttributes().setMaxMana(
-                    hero.getAttributes().getMaxMana() + this.inventory[index].getAttributes().getCurrentMana());
+            hero.getAttributes().setMaxMana(hero.getAttributes().getMaxMana() + this.inventory[index].getAttributes().getCurrentMana());
         }
     }
 
@@ -183,6 +186,7 @@ public class Inventory {
 
     /**
      * checks if inventory is empty
+     *
      * @return true if inventory is empty, false otherwise
      */
     public boolean isEmpty() {
@@ -195,6 +199,7 @@ public class Inventory {
 
     /**
      * getter fpr the inventory
+     *
      * @return inventory
      */
     public Item[] getInventory() {
@@ -203,7 +208,7 @@ public class Inventory {
 
     /**
      * gets active item
-     * 
+     *
      * @return returns active item
      */
     public Item getActiveItem() {
@@ -212,7 +217,7 @@ public class Inventory {
 
     /**
      * sets active item
-     * 
+     *
      * @param item item thats active
      */
     public void setActiveItem(Item item) {

@@ -5,20 +5,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.HUDPainter;
 import tools.Point;
 
-public class AbilityBox extends HUDElement {
-    private String texturePath;
-    private Point position;
+public class HealthBar extends HUDElement {
 
-    /**
-     * paints an ability box
-     * @param painter render
-     * @param batch render
-     * @param position position on screen
-     */
-    public AbilityBox(HUDPainter painter, SpriteBatch batch, Point position) {
+    protected String texturePath;
+    protected Point position;
+
+    public HealthBar(HUDPainter painter, SpriteBatch batch, Point position) {
         super(painter, batch);
-        texturePath = "hud/HUD 2D Pixel 2.png";
         this.position = position;
+        this.texturePath = "hud/healthbar.png";
     }
 
     @Override

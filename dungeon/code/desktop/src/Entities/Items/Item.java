@@ -18,6 +18,7 @@ public class Item extends BasicEntity {
     protected boolean isOnFloor;
     protected boolean isEquipped;
     protected boolean removeOrConsume;
+    protected boolean pickUp;
     protected PointBooleanTransmitter viewDirection;
     protected float xOffset = 0.7f;
 
@@ -26,13 +27,13 @@ public class Item extends BasicEntity {
         this.isOnFloor = true;
         this.isEquipped = false;
         this.removeOrConsume = false;
-
+        this.pickUp = false;
     }
 
     protected void initIdleAnimation(ArrayList<String> idleAnimation) {
         this.idleAnimation = new Animation(idleAnimation, 1);
         ArrayList<String> animations = new ArrayList<>();
-        animations.add("assets/InvisibleItem/invisibileItem.png");
+        animations.add("InvisibleItem/invisibileItem.png");
         this.invisible = new Animation(animations, 1);
 
     }
@@ -61,7 +62,7 @@ public class Item extends BasicEntity {
             }else{
                 this.activeAnimation = this.invisible;
             }
-            
+
         }
 
     }
@@ -107,6 +108,11 @@ public class Item extends BasicEntity {
         this.currentPosition = this.currentFloor.getRandomRoom().getRandomFloorTile().getCoordinate().toPoint();
     }
 
+    public void setLevel(Item item){
+        this.currentFloor = item.getCurrentFloor();
+        this.currentPosition = item.getPosition();
+    }
+
     public boolean getHeroViewDirection() {
         return true;
     }
@@ -123,6 +129,13 @@ public class Item extends BasicEntity {
     @Override
     public Point getPosition() {
         return this.currentPosition;
+    }
+
+    public void setPickUp(boolean pickUp){
+        this.pickUp = pickUp;
+    }
+    public boolean getPickUp(){
+        return pickUp;
     }
 
 }
