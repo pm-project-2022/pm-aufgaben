@@ -14,6 +14,10 @@ import level.elements.Level;
 import tools.Point;
 
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Logger;
+
+import Logger.ColumnFormatter;
 
 public class Hero extends Moveable {
     protected boolean viewDirection;
@@ -23,6 +27,7 @@ public class Hero extends Moveable {
     protected ArrayList<Item> traps;
     protected ArrayList<FriendlyNPC> npcs;
     protected Inventory inventory;
+    protected Logger log;
 
 
     public Hero(Painter painter, SpriteBatch batch) {
@@ -33,6 +38,17 @@ public class Hero extends Moveable {
         this.chests = new ArrayList<>();
         this.traps = new ArrayList<>();
         this.npcs = new ArrayList<>();
+        initLogger();
+    }
+
+    private void initLogger() {
+        log = Logger.getLogger("Hero");
+        log.setUseParentHandlers(false);
+        log.setLevel(java.util.logging.Level.ALL);
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setFormatter(new ColumnFormatter());
+        ch.setLevel(java.util.logging.Level.ALL);
+        log.addHandler(ch);
     }
 
     @Override
@@ -139,20 +155,18 @@ public class Hero extends Moveable {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) ==
                 npc.getCurrentFloor().getTileAt(npc.getPosition().toCoordinate())) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-                    System.out.println("Freundlicher Npc");
 
                     for (int i = 0; i < floorItems.size(); i++) {
                         if (floorItems.get(i).getPickUp() == false) {
-                            inventory.addItem(floorItems.get(i));
-                            floorItems.get(i).setIsOnFloor(false);
-                            floorItems.get(i).setPickUp(true);
-                            floorItems.get(i).setPosition(this.currentPosition);
-                            npc.setPosition(this.currentFloor.getRandomRoom().getRandomFloorTile().getCoordinate().toPoint());
-                            break;
-                        } else {
-                            System.out.println("Keine Items mehr");
+                            if (inventory.addItem(floorItems.get(i))) {
+                                floorItems.get(i).setIsOnFloor(false);
+                                floorItems.get(i).setPickUp(true);
+                                floorItems.get(i).setPosition(this.currentPosition);
+                                npc.setPosition(this.currentFloor.getRandomRoom().getRandomFloorTile().getCoordinate().toPoint());
+                                log.info("Item gebracht");
+                                break;
+                            }
                         }
-
                     }
                 }
             }

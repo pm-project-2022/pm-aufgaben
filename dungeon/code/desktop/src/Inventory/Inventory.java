@@ -2,7 +2,7 @@ package Inventory;
 
 import Entities.Items.Item;
 import Entities.Moveable.Hero.Hero;
-
+import Logger.ColumnFormatter;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
