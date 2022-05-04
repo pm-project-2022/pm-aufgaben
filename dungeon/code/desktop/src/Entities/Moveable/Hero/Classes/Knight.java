@@ -1,19 +1,19 @@
 package Entities.Moveable.Hero.Classes;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Attribute.Moveables.Hero.HeroAttributes;
 import Entities.Moveable.Hero.Hero;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
 
+import java.util.ArrayList;
+
 public class Knight extends Hero {
-    
+
     public Knight(Painter painter, SpriteBatch batch) {
         super(painter, batch);
         this.attributes = new HeroAttributes(100,100,50,100,50,50,1,0,10,0.2f);
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
+        this.name = "You";
     }
 
     /**

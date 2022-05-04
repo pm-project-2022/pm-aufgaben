@@ -1,10 +1,8 @@
 package Entities.Items;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Attribute.Items.ManaItems;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
-
 
 import java.util.ArrayList;
 

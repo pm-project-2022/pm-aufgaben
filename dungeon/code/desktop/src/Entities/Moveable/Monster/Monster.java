@@ -1,12 +1,11 @@
 package Entities.Moveable.Monster;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import Entities.Moveable.Moveable;
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.Idle;
+import Entities.Moveable.Moveable;
 import Helper.PointBooleanTransmitter;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Animation;
 import graphic.Painter;
 import level.elements.Level;
@@ -41,10 +40,10 @@ public class Monster extends Moveable {
     }
 
     private void animations() {
-        
+
         if (this.pointBooleanTransmitter.getCollision()) {
 
-            this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection());
+            //this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection());
 
             if (this.pointBooleanTransmitter.getRunDirection()) {
                 this.activeAnimation = this.idleAnimation;

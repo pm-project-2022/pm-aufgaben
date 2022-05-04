@@ -1,11 +1,10 @@
 package Entities.Items;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Attribute.Items.HPItems;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
+
+import java.util.ArrayList;
 
 public class HPPot extends Item{
 
@@ -22,5 +21,5 @@ public class HPPot extends Item{
         animation.add("potions/flask_red.png");
         initIdleAnimation(animation);
     }
-    
+
 }

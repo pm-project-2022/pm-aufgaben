@@ -1,11 +1,12 @@
 package Inventory;
 
+import Entities.Items.Item;
+import Entities.Moveable.Hero.Hero;
+import Logger.ColumnFormatter;
+
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import Entities.Items.Item;
-import Entities.Moveable.Hero.Hero;
 
 /**
  * Inventory of the hero
@@ -108,7 +109,7 @@ public class Inventory {
     public boolean dropItem() {
         for (int i = 0; i < this.inventory.length; i++) {
             if (this.inventory[i] != null && this.inventory[i].getIsEquipped()) {
-                log.info("Item dropped: " +  this.inventory[i].getItemName());
+                log.info("Item dropped: " + this.inventory[i].getItemName());
                 this.inventory[i].setRemoveOrConsume(true);
                 this.inventory[i] = null;
                 this.amount[i] = 0;
@@ -133,6 +134,8 @@ public class Inventory {
                     log.info("Item benutzt: " + this.inventory[i].getItemName());
                     this.inventory[i] = null;
                     this.elements--;
+
+
                 } else {
                     giveStats(hero, i);
                 }

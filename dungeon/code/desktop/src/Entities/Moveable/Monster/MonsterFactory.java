@@ -1,20 +1,19 @@
 package Entities.Moveable.Monster;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.PatrolXAxis;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.PatrolYAxis;
 import Entities.Moveable.Monster.NormalMonster.Chort;
 import Entities.Moveable.Monster.WeakMonster.Imp;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MonsterFactory {
-    
+
    private MonsterFactory(){}
 
     public static ArrayList<Monster> monFac(Painter painter, SpriteBatch batch, Hero hero, int currentFloor){
@@ -27,7 +26,7 @@ public class MonsterFactory {
         for(int i = 0; i < randomizeQuantity(currentFloor, 2); i++){
             monster.add(new Chort(painter, batch, hero, createMovement(), currentFloor));
         }
-        
+
         return monster;
     }
 
@@ -39,7 +38,7 @@ public class MonsterFactory {
             if (currentFloor <= 5) {
                 monsterQuantityMin = 1;
                 monsterQuantityMax = 3;
-    
+
             } else if (currentFloor <= 10) {
                 monsterQuantityMin = 3;
                 monsterQuantityMax = 6;
@@ -50,7 +49,7 @@ public class MonsterFactory {
         }else{
             if (currentFloor < 3) {
                 return 0;
-    
+
             } else if (currentFloor <= 10) {
                 monsterQuantityMin = 1;
                 monsterQuantityMax = 2;
@@ -59,7 +58,7 @@ public class MonsterFactory {
                 monsterQuantityMax = 6;
             }
         }
-        return random.nextInt(monsterQuantityMin + monsterQuantityMax) + monsterQuantityMin;   
+        return random.nextInt(monsterQuantityMin + monsterQuantityMax) + monsterQuantityMin;
     }
 
     private static IMovement createMovement(){
@@ -74,12 +73,4 @@ public class MonsterFactory {
         }
     }
 
-    /*private Monster createSmallMonster(Painter painter, SpriteBatch batch, String monName, Hero hero, int floor, IMovement movement){
-        return new Imp(painter, batch, hero, movement, floor);
-    }
-
-    private Monster createNormalMonster(Painter painter, SpriteBatch batch, String monName, Hero hero, int floor, IMovement movement){
-        return new Chort(painter, batch, hero, movement, floor);
-    }*/
-    
 }

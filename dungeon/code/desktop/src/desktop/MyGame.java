@@ -1,28 +1,27 @@
 package desktop;
 
-import java.util.ArrayList;
-
 import Entities.Chest.ChestFactory;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
+import Entities.Items.Item;
+import Entities.Items.ItemFactory;
+import Entities.Moveable.Hero.Classes.Knight;
+import Entities.Moveable.Hero.Hero;
+import Entities.Moveable.Monster.Monster;
+import Entities.Moveable.Monster.MonsterFactory;
 import HUD.ExpBar;
 import HUD.HealthBar;
 import HUD.ManaBar;
+import Traps.TrapFactory;
 import com.badlogic.gdx.Gdx;
-
-import Entities.Items.Item;
-import Entities.Items.ItemFactory;
-import Entities.Moveable.Hero.Hero;
-import Entities.Moveable.Hero.Classes.Knight;
-import Entities.Moveable.Monster.Monster;
-import Entities.Moveable.Monster.MonsterFactory;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import controller.MainController;
-import Traps.TrapFactory;
 import level.generator.LevelLoader.LevelLoader;
 import level.generator.dungeong.graphg.NoSolutionException;
 import tools.Point;
+
+import java.util.ArrayList;
 
 public class MyGame extends MainController {
     public Hero hero;
@@ -48,13 +47,13 @@ public class MyGame extends MainController {
         camera.follow(hero);
         entityController.add(hero);
         initHud();
+
         levelAPI.setGenerator(new LevelLoader());
         // load the first level
         try {
             levelAPI.loadLevel();
         } catch (NoSolutionException e) {
-            System.out.println(
-                "Es konnte kein Level geladen werden, bitte den \"assets\" Ordner überprüfen.");
+            System.out.println("Es konnte kein Level geladen werden, bitte den \"assets\" Ordner überprüfen.");
             Gdx.app.exit();
         }
     }
@@ -85,9 +84,7 @@ public class MyGame extends MainController {
         if (levelAPI.getCurrentLevel().isOnEndTile(hero)) {
             try {
                 for (Monster monster : this.monster) {
-                    if (entityController.contains(monster)) {
-                        entityController.remove(monster);
-                    }
+                    entityController.remove(monster);
                 }
                 for (Item item : this.items) {
                     if (item.getIsOnFloor()) {
@@ -98,6 +95,7 @@ public class MyGame extends MainController {
                 for (Item traps : this.traps) {
                     entityController.remove(traps);
                 }
+
                 for (FriendlyNPC npc : this.npcs) {
                     entityController.remove(npc);
                 }
@@ -125,10 +123,10 @@ public class MyGame extends MainController {
     public void onLevelLoad() {
         currentFloor++;
         hero.setLevel(levelAPI.getCurrentLevel());
+        initTraps();
         initMons();
         initItems();
         initChest();
-        initTraps();
         initNpc();
     }
 
@@ -139,7 +137,6 @@ public class MyGame extends MainController {
             entityController.add(monster);
         }
     }
-
     private void initTraps() {
         this.traps = TrapFactory.trapFac(painter, batch);
         for (Item traps : this.traps) {
@@ -170,15 +167,14 @@ public class MyGame extends MainController {
         }
     }
 
-    private void initNpc(){
-        this.npcs = FriendlyNpcFactory.npcFac(painter,batch);
-        for(FriendlyNPC npc : npcs){
+    private void initNpc() {
+        this.npcs = FriendlyNpcFactory.npcFac(painter, batch);
+        for (FriendlyNPC npc : npcs) {
             npc.setLevel(levelAPI.getCurrentLevel());
             entityController.add(npc);
         }
         this.hero.setNpcs(npcs);
     }
-
 
     public static void main(String[] args) {
         // start the game

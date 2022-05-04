@@ -1,14 +1,13 @@
 package Entities.Moveable.Monster.NormalMonster;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Attribute.Moveables.Monster.MonsterAttributes;
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.Monster;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
+
+import java.util.ArrayList;
 
 public class Chort extends Monster {
 
