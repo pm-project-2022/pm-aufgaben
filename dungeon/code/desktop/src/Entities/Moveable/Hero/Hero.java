@@ -132,7 +132,7 @@ public class Hero extends Moveable {
     }
 
     private void updateExp() {
-        if(this.attributes.getExp() > this.attributes.getExpForLvlUp()){
+        if(this.attributes.getExp() >= this.attributes.getExpForLvlUp()){
             this.attributes.updateHeroLevelAndStats();
         }
     }
