@@ -32,7 +32,7 @@ public class MyGame extends MainController {
     private ArrayList<Item> chests;
     private ArrayList<Item> traps;
     private ArrayList<FriendlyNPC> npcs;
-    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel; 
+    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel;
 
     @Override
     protected void setup() {
@@ -72,7 +72,7 @@ public class MyGame extends MainController {
         levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
         levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
         levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
-        heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 500, 420);
+        heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 480, 410);
         heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
         hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
         hudController.add(new ManaBar(hudPainter, hudBatch, new Point(0, -290)));
