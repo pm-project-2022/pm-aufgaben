@@ -63,7 +63,6 @@ public class MyGame extends MainController {
         if (gui.getChara() == 3) {
             hero = new Hunter(painter, batch);
         }
-
         setup2();
     }
 

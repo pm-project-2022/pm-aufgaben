@@ -1,5 +1,8 @@
 package Gui;
 
+import Entities.Moveable.Hero.Classes.Knight;
+import Entities.Moveable.Hero.Hero;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -13,18 +16,7 @@ public class Gui extends JFrame {
     int chara = 0;
     boolean bool = false;
     public Gui() throws IOException {
-
         initGui();
-    }
-
-    public boolean getBool(){
-        return bool;
-    };
-    public void setChara(int chara){
-        this.chara = chara;
-    }
-    public int getChara(){
-        return chara;
     }
 
     public void initGui() throws IOException {
@@ -40,8 +32,22 @@ public class Gui extends JFrame {
         ImageIcon icon3 = new ImageIcon(imgHunter);
 
         JLabel lblKnight = new JLabel();
+        JLabel lblKnightStats = new JLabel("<html>HP: 100<br/>Mana: 100<br/>AtkP: 50<br/>DefP: 100<br/>Eva: 50<br/>Accu: 50<html>");
+        lblKnightStats.setFont(new Font("Arial",Font.PLAIN,10));
+        lblKnight.setHorizontalAlignment(JLabel.CENTER);
+        lblKnight.setVerticalAlignment(JLabel.CENTER);
+
         JLabel lblWizard = new JLabel();
+        lblWizard.setHorizontalAlignment(JLabel.CENTER);
+        lblWizard.setVerticalAlignment(JLabel.CENTER);
+        JLabel lblWizardStats = new JLabel("<html>HP: 50<br/>Mana: 200<br/>AtkP: 100<br/>DefP: 50<br/>Eva: 50<br/>Accu: 50<html>");
+        lblWizardStats.setFont(new Font("Arial",Font.PLAIN,10));
+
         JLabel lblHunter = new JLabel();
+        lblHunter.setHorizontalAlignment(JLabel.CENTER);
+        lblHunter.setVerticalAlignment(JLabel.CENTER);
+        JLabel lblHunterStats = new JLabel("<html>HP: 75<br/>Mana: 125<br/>AtkP: 75<br/>DefP: 75<br/>Eva: 70<br/>Accu: 70<html>");
+        lblHunterStats.setFont(new Font("Arial",Font.PLAIN,10));
 
         lblKnight.setIcon(icon);
         lblWizard.setIcon(icon2);
@@ -51,18 +57,21 @@ public class Gui extends JFrame {
         JPanel p1 = new JPanel();
         f1.setLocation(700,500);
         f1.setResizable(false);
-        f1.setTitle("Choose");
-        f1.setSize(300,100);
+        f1.setTitle("Choose your Character!");
+        f1.setSize(500,150);
         f1.setDefaultCloseOperation(3);
         p1.setLayout(new GridLayout());
         f1.add(p1);
 
         p1.add(r1);
         p1.add(lblKnight);
+        p1.add(lblKnightStats);
         p1.add(r2);
         p1.add(lblWizard);
+        p1.add(lblWizardStats);
         p1.add(r3);
         p1.add(lblHunter);
+        p1.add(lblHunterStats);
         f1.setVisible(true);
 
         r1.addActionListener(new ActionListener() {
@@ -88,6 +97,15 @@ public class Gui extends JFrame {
         });
     }
 
+    public boolean getBool(){
+        return bool;
+    };
+    public void setChara(int chara){
+        this.chara = chara;
+    }
+    public int getChara(){
+        return chara;
+    }
 
 
 }
