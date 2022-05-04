@@ -68,7 +68,6 @@ public class Gui extends JFrame {
         r1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setChara(1);
-                System.out.println(getChara());
                 bool=true;
                 f1.dispose();
             }
@@ -76,7 +75,6 @@ public class Gui extends JFrame {
         r2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setChara(2);
-                System.out.println(getChara());
                 bool=true;
                 f1.dispose();
             }
@@ -84,7 +82,6 @@ public class Gui extends JFrame {
         r3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setChara(3);
-                System.out.println(getChara());
                 bool=true;
                 f1.dispose();
             }
