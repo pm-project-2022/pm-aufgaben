@@ -1,20 +1,19 @@
 package Entities.Moveable;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Entities.BasicEntity;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Animation;
 import graphic.Painter;
 
+import java.util.ArrayList;
+
 public class Moveable extends BasicEntity{
     //stores the animations
-    
+
     protected Animation idleMirroredAnimation;
     protected Animation runAnimation;
     protected Animation runMirroredAnimation;
-    
+
 
     public Moveable(Painter painter, SpriteBatch batch) {
         super(painter, batch);

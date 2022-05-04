@@ -1,11 +1,10 @@
 package Entities.Items;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import graphic.Painter;
+
 import java.util.ArrayList;
 import java.util.Random;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import graphic.Painter;
 
 public class ItemFactory {
     private ItemFactory() {

@@ -1,8 +1,9 @@
 package Traps;
 
-import Entities.Items.*;
+import Entities.Items.Item;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
+
 import java.util.ArrayList;
 
 

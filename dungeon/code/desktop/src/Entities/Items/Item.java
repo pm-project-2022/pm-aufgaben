@@ -1,15 +1,14 @@
 package Entities.Items;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Entities.BasicEntity;
 import Helper.PointBooleanTransmitter;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Animation;
 import graphic.Painter;
 import level.elements.Level;
 import tools.Point;
+
+import java.util.ArrayList;
 
 public class Item extends BasicEntity {
     protected Animation invisible;
@@ -31,7 +30,7 @@ public class Item extends BasicEntity {
     }
 
     protected void initIdleAnimation(ArrayList<String> idleAnimation) {
-        this.idleAnimation = new Animation(idleAnimation, 1);
+        this.idleAnimation = new Animation(idleAnimation, 16);
         ArrayList<String> animations = new ArrayList<>();
         animations.add("InvisibleItem/invisibileItem.png");
         this.invisible = new Animation(animations, 1);

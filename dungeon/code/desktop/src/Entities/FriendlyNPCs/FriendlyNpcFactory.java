@@ -2,6 +2,7 @@ package Entities.FriendlyNPCs;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
+
 import java.util.ArrayList;
 
 public class FriendlyNpcFactory {

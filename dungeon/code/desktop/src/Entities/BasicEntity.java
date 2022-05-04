@@ -1,9 +1,8 @@
 package Entities;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Attribute.BasicAttributes;
 import basiselements.Animatable;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Animation;
 import graphic.Painter;
 import level.elements.Level;
@@ -12,7 +11,7 @@ import tools.Point;
 public abstract class BasicEntity extends Animatable {
     //manages the attributes of an entity
     protected BasicAttributes attributes;
-    
+
     protected Animation activeAnimation;
     protected Animation idleAnimation;
 
