@@ -5,15 +5,19 @@ import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
 import Entities.Items.Item;
 import Entities.Items.ItemFactory;
+import Entities.Moveable.Hero.Classes.Hunter;
 import Entities.Moveable.Hero.Classes.Knight;
+import Entities.Moveable.Hero.Classes.Wizard;
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.Monster;
 import Entities.Moveable.Monster.MonsterFactory;
+import Gui.Gui;
 import HUD.ExpBar;
 import HUD.HealthBar;
 import HUD.ManaBar;
 import Traps.TrapFactory;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import controller.MainController;
@@ -21,11 +25,12 @@ import level.generator.LevelLoader.LevelLoader;
 import level.generator.dungeong.graphg.NoSolutionException;
 import tools.Point;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MyGame extends MainController {
     public Hero hero;
-    private FriendlyNPC npc;
     private int currentFloor;
     private ArrayList<Monster> monster;
     private ArrayList<Item> items;
@@ -33,11 +38,37 @@ public class MyGame extends MainController {
     private ArrayList<Item> traps;
     private ArrayList<FriendlyNPC> npcs;
     private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel;
+    private Gui gui;
 
     @Override
     protected void setup() {
+        try {
+            gui = new Gui();
+            while(!gui.getBool()){
+                Thread.sleep(1000);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
-        this.hero = new Knight(painter, batch);
+
+        if (gui.getChara() == 1) {
+            hero = new Knight(painter, batch);
+        }
+        if (gui.getChara() == 2) {
+            hero = new Wizard(painter, batch);
+        }
+        if (gui.getChara() == 3) {
+            hero = new Hunter(painter, batch);
+        }
+
+        setup2();
+    }
+
+    private void setup2() {
+
         this.currentFloor = 0;
         this.monster = new ArrayList<>();
         this.hero.getAttributes().setCurrentHP(20);
@@ -137,6 +168,7 @@ public class MyGame extends MainController {
             entityController.add(monster);
         }
     }
+
     private void initTraps() {
         this.traps = TrapFactory.trapFac(painter, batch);
         for (Item traps : this.traps) {
