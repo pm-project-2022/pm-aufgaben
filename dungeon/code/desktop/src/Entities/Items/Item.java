@@ -30,7 +30,7 @@ public class Item extends BasicEntity {
     }
 
     protected void initIdleAnimation(ArrayList<String> idleAnimation) {
-        this.idleAnimation = new Animation(idleAnimation, 1);
+        this.idleAnimation = new Animation(idleAnimation, 32);
         ArrayList<String> animations = new ArrayList<>();
         animations.add("InvisibleItem/invisibileItem.png");
         this.invisible = new Animation(animations, 1);

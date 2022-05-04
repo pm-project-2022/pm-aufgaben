@@ -28,6 +28,7 @@ public class Hero extends Moveable {
     protected ArrayList<FriendlyNPC> npcs;
     protected Inventory inventory;
     protected Logger log;
+    protected String name;
 
 
     public Hero(Painter painter, SpriteBatch batch) {
@@ -261,8 +262,8 @@ public class Hero extends Moveable {
         this.chests = chests;
     }
 
-    public void setAvailableItems(ArrayList<Item> availableItems) {
-        this.availableItems = availableItems;
+    public String getName(){
+        return name;
     }
 
     @Override
@@ -274,5 +275,6 @@ public class Hero extends Moveable {
     public Point getPosition() {
         return this.currentPosition;
     }
+
 
 }

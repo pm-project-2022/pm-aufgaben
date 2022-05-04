@@ -47,13 +47,13 @@ public class MyGame extends MainController {
         camera.follow(hero);
         entityController.add(hero);
         initHud();
+
         levelAPI.setGenerator(new LevelLoader());
         // load the first level
         try {
             levelAPI.loadLevel();
         } catch (NoSolutionException e) {
-            System.out.println(
-                "Es konnte kein Level geladen werden, bitte den \"assets\" Ordner überprüfen.");
+            System.out.println("Es konnte kein Level geladen werden, bitte den \"assets\" Ordner überprüfen.");
             Gdx.app.exit();
         }
     }
@@ -63,8 +63,7 @@ public class MyGame extends MainController {
         levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
         levelMANA.setText(hero.getAttributes().getCurrentMana() + " / " + hero.getAttributes().getMaxMana());
         levelCounter.setText("Floor " + currentFloor);
-        heroStats.setText("AtkP: " + hero.getAttributes().getAttackPower() + "\nDefP: " + hero.getAttributes().getDefensePower() +
-            "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy());
+        heroStats.setText("AtkP: " + hero.getAttributes().getAttackPower() + "\nDefP: " + hero.getAttributes().getDefensePower() + "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy());
         heroLevel.setText("Level: " + hero.getAttributes().getLevel());
     }
 
@@ -84,9 +83,7 @@ public class MyGame extends MainController {
         if (levelAPI.getCurrentLevel().isOnEndTile(hero)) {
             try {
                 for (Monster monster : this.monster) {
-                    if (entityController.contains(monster)) {
-                        entityController.remove(monster);
-                    }
+                    entityController.remove(monster);
                 }
                 for (Item item : this.items) {
                     if (item.getIsOnFloor()) {
@@ -97,6 +94,7 @@ public class MyGame extends MainController {
                 for (Item traps : this.traps) {
                     entityController.remove(traps);
                 }
+
                 for (FriendlyNPC npc : this.npcs) {
                     entityController.remove(npc);
                 }
@@ -124,10 +122,10 @@ public class MyGame extends MainController {
     public void onLevelLoad() {
         currentFloor++;
         hero.setLevel(levelAPI.getCurrentLevel());
+        initTraps();
         initMons();
         initItems();
         initChest();
-        initTraps();
         initNpc();
     }
 
@@ -138,7 +136,6 @@ public class MyGame extends MainController {
             entityController.add(monster);
         }
     }
-
     private void initTraps() {
         this.traps = TrapFactory.trapFac(painter, batch);
         for (Item traps : this.traps) {
@@ -169,15 +166,14 @@ public class MyGame extends MainController {
         }
     }
 
-    private void initNpc(){
-        this.npcs = FriendlyNpcFactory.npcFac(painter,batch);
-        for(FriendlyNPC npc : npcs){
+    private void initNpc() {
+        this.npcs = FriendlyNpcFactory.npcFac(painter, batch);
+        for (FriendlyNPC npc : npcs) {
             npc.setLevel(levelAPI.getCurrentLevel());
             entityController.add(npc);
         }
         this.hero.setNpcs(npcs);
     }
-
 
     public static void main(String[] args) {
         // start the game

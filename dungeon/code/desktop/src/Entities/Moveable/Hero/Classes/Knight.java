@@ -13,6 +13,7 @@ public class Knight extends Hero {
         super(painter, batch);
         this.attributes = new HeroAttributes(100,100,50,100,50,50,1,0,0,0.2f);
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
+        this.name = "You";
     }
 
     /**
