@@ -208,6 +208,34 @@ public abstract class BasicAttributes {
         return level;
     }
 
+    /**
+     * get current monster or hero xp
+     * @return current xp
+     */
+    public int getExp() {
+        return this.currentExp;
+    }
+
+    /**
+     * set movementSpeed
+     * @param movementSpeed new value for movementSpeed
+     */
+    public void setMovementSpeed(float movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public void updateHeroLevelAndStats(){
+        this.level += 1;
+        this.maxHP +=20;
+        this.maxMana +=20;
+        this.attackPower += 5;
+        this.defensePower += 5;
+        this.accuracy += 5;
+        this.evasion += 5;
+        this.currentExp = this.currentExp - this.expForLvlUp;
+        this.expForLvlUp *= 2;
+    }
+
     @Override
     public String toString() {
         return "HP: " + this.currentHP + "\nMaxHP: " + this.maxHP +  "\nMANA: " + this.currentMana + "\nMaxMana: " + this.maxMana + "\nAttackpower: " + this.attackPower
