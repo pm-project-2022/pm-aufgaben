@@ -55,6 +55,7 @@ public class Hero extends Moveable {
     @Override
     public void update() {
         animations(movementUpdate(movementKeyPressed(), this.currentPosition));
+        updateExp();
         pickUpItem();
         updateInventoryItemPosition();
         equipItem();
@@ -66,6 +67,25 @@ public class Hero extends Moveable {
         openChest();
         stepOnTrap();
         talkToNpc();
+    }
+
+    /**
+     * manages and sets animations
+     */
+    private void animations(boolean keyPressed) {
+        if (keyPressed) {
+            if (viewDirection) {
+                this.activeAnimation = this.runAnimation;
+            } else {
+                this.activeAnimation = this.runMirroredAnimation;
+            }
+        } else {
+            if (this.viewDirection) {
+                this.activeAnimation = this.idleAnimation;
+            } else {
+                this.activeAnimation = this.idleMirroredAnimation;
+            }
+        }
     }
 
     /**
@@ -108,6 +128,12 @@ public class Hero extends Moveable {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private void updateExp() {
+        if(this.attributes.getExp() >= this.attributes.getExpForLvlUp()){
+            this.attributes.updateHeroLevelAndStats();
         }
     }
 
@@ -222,24 +248,7 @@ public class Hero extends Moveable {
         }
     }
 
-    /**
-     * manages and sets animations
-     */
-    private void animations(boolean keyPressed) {
-        if (keyPressed) {
-            if (viewDirection) {
-                this.activeAnimation = this.runAnimation;
-            } else {
-                this.activeAnimation = this.runMirroredAnimation;
-            }
-        } else {
-            if (this.viewDirection) {
-                this.activeAnimation = this.idleAnimation;
-            } else {
-                this.activeAnimation = this.idleMirroredAnimation;
-            }
-        }
-    }
+    
 
     public void setLevel(Level currentFloor) {
         this.currentFloor = currentFloor;

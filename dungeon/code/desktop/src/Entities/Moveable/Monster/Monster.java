@@ -63,6 +63,7 @@ public class Monster extends Moveable {
     @Override
     public boolean removable() {
         if(this.attributes.getCurrentHP() == 0){
+            this.hero.getAttributes().setExp(this.attributes.getExp() + this.hero.getAttributes().getExp());
             return true;
         }else{
             return false;
