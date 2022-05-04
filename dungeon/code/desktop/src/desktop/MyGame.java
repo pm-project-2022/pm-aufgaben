@@ -33,7 +33,7 @@ public class MyGame extends MainController {
     private ArrayList<Item> chests;
     private ArrayList<Item> traps;
     private ArrayList<FriendlyNPC> npcs;
-    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel;
+    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel; 
 
     @Override
     protected void setup() {
@@ -65,7 +65,7 @@ public class MyGame extends MainController {
         levelMANA.setText(hero.getAttributes().getCurrentMana() + " / " + hero.getAttributes().getMaxMana());
         levelCounter.setText("Floor " + currentFloor);
         heroStats.setText("AtkP: " + hero.getAttributes().getAttackPower() + "\nDefP: " + hero.getAttributes().getDefensePower() +
-            "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy());
+            "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy() + "\nExp: " + hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
         heroLevel.setText("Level: " + hero.getAttributes().getLevel());
     }
 

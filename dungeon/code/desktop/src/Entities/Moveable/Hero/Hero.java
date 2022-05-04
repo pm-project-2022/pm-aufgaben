@@ -1,11 +1,7 @@
 package Entities.Moveable.Hero;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import Entities.Chest.Chest;
 import Entities.FriendlyNPCs.FriendlyNPC;
-import Entities.Items.ItemFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -120,7 +116,7 @@ public class Hero extends Moveable {
     }
 
     private void updateExp() {
-        if(this.attributes.getExp() > this.attributes.getExpForLvlUp()){
+        if(this.attributes.getExp() >= this.attributes.getExpForLvlUp()){
             this.attributes.updateHeroLevelAndStats();
         }
     }
