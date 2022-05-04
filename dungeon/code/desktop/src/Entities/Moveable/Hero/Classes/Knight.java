@@ -12,7 +12,7 @@ public class Knight extends Hero {
     
     public Knight(Painter painter, SpriteBatch batch) {
         super(painter, batch);
-        this.attributes = new HeroAttributes(100,100,50,100,50,50,1,0,0,0.2f);
+        this.attributes = new HeroAttributes(100,100,50,100,50,50,1,0,10,0.2f);
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
     }
 

@@ -65,15 +65,15 @@ public class Fight {
             int monHP = this.monster.getAttributes().getCurrentHP() + this.dmg;
             if (monHP < 0) {
                 this.monster.getAttributes().setCurrentHP(0);
-                System.out.println(this.monster.getAttributes().toString());
+                //System.out.println(this.monster.getAttributes().toString());
 
             } else {
                 this.monster.getAttributes().setCurrentHP(monHP);
-                System.out.println(this.monster.getAttributes().toString());
+                //System.out.println(this.monster.getAttributes().toString());
             }
         } else {
             this.monster.getAttributes().setCurrentHP(this.monster.getAttributes().getCurrentHP() - 1);
-            System.out.println(this.monster.getAttributes().toString());
+            //System.out.println(this.monster.getAttributes().toString());
         }
         return true;
 
