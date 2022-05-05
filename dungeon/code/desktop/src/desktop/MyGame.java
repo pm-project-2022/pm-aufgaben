@@ -74,11 +74,12 @@ public class MyGame extends MainController {
         this.currentFloor = 0;
         this.monster = new ArrayList<>();
 
+
         // spawns hero
         camera.follow(hero);
         entityController.add(hero);
         initHud();
-        
+
 
         levelAPI.setGenerator(new LevelLoader());
         // load the first level
@@ -120,7 +121,7 @@ public class MyGame extends MainController {
 
     @Override
     protected void endFrame() {
-        
+
 
         if (levelAPI.getCurrentLevel().isOnEndTile(hero)) {
             try {

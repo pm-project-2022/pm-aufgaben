@@ -1,8 +1,4 @@
 package Gui;
-
-import Entities.Moveable.Hero.Classes.Knight;
-import Entities.Moveable.Hero.Hero;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
