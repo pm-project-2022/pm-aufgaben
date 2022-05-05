@@ -247,7 +247,7 @@ public class MyGame extends MainController {
         levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
         heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 500, 420);
         heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
-        this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 60, 200);
+        this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 170, 150);
         hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
         hudController.add(new ManaBar(hudPainter, hudBatch, new Point(0, -290)));
         hudController.add(new ExpBar(hudPainter, hudBatch, new Point(200, 90)));
