@@ -111,23 +111,8 @@ public class MyGame extends MainController {
             if (Gdx.input.isKeyPressed(Input.Keys.R)) {
                 restartGame();
             }
-
         }
-
-
-    /**
-     * initiates hud elements
-     */
-    public void initHud() {
-        levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
-        levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
-        levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
-        heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 480, 410);
-        heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
-        hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
-        hudController.add(new ManaBar(hudPainter, hudBatch, new Point(0, -290)));
-        hudController.add(new ExpBar(hudPainter, hudBatch, new Point(200, 90)));
-    }
+        }
 
     /**
      * clears stage on endframe
@@ -264,7 +249,15 @@ public class MyGame extends MainController {
     }
 
     private void restartGame() {
-        this.hero = new Knight(painter, batch);
+        if (gui.getChara() == 1) {
+            hero = new Knight(painter, batch);
+        }
+        if (gui.getChara() == 2) {
+            hero = new Wizard(painter, batch);
+        }
+        if (gui.getChara() == 3) {
+            hero = new Hunter(painter, batch);
+        }
         this.currentFloor = 0;
         this.hero.getAttributes().setCurrentHP(20);
         this.hero.getAttributes().setCurrentMana(20);
