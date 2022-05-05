@@ -14,6 +14,9 @@ public class Traps extends Item {
         isOnFloor = false;
     }
 
+    /**
+     * sets trap animations
+     */
     private void setAnimation() {
         ArrayList<String> animation = new ArrayList<String>();
         animation.add("traps/floor_spikes_anim_f0.png");

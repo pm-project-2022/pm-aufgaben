@@ -21,6 +21,9 @@ public class ManaOrb extends Item {
     private void setAnimation() {
         ArrayList<String> animation = new ArrayList<String>();
         animation.add("buffEntity/SpeedbuffOrb.png");
+        animation.add("buffEntity/SpeedbuffOrb2.png");
+        animation.add("buffEntity/SpeedbuffOrb3.png");
+        animation.add("buffEntity/SpeedbuffOrb4.png");
         initIdleAnimation(animation);
     }
 }

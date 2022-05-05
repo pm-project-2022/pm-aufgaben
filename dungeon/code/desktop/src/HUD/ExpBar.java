@@ -7,6 +7,9 @@ import tools.Point;
 
 public class ExpBar extends HUDElement {
 
+    /**
+     * Hud element expbar
+     */
     protected String texturePath;
     protected Point position;
 

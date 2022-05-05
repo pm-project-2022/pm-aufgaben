@@ -5,10 +5,13 @@ import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
 import Entities.Items.Item;
 import Entities.Items.ItemFactory;
+import Entities.Moveable.Hero.Classes.Hunter;
 import Entities.Moveable.Hero.Classes.Knight;
+import Entities.Moveable.Hero.Classes.Wizard;
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.Monster;
 import Entities.Moveable.Monster.MonsterFactory;
+import Gui.Gui;
 import HUD.ExpBar;
 import HUD.HealthBar;
 import HUD.ManaBar;
@@ -22,23 +25,50 @@ import level.generator.LevelLoader.LevelLoader;
 import level.generator.dungeong.graphg.NoSolutionException;
 import tools.Point;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MyGame extends MainController {
     public Hero hero;
-    private FriendlyNPC npc;
     private int currentFloor;
     private ArrayList<Monster> monster;
     private ArrayList<Item> items;
     private ArrayList<Item> chests;
     private ArrayList<Item> traps;
     private ArrayList<FriendlyNPC> npcs;
+    private Gui gui;
     private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, deathScreen;
+
 
     @Override
     protected void setup() {
 
-        this.hero = new Knight(painter, batch);
+        //Initiates Gui and waits on input
+        try {
+            gui = new Gui();
+            while(!gui.getBool()){
+                Thread.sleep(1000);
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Initiates chosen hero
+        if (gui.getChara() == 1) {
+            hero = new Knight(painter, batch);
+        }
+        if (gui.getChara() == 2) {
+            hero = new Wizard(painter, batch);
+        }
+        if (gui.getChara() == 3) {
+            hero = new Hunter(painter, batch);
+        }
+        setup2();
+    }
+
+    private void setup2() {
+
         this.currentFloor = 0;
         this.monster = new ArrayList<>();
         this.hero.getAttributes().setCurrentHP(20);
@@ -60,6 +90,9 @@ public class MyGame extends MainController {
         }
     }
 
+    /**
+     * sets text for hud
+     */
     @Override
     protected void beginFrame() {
         if (!this.hero.getHeroDead()) {
@@ -74,16 +107,31 @@ public class MyGame extends MainController {
             deathScreen.setText("");
         }else{
             levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
-            deathScreen.setText("You are dead\nPress `r` to \nrestart the game");
+            deathScreen.setText("Gamer Over\n`r` to restart");
             if (Gdx.input.isKeyPressed(Input.Keys.R)) {
                 restartGame();
             }
 
         }
 
+
+    /**
+     * initiates hud elements
+     */
+    public void initHud() {
+        levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
+        levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
+        levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
+        heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 480, 410);
+        heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
+        hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
+        hudController.add(new ManaBar(hudPainter, hudBatch, new Point(0, -290)));
+        hudController.add(new ExpBar(hudPainter, hudBatch, new Point(200, 90)));
     }
 
-
+    /**
+     * clears stage on endframe
+     */
 
     @Override
     protected void endFrame() {
@@ -127,6 +175,9 @@ public class MyGame extends MainController {
         }
     }
 
+    /**
+     * initiates all entities
+     */
     @Override
     public void onLevelLoad() {
         currentFloor++;
@@ -138,6 +189,9 @@ public class MyGame extends MainController {
         initNpc();
     }
 
+    /**
+     * spawns monster
+     */
     private void initMons() {
         this.monster = MonsterFactory.monFac(painter, batch, this.hero, this.currentFloor);
         for (Monster monster : this.monster) {
@@ -146,6 +200,9 @@ public class MyGame extends MainController {
         }
     }
 
+    /**
+     * spawns traps
+     */
     private void initTraps() {
         this.traps = TrapFactory.trapFac(painter, batch);
         for (Item traps : this.traps) {
@@ -155,6 +212,9 @@ public class MyGame extends MainController {
         this.hero.setFloorTraps(traps);
     }
 
+    /**
+     * spawns items
+     */
     private void initItems() {
         this.items = ItemFactory.itemFac(painter, batch);
         for (Item item : this.items) {
@@ -164,6 +224,9 @@ public class MyGame extends MainController {
         this.hero.setFloorItems(items);
     }
 
+    /**
+     * spawns chests
+     */
     private void initChest() {
         if (currentFloor % 5 == 0) {
             this.chests = ChestFactory.chestFac(painter, batch);
@@ -176,6 +239,9 @@ public class MyGame extends MainController {
         }
     }
 
+    /**
+     * spawns npc
+     */
     private void initNpc() {
         this.npcs = FriendlyNpcFactory.npcFac(painter, batch);
         for (FriendlyNPC npc : npcs) {

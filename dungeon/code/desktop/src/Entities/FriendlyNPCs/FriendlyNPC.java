@@ -20,6 +20,10 @@ public class FriendlyNPC extends BasicEntity {
         setAnimation();
     }
 
+    /**
+     * sets animation
+     * @return animations
+     */
     private Animation setAnimation(){
         ArrayList<String> animation = new ArrayList();
         animation.add("character/friendlyNPC/elf_f_idle_anim_f0.png");
@@ -35,6 +39,10 @@ public class FriendlyNPC extends BasicEntity {
         return idleAnimation;
     }
 
+    /**
+     * sets position on random tile in dungeon
+     * @param currentFloor
+     */
     public void setLevel(Level currentFloor) {
         this.currentFloor = currentFloor;
         this.currentPosition = this.currentFloor.getRandomRoom().getRandomFloorTile().getCoordinate().toPoint();
@@ -45,10 +53,18 @@ public class FriendlyNPC extends BasicEntity {
         return this.currentPosition;
     }
 
+    /**
+     * sets position
+     * @param position position in dungeon
+     */
     public void setPosition(Point position){
         this.currentPosition = position;
     }
 
+    /**
+     * gets the current floor
+     * @return current floor
+     */
     public Level getCurrentFloor(){
         return this.currentFloor;
     }
