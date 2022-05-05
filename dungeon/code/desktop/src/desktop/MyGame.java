@@ -27,7 +27,7 @@ import tools.Point;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class MyGame extends MainController {
     public Hero hero;
@@ -71,8 +71,7 @@ public class MyGame extends MainController {
 
         this.currentFloor = 0;
         this.monster = new ArrayList<>();
-        this.hero.getAttributes().setCurrentHP(20);
-        this.hero.getAttributes().setCurrentMana(20);
+        
 
         // spawns hero
         camera.follow(hero);
