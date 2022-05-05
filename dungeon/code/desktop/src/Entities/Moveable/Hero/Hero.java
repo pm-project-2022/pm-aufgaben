@@ -196,7 +196,7 @@ public class Hero extends Moveable {
 
     private void consumeItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            this.inventory.consumeItem(this);
+            this.inventory.consume(this);
         }
     }
 
@@ -296,6 +296,10 @@ public class Hero extends Moveable {
 
     public void setHeroDead(boolean dead) {
         this.heroDead = dead;
+    }
+
+    public ArrayList<Item> getTraps(){
+        return this.traps;
     }
 
     public boolean getHeroDead() {

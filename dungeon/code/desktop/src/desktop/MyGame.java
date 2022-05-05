@@ -5,6 +5,8 @@ import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
 import Entities.Items.Item;
 import Entities.Items.ItemFactory;
+import Entities.Items.MagicItems.HPEnhancer;
+import Entities.Items.MagicItems.TrapRemover;
 import Entities.Moveable.Hero.Classes.Hunter;
 import Entities.Moveable.Hero.Classes.Knight;
 import Entities.Moveable.Hero.Classes.Wizard;
@@ -71,7 +73,6 @@ public class MyGame extends MainController {
 
         this.currentFloor = 0;
         this.monster = new ArrayList<>();
-        
 
         // spawns hero
         camera.follow(hero);
@@ -201,6 +202,10 @@ public class MyGame extends MainController {
      */
     private void initItems() {
         this.items = ItemFactory.itemFac(painter, batch);
+        Item trapRemove = new TrapRemover(painter, batch);
+        Item HPEnhancer = new HPEnhancer(painter, batch);
+        this.items.add(trapRemove);
+        this.items.add(HPEnhancer);
         for (Item item : this.items) {
             item.setLevel(levelAPI.getCurrentLevel());
             entityController.add(item);

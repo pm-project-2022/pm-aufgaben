@@ -120,6 +120,60 @@ public class Inventory {
         return false;
     }
 
+    public void consume(Hero hero){
+        for(int i = 0; i< this.inventory.length; i++) {
+            if(this.inventory[i] != null && this.inventory[i].getIsEquipped() && this.amount[i] > 0 &&  this.inventory[i].getItemName().matches("Trapremover")) {
+                if(this.inventory[i].getAttributes().getCurrentMana() <= hero.getAttributes().getCurrentMana()){
+                    hero.getAttributes().setCurrentMana(hero.getAttributes().getCurrentMana() - 50);
+                    if(this.amount[i] == 1){
+                        for (Item traps : hero.getTraps()) {
+                            traps.setRemoveOrConsume(true);
+                        }
+                        this.inventory[i].setRemoveOrConsume(true);
+                        this.inventory[i] = null;
+                        this.elements --;
+                    }else{
+                        for (Item traps : hero.getTraps()) {
+                            traps.setRemoveOrConsume(true);
+                        }
+                    }
+                    hero.getTraps().clear();
+                    this.amount[i] -= 1;
+                }else{
+                    return;
+                }
+            
+            }else if(this.inventory[i] != null && this.inventory[i].getIsEquipped() && this.amount[i] > 0 &&  this.inventory[i].getItemName().matches("HpEnhancer")){
+                if(100 <= hero.getAttributes().getCurrentMana()){
+                    hero.getAttributes().setMaxHP(hero.getAttributes().getMaxHP() + this.inventory[i].getAttributes().getCurrentHP());
+                    hero.getAttributes().setCurrentMana(hero.getAttributes().getCurrentMana() - 100);
+                    if(this.amount[i] == 1){
+                        this.inventory[i].setRemoveOrConsume(true);
+                        this.inventory[i] = null;
+                        this.elements --;
+                    }
+                    this.amount[i] -= 1;
+                }else{
+                    return;
+                }
+            }else if (this.inventory[i] != null && this.inventory[i].getIsEquipped() && this.amount[i] > 0) {
+                if (this.amount[i] == 1) {
+                    giveStats(hero, i);
+                    this.inventory[i].setRemoveOrConsume(true);
+                    log.info("Item benutzt: " + this.inventory[i].getItemName());
+                    this.inventory[i] = null;
+                    this.elements--;
+
+
+                } else {
+                    giveStats(hero, i);
+                }
+
+                this.amount[i] -= 1;
+            }
+        }
+    }
+
     /**
      * consumes a item from the inventory
      *
