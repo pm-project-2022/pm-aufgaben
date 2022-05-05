@@ -109,8 +109,8 @@ public class MyGame extends MainController {
             deathScreen.setText("Gamer Over\n`r` to restart");
             if (Gdx.input.isKeyPressed(Input.Keys.R)) {
                 restartGame();
-            }}
-
+            }
+        }
         }
 
     /**
