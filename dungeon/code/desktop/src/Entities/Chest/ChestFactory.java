@@ -13,6 +13,12 @@ public class ChestFactory {
 
     }
 
+    /**
+     * adds chests with item to a list
+     * @param painter render
+     * @param batch render
+     * @return list with chest containing item
+     */
     public static ArrayList<Item> chestFac(Painter painter, SpriteBatch batch) {
         ArrayList<Item> chests = new ArrayList<>();
         chests.add(new Chest(painter,batch));

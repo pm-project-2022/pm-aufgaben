@@ -19,11 +19,17 @@ public class Gui extends JFrame {
         initGui();
     }
 
+    /**
+     * initiates gui for picking a character
+     * @throws IOException file found, not found
+     */
     public void initGui() throws IOException {
+        //buttons
         Button r1 = new Button("Knight");
         Button r2 = new Button("Wizard");
         Button r3 = new Button("Hunter");
 
+        //load images
         BufferedImage imgKnight =  ImageIO.read(new File("dungeon/code/assets/character/heroclasses/knight/Male/knight_m_hit_anim_f0.png"));
         ImageIcon icon = new ImageIcon(imgKnight);
         BufferedImage imgWizard =  ImageIO.read(new File("dungeon/code/assets/character/heroclasses/wizard/Male/wizzard_m_hit_anim_f0.png"));
@@ -31,6 +37,7 @@ public class Gui extends JFrame {
         BufferedImage imgHunter =  ImageIO.read(new File("dungeon/code/assets/character/heroclasses/hunter/male/elf_m_hit_anim_f0.png"));
         ImageIcon icon3 = new ImageIcon(imgHunter);
 
+        //fill label and center
         JLabel lblKnight = new JLabel();
         JLabel lblKnightStats = new JLabel("<html>HP: 100<br/>Mana: 100<br/>AtkP: 50<br/>DefP: 100<br/>Eva: 50<br/>Accu: 50<html>");
         lblKnightStats.setFont(new Font("Arial",Font.PLAIN,10));
@@ -53,6 +60,7 @@ public class Gui extends JFrame {
         lblWizard.setIcon(icon2);
         lblHunter.setIcon(icon3);
 
+        //set frame and add contents to panel
         JFrame f1 = new JFrame();
         JPanel p1 = new JPanel();
         f1.setLocation(700,500);
@@ -74,6 +82,7 @@ public class Gui extends JFrame {
         p1.add(lblHunterStats);
         f1.setVisible(true);
 
+        //ActionListener for buttons to choose a character
         r1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setChara(1);
@@ -97,6 +106,10 @@ public class Gui extends JFrame {
         });
     }
 
+    /**
+     * boolean for character
+     * @return button pressed true, otherwise false
+     */
     public boolean getBool(){
         return bool;
     };

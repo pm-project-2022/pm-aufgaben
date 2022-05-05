@@ -10,9 +10,14 @@ public class ItemFactory {
     private ItemFactory() {
     }
 
+    /**
+     * adds items to a list
+     * @param painter render
+     * @param batch render
+     * @return list with items
+     */
     public static ArrayList<Item> itemFac(Painter painter, SpriteBatch batch) {
         ArrayList<Item> items = new ArrayList<>();
-
         for (int i = 0; i < 4; i++) {
             int ranNum = new Random().nextInt(5);
             switch (ranNum) {

@@ -201,7 +201,7 @@ public class Inventory {
     }
 
     /**
-     * getter fpr the inventory
+     * getter for the inventory
      *
      * @return inventory
      */

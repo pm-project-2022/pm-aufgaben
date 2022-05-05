@@ -7,6 +7,9 @@ import tools.Point;
 
 public class HealthBar extends HUDElement {
 
+    /**
+     * hud element healthbar
+     */
     protected String texturePath;
     protected Point position;
 

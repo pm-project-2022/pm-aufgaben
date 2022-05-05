@@ -13,6 +13,12 @@ public class TrapFactory {
 
     }
 
+    /**
+     * adds traps to a list
+     * @param painter render
+     * @param batch render
+     * @return list with traps
+     */
     public static ArrayList<Item> trapFac(Painter painter, SpriteBatch batch) {
         ArrayList<Item> traps = new ArrayList<>();
         for(int i = 0; i < 5; i++){

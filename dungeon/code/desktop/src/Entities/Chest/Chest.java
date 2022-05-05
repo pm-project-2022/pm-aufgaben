@@ -13,6 +13,9 @@ public class Chest extends Item {
         setAnimation();
     }
 
+    /**
+     * sets animation
+     */
     private void setAnimation() {
         ArrayList<String> animation = new ArrayList<String>();
         animation.add("chest/chest_full_open_anim_f0.png");

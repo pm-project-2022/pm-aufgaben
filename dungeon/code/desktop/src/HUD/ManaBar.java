@@ -7,6 +7,9 @@ import tools.Point;
 
 public class ManaBar extends HUDElement {
 
+    /**
+     * hud element manabar
+     */
     protected String texturePath;
     protected Point position;
 
