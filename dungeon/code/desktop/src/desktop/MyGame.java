@@ -27,7 +27,7 @@ import tools.Point;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class MyGame extends MainController {
     public Hero hero;
@@ -71,8 +71,7 @@ public class MyGame extends MainController {
 
         this.currentFloor = 0;
         this.monster = new ArrayList<>();
-        this.hero.getAttributes().setCurrentHP(20);
-        this.hero.getAttributes().setCurrentMana(20);
+        
 
         // spawns hero
         camera.follow(hero);
@@ -110,24 +109,9 @@ public class MyGame extends MainController {
             deathScreen.setText("Gamer Over\n`r` to restart");
             if (Gdx.input.isKeyPressed(Input.Keys.R)) {
                 restartGame();
-            }
+            }}
 
         }
-
-
-    /**
-     * initiates hud elements
-     */
-    public void initHud() {
-        levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
-        levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
-        levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
-        heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 480, 410);
-        heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
-        hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
-        hudController.add(new ManaBar(hudPainter, hudBatch, new Point(0, -290)));
-        hudController.add(new ExpBar(hudPainter, hudBatch, new Point(200, 90)));
-    }
 
     /**
      * clears stage on endframe
