@@ -3,12 +3,14 @@ package Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement;
 import Entities.Fight.Fight;
 import Entities.Moveable.Monster.Monster;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
+import Helper.Booleans;
 import Helper.PointBooleanTransmitter;
 import tools.Point;
 
 public class Idle implements IMovement {
     private boolean idle;
     private Point newPosition;
+    private Point newHeroPoint;
     private boolean runDirection;
     private boolean collision;
 
@@ -26,7 +28,7 @@ public class Idle implements IMovement {
                 fightTrigger(monster);
             }
 
-            if (monster.getCurrentFloor().getTileAt(newPosition.toCoordinate()).isAccessible()) {
+            if (monster.getCurrentFloor().getTileAt(this.newPosition.toCoordinate()).isAccessible()) {
                 return new PointBooleanTransmitter(this.runDirection, this.idle, this.newPosition);
 
             } else {
@@ -48,14 +50,31 @@ public class Idle implements IMovement {
         }
     }
 
-    private void fightTrigger(Monster monster) {
-        if (new Fight(monster).fight()) {
-            if (this.runDirection) {
+    private void fightTrigger(Monster monster){
+        Fight fight = new Fight(monster);
+        Booleans fightresult = fight.fight();
+        if(fightresult.getMonsterDmg()){
+            if(this.runDirection){
                 this.newPosition.x -= 1.0f;
-            } else {
+            }else{
                 this.newPosition.x += 1.0f;
             }
             this.collision = true;
+        }
+
+        if(fightresult.getHeroDmg()){
+            this.newHeroPoint = monster.getHero().getPosition();
+            if(this.runDirection){
+                this.newHeroPoint.x += 1.0f;
+            }else{
+                this.newHeroPoint.x -= 1.0f;
+            }
+
+            if(monster.getHero().getCurrentFloor().getTileAt(this.newHeroPoint.toCoordinate()).isAccessible()){
+                monster.getHero().setPosition(this.newHeroPoint);
+            }else{
+                monster.getHero().setPosition(monster.getHero().getPosition());
+            }
         }
     }
 }

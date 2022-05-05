@@ -44,6 +44,9 @@ public class Monster extends Moveable {
     private void animations() {
 
         if (this.pointBooleanTransmitter.getCollision()) {
+            this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection()) {
+                
+            };
 
             // this.movementBehaviour = new
             // Idle(this.pointBooleanTransmitter.getRunDirection());

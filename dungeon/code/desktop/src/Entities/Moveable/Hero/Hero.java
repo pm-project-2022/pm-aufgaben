@@ -264,13 +264,10 @@ public class Hero extends Moveable {
             this.heroDead = true;
         }
     }
-
     
-    
-
-    
-
-    
+    public void setPosition(Point newPosition){
+        this.currentPosition = newPosition;
+    }
 
     public void setLevel(Level currentFloor) {
         this.currentFloor = currentFloor;
