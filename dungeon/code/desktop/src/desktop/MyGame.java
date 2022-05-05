@@ -109,8 +109,8 @@ public class MyGame extends MainController {
             deathScreen.setText("Gamer Over\n`r` to restart");
             if (Gdx.input.isKeyPressed(Input.Keys.R)) {
                 restartGame();
-            }}
-
+            }
+        }
         }
 
     /**
@@ -248,7 +248,15 @@ public class MyGame extends MainController {
     }
 
     private void restartGame() {
-        this.hero = new Knight(painter, batch);
+        if (gui.getChara() == 1) {
+            hero = new Knight(painter, batch);
+        }
+        if (gui.getChara() == 2) {
+            hero = new Wizard(painter, batch);
+        }
+        if (gui.getChara() == 3) {
+            hero = new Hunter(painter, batch);
+        }
         this.currentFloor = 0;
         this.hero.getAttributes().setCurrentHP(20);
         this.hero.getAttributes().setCurrentMana(20);
