@@ -2,16 +2,18 @@ package Traps;
 
 import Entities.Items.Item;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import graphic.Animation;
 import graphic.Painter;
 
 import java.util.ArrayList;
 
 public class Traps extends Item {
+
     public Traps(Painter painter, SpriteBatch batch) {
         super(painter, batch);
         setAnimation();
         isOnFloor = false;
+        this.itemName = "Trap";
+        this.removeOrConsume = false;
     }
 
     /**
@@ -33,7 +35,8 @@ public class Traps extends Item {
             activeAnimation = idleAnimation;
         }
         else{
-            activeAnimation = invisible;
+            activeAnimation = idleAnimation;
         }
     }
+    
 }
