@@ -71,13 +71,13 @@ public class MyGame extends MainController {
 
         this.currentFloor = 0;
         this.monster = new ArrayList<>();
-        
+
 
         // spawns hero
         camera.follow(hero);
         entityController.add(hero);
         initHud();
-        
+
 
         levelAPI.setGenerator(new LevelLoader());
         // load the first level
@@ -119,7 +119,7 @@ public class MyGame extends MainController {
 
     @Override
     protected void endFrame() {
-        
+
 
         if (levelAPI.getCurrentLevel().isOnEndTile(hero)) {
             try {
@@ -248,7 +248,15 @@ public class MyGame extends MainController {
     }
 
     private void restartGame() {
-        this.hero = new Knight(painter, batch);
+        if (gui.getChara() == 1) {
+            hero = new Knight(painter, batch);
+        }
+        if (gui.getChara() == 2) {
+            hero = new Wizard(painter, batch);
+        }
+        if (gui.getChara() == 3) {
+            hero = new Hunter(painter, batch);
+        }
         this.currentFloor = 0;
         this.hero.getAttributes().setCurrentHP(20);
         this.hero.getAttributes().setCurrentMana(20);
