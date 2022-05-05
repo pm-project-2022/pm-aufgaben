@@ -63,7 +63,7 @@ public class Idle implements IMovement {
         }
 
         if(fightresult.getHeroDmg()){
-            this.newHeroPoint = monster.getHero().getPosition();
+            this.newHeroPoint = new Point(monster.getHero().getPosition());
             if(this.runDirection){
                 this.newHeroPoint.x += 1.0f;
             }else{

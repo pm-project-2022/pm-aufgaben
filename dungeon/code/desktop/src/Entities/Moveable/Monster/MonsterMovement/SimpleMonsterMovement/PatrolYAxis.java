@@ -64,7 +64,7 @@ public class PatrolYAxis implements IMovement{
         }
 
         if(fightresult.getHeroDmg()){
-            this.newHeroPoint = monster.getHero().getPosition();
+            this.newHeroPoint = new Point(monster.getHero().getPosition());
             if(this.runDirectionY){
                 this.newHeroPoint.y += 1.0f;
             }else{
