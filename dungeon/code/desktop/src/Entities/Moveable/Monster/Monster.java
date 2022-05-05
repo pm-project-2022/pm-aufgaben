@@ -34,16 +34,22 @@ public class Monster extends Moveable {
 
     @Override
     public void update() {
-        this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
-        this.currentPosition = pointBooleanTransmitter.getPoint();
-        animations();
+        if (!this.hero.getHeroDead()) {
+            this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
+            this.currentPosition = pointBooleanTransmitter.getPoint();
+            animations();
+        }
     }
 
     private void animations() {
 
         if (this.pointBooleanTransmitter.getCollision()) {
+            this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection()) {
+                
+            };
 
-            //this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection());
+            // this.movementBehaviour = new
+            // Idle(this.pointBooleanTransmitter.getRunDirection());
 
             if (this.pointBooleanTransmitter.getRunDirection()) {
                 this.activeAnimation = this.idleAnimation;
@@ -60,12 +66,13 @@ public class Monster extends Moveable {
             this.activeAnimation = this.runMirroredAnimation;
         }
     }
+
     @Override
     public boolean removable() {
-        if(this.attributes.getCurrentHP() == 0){
+        if (this.attributes.getCurrentHP() == 0) {
             this.hero.getAttributes().setExp(this.attributes.getExp() + this.hero.getAttributes().getExp());
             return true;
-        }else{
+        } else {
             return false;
         }
     }

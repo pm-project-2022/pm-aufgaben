@@ -21,6 +21,7 @@ import Logger.ColumnFormatter;
 
 public class Hero extends Moveable {
     protected boolean viewDirection;
+    protected boolean heroDead;
     protected ArrayList<Item> floorItems;
     protected ArrayList<Item> availableItems;
     protected ArrayList<Item> chests;
@@ -30,11 +31,11 @@ public class Hero extends Moveable {
     protected Logger log;
     protected String name;
 
-
     public Hero(Painter painter, SpriteBatch batch) {
         super(painter, batch);
         this.viewDirection = true;
         this.inventory = new Inventory();
+        this.heroDead = false;
         this.floorItems = new ArrayList<>();
         this.chests = new ArrayList<>();
         this.traps = new ArrayList<>();
@@ -54,19 +55,22 @@ public class Hero extends Moveable {
 
     @Override
     public void update() {
-        animations(movementUpdate(movementKeyPressed(), this.currentPosition));
-        updateExp();
-        pickUpItem();
-        updateInventoryItemPosition();
-        equipItem();
-        itemViewDirection();
-        dropItem();
-        consumeItem();
-        showInventory();
-        printStats();
-        openChest();
-        stepOnTrap();
-        talkToNpc();
+        if (!this.heroDead) {
+            animations(movementUpdate(movementKeyPressed(), this.currentPosition));
+            updateExp();
+            pickUpItem();
+            updateInventoryItemPosition();
+            equipItem();
+            itemViewDirection();
+            dropItem();
+            consumeItem();
+            showInventory();
+            printStats();
+            openChest();
+            stepOnTrap();
+            talkToNpc();
+            updateDead();
+        }
     }
 
     /**
@@ -94,7 +98,8 @@ public class Hero extends Moveable {
      * @return true if a button was pressed, false if not
      */
     private boolean movementKeyPressed() {
-        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.S)
+                || Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.D)) {
             return true;
         } else {
             return false;
@@ -132,7 +137,7 @@ public class Hero extends Moveable {
     }
 
     private void updateExp() {
-        if(this.attributes.getExp() >= this.attributes.getExpForLvlUp()){
+        if (this.attributes.getExp() >= this.attributes.getExpForLvlUp()) {
             this.attributes.updateHeroLevelAndStats();
         }
     }
@@ -140,55 +145,14 @@ public class Hero extends Moveable {
     private void pickUpItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             for (Item item : this.floorItems) {
-                if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == item.getCurrentFloor().getTileAt(item.getPosition().toCoordinate()) && item.getIsOnFloor()) {
+                if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == item.getCurrentFloor()
+                        .getTileAt(item.getPosition().toCoordinate()) && item.getIsOnFloor()) {
                     if (this.inventory.addItem(item)) {
                         item.setIsOnFloor(false);
                         item.setPickUp(true);
                         item.setPosition(this.currentPosition);
                     }
 
-                }
-            }
-        }
-    }
-
-    private void openChest() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
-            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == chests.get(0).getCurrentFloor().getTileAt(chests.get(0).getPosition().toCoordinate()) && chests.get(0).getIsOnFloor()) {
-                chests.get(0).setRemoveOrConsume(true);
-                chests.get(1).setIsOnFloor(true);
-                this.floorItems.add(chests.get(1));
-            }
-
-        }
-    }
-
-    private void stepOnTrap() {
-        for (Item traps : traps) {
-            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == traps.getCurrentFloor().getTileAt(traps.getPosition().toCoordinate())) {
-                traps.setIsOnFloor(true);
-                attributes.setCurrentHP(attributes.getCurrentHP() - 1);
-            }
-        }
-    }
-
-    private void talkToNpc() {
-        for (FriendlyNPC npc : npcs) {
-            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == npc.getCurrentFloor().getTileAt(npc.getPosition().toCoordinate())) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-
-                    for (int i = 0; i < floorItems.size(); i++) {
-                        if (!floorItems.get(i).getPickUp()) {
-                            if (inventory.addItem(floorItems.get(i))) {
-                                floorItems.get(i).setIsOnFloor(false);
-                                floorItems.get(i).setPickUp(true);
-                                floorItems.get(i).setPosition(this.currentPosition);
-                                npc.setPosition(this.currentFloor.getRandomRoom().getRandomFloorTile().getCoordinate().toPoint());
-                                log.info("Item gebracht");
-                                break;
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -205,14 +169,6 @@ public class Hero extends Moveable {
         }
     }
 
-    private void itemViewDirection() {
-        for (Item item : this.inventory.getInventory()) {
-            if (item != null && item.isEquipped()) {
-                item.setViewDirection(new PointBooleanTransmitter(this.viewDirection, this.currentPosition));
-            }
-        }
-    }
-
     private void equipItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
             this.inventory.equipItem(0);
@@ -220,6 +176,14 @@ public class Hero extends Moveable {
             this.inventory.equipItem(1);
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
             this.inventory.equipItem(2);
+        }
+    }
+
+    private void itemViewDirection() {
+        for (Item item : this.inventory.getInventory()) {
+            if (item != null && item.isEquipped()) {
+                item.setViewDirection(new PointBooleanTransmitter(this.viewDirection, this.currentPosition));
+            }
         }
     }
 
@@ -248,7 +212,62 @@ public class Hero extends Moveable {
         }
     }
 
+
+    private void openChest() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
+            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == chests.get(0).getCurrentFloor()
+                    .getTileAt(chests.get(0).getPosition().toCoordinate()) && chests.get(0).getIsOnFloor()) {
+                chests.get(0).setRemoveOrConsume(true);
+                chests.get(1).setIsOnFloor(true);
+                this.floorItems.add(chests.get(1));
+            }
+
+        }
+    }
+
+    private void stepOnTrap() {
+        for (Item traps : traps) {
+            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == traps.getCurrentFloor()
+                    .getTileAt(traps.getPosition().toCoordinate())) {
+                traps.setIsOnFloor(true);
+                attributes.setCurrentHP(attributes.getCurrentHP() - 1);
+            }
+        }
+    }
+
+    private void talkToNpc() {
+        for (FriendlyNPC npc : npcs) {
+            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == npc.getCurrentFloor()
+                    .getTileAt(npc.getPosition().toCoordinate())) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+
+                    for (int i = 0; i < floorItems.size(); i++) {
+                        if (!floorItems.get(i).getPickUp()) {
+                            if (inventory.addItem(floorItems.get(i))) {
+                                floorItems.get(i).setIsOnFloor(false);
+                                floorItems.get(i).setPickUp(true);
+                                floorItems.get(i).setPosition(this.currentPosition);
+                                npc.setPosition(this.currentFloor.getRandomRoom().getRandomFloorTile().getCoordinate()
+                                        .toPoint());
+                                log.info("Item gebracht");
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateDead(){
+        if(this.attributes.getCurrentHP() <= 0){
+            this.heroDead = true;
+        }
+    }
     
+    public void setPosition(Point newPosition){
+        this.currentPosition = newPosition;
+    }
 
     public void setLevel(Level currentFloor) {
         this.currentFloor = currentFloor;
@@ -271,8 +290,16 @@ public class Hero extends Moveable {
         this.chests = chests;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
+    }
+
+    public void setHeroDead(boolean dead) {
+        this.heroDead = dead;
+    }
+
+    public boolean getHeroDead() {
+        return this.heroDead;
     }
 
     @Override
@@ -284,6 +311,5 @@ public class Hero extends Moveable {
     public Point getPosition() {
         return this.currentPosition;
     }
-
 
 }

@@ -27,7 +27,7 @@ import tools.Point;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class MyGame extends MainController {
     public Hero hero;
@@ -37,8 +37,9 @@ public class MyGame extends MainController {
     private ArrayList<Item> chests;
     private ArrayList<Item> traps;
     private ArrayList<FriendlyNPC> npcs;
-    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel;
     private Gui gui;
+    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, deathScreen;
+
 
     @Override
     protected void setup() {
@@ -70,13 +71,13 @@ public class MyGame extends MainController {
 
         this.currentFloor = 0;
         this.monster = new ArrayList<>();
-        this.hero.getAttributes().setCurrentHP(20);
-        this.hero.getAttributes().setCurrentMana(20);
+        
 
-        //spawns hero
+        // spawns hero
         camera.follow(hero);
         entityController.add(hero);
         initHud();
+        
 
         levelAPI.setGenerator(new LevelLoader());
         // load the first level
@@ -93,33 +94,33 @@ public class MyGame extends MainController {
      */
     @Override
     protected void beginFrame() {
-        levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
-        levelMANA.setText(hero.getAttributes().getCurrentMana() + " / " + hero.getAttributes().getMaxMana());
-        levelCounter.setText("Floor " + currentFloor);
-        heroStats.setText("AtkP: " + hero.getAttributes().getAttackPower() + "\nDefP: " + hero.getAttributes().getDefensePower() +
-            "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy() + "\nExp: " + hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
-        heroLevel.setText("Level: " + hero.getAttributes().getLevel());
-    }
+        if (!this.hero.getHeroDead()) {
+            levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
+            levelMANA.setText(hero.getAttributes().getCurrentMana() + " / " + hero.getAttributes().getMaxMana());
+            levelCounter.setText("Floor " + currentFloor);
+            heroStats.setText("AtkP: " + hero.getAttributes().getAttackPower() + "\nDefP: "
+                    + hero.getAttributes().getDefensePower() +
+                    "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy()
+                    + "\nExp: " + hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
+            heroLevel.setText("Level: " + hero.getAttributes().getLevel());
+            deathScreen.setText("");
+        }else{
+            levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
+            deathScreen.setText("Gamer Over\n`r` to restart");
+            if (Gdx.input.isKeyPressed(Input.Keys.R)) {
+                restartGame();
+            }}
 
-    /**
-     * initiates hud elements
-     */
-    public void initHud() {
-        levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
-        levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
-        levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
-        heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 480, 410);
-        heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
-        hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
-        hudController.add(new ManaBar(hudPainter, hudBatch, new Point(0, -290)));
-        hudController.add(new ExpBar(hudPainter, hudBatch, new Point(200, 90)));
-    }
+        }
 
     /**
      * clears stage on endframe
      */
+
     @Override
     protected void endFrame() {
+        
+
         if (levelAPI.getCurrentLevel().isOnEndTile(hero)) {
             try {
                 for (Monster monster : this.monster) {
@@ -233,6 +234,38 @@ public class MyGame extends MainController {
         }
         this.hero.setNpcs(npcs);
     }
+
+    private void initHud() {
+        levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
+        levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
+        levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
+        heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 500, 420);
+        heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
+        this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 60, 200);
+        hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
+        hudController.add(new ManaBar(hudPainter, hudBatch, new Point(0, -290)));
+        hudController.add(new ExpBar(hudPainter, hudBatch, new Point(200, 90)));
+    }
+
+    private void restartGame() {
+        this.hero = new Knight(painter, batch);
+        this.currentFloor = 0;
+        this.hero.getAttributes().setCurrentHP(20);
+        this.hero.getAttributes().setCurrentMana(20);
+        this.monster.clear();
+        this.items.clear();
+        this.traps.clear();
+        this.npcs.clear();
+        this.entityController.clear();
+        camera.follow(hero);
+        entityController.add(hero);
+        try {
+            levelAPI.loadLevel();
+        } catch (NoSolutionException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args) {
         // start the game

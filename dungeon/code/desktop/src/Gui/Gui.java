@@ -26,11 +26,11 @@ public class Gui extends JFrame {
         Button r3 = new Button("Hunter");
 
         //load images
-        BufferedImage imgKnight =  ImageIO.read(new File("dungeon/code/assets/character/heroclasses/knight/Male/knight_m_hit_anim_f0.png"));
+        BufferedImage imgKnight =  ImageIO.read(new File("assets/character/heroclasses/knight/Male/knight_m_hit_anim_f0.png"));
         ImageIcon icon = new ImageIcon(imgKnight);
-        BufferedImage imgWizard =  ImageIO.read(new File("dungeon/code/assets/character/heroclasses/wizard/Male/wizzard_m_hit_anim_f0.png"));
+        BufferedImage imgWizard =  ImageIO.read(new File("assets/character/heroclasses/wizard/Male/wizzard_m_hit_anim_f0.png"));
         ImageIcon icon2 = new ImageIcon(imgWizard);
-        BufferedImage imgHunter =  ImageIO.read(new File("dungeon/code/assets/character/heroclasses/hunter/male/elf_m_hit_anim_f0.png"));
+        BufferedImage imgHunter =  ImageIO.read(new File("assets/character/heroclasses/hunter/male/elf_m_hit_anim_f0.png"));
         ImageIcon icon3 = new ImageIcon(imgHunter);
 
         //fill label and center
