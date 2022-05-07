@@ -15,7 +15,8 @@ public class JUnit {
     }
 
     /**
-     *
+
+     * Prüft ob Liste gefüllt ist
      */
     @Test
     public void assume(){
@@ -59,7 +60,4 @@ public class JUnit {
         a1.remove(1);
         Assert.assertTrue(a1.get(0).equals("a") && a1.size() == 1);
     }
-
-
-
 }

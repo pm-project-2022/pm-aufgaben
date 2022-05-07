@@ -1,16 +1,14 @@
 package Entities.Items;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import Attribute.Items.AttackPowerItems;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
-
 
 import java.util.ArrayList;
 
 
 public class StrengthOrb extends Item{
-    
+
     public StrengthOrb(Painter painter, SpriteBatch batch) {
         super(painter, batch);
         this.itemName = "Strength Orb";
