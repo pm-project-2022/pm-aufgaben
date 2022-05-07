@@ -1,3 +1,5 @@
+package SpecialArrayList;
+
 import org.junit.*;
 import java.util.ArrayList;
 import static org.junit.Assume.assumeTrue;
@@ -13,6 +15,7 @@ public class JUnit {
     }
 
     /**
+
      * Prüft ob Liste gefüllt ist
      */
     @Test
@@ -57,7 +60,4 @@ public class JUnit {
         a1.remove(1);
         Assert.assertTrue(a1.get(0).equals("a") && a1.size() == 1);
     }
-
-
-
 }
