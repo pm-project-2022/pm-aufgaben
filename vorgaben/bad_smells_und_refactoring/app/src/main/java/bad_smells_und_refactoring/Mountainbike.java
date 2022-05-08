@@ -1,21 +1,26 @@
+package bad_smells_und_refactoring;
 
-public class EBike extends Bike {
+public class Mountainbike extends Bike {
 
     public int maxSpeed;
     public int rearGearsCount;
     public int frontGearsCount;
 
-    public EBike(String pn, double p, int ms, int rgc, int fgc, int bc) {
+    public Mountainbike(String pn, double p, int ms, int rgc, int fgc) {
         productName = pn;
         price = p;
         maxSpeed = ms;
         rearGearsCount = rgc;
         frontGearsCount = fgc;
-        batteryCapacity = bc;
     }
 
     public int getMaxSpeed() {
         return maxSpeed;
+    }
+
+    @Override
+    public Integer getBatteryCapacity() {
+        return null;
     }
 
     @Override

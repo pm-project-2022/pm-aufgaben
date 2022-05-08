@@ -1,3 +1,5 @@
+package bad_smells_und_refactoring;
+
 import java.util.ArrayList;
 import java.util.Date;
 
