@@ -4,55 +4,49 @@ import java.util.ArrayList;
 
 
 public class Bill {
+    private double totalPrice;
+    private double articlePrice;
+    private CustomerData customerData;
+    private ArrayList<Article> articles;
 
-    public CustomerData customerData;
-    public ArrayList<Article> articles;
-
-    public Bill(ArrayList<Article> articles) {
+    public Bill(CustomerData customerData, ArrayList<Article> articles) {
+        this.customerData = customerData;
         this.articles = articles;
+        this.totalPrice = 0;
+        this.articlePrice = 0;
     }
-
 
     public boolean addArticle(Article a) {
         return articles.add(a);
     }
 
-    /*public String getDetails() {
-        double total = 0;
+    public void printBill() {
+        this.customerData.printCustomerData();
+        calculateArticlePrice();
+        printTotalPrice();
+    }
 
-        String result = "Details for \"" + customerName + "\"\n";
-        result += street + " " + streetNumber + "\n";
-        result += postalCode + " " + city + "\n";
-        result += "Geburtstag: " + birthday + "\n";
-        result += "Email: " + email + "\n\n";
-        result += "Article: \n";
-        for (Article article : articles) {
-            double price = 0;
-            if (article.bike instanceof Brompton) {
-                if (article.purchaseAmount > 1) {
-                    price += (article.purchaseAmount - 1) * article.bike.price / 2;
-                }
-                price += article.bike.price * article.purchaseAmount;
-            } else if (article.bike instanceof EBike) {
-                price += article.bike.price * article.purchaseAmount;
-            } else if (article.bike instanceof Mountainbike) {
-                if (article.purchaseAmount > 2) {
-                    price += article.purchaseAmount * article.bike.price * 9 / 10;
-                } else {
-                    price += article.bike.price * article.purchaseAmount;
-                }
+    private void calculateArticlePrice(){
+        for (Article article : this.articles) {
+            this.articlePrice = 0;
+            if(article.getBike().getBikeType().equals("Brompton") && article.getPurchaseAmount() > 1){
+                articlePrice += (article.getPurchaseAmount() - 1) * article.getBike().getPrice() / 2;
+            }else if(article.getBike().getBikeType().equals("Mountainbike") && article.getPurchaseAmount() > 2){
+                articlePrice += article.getPurchaseAmount() * article.getBike().getPrice() * 0.9;
+            }else{
+                articlePrice += article.getBike().getPrice();
             }
-            if (price > 1000f || price == 1000.0) {
-                price = price * 0.8;
-            }
-
-            result += "\t" + article.bike.productName + "\tx\t" + article.purchaseAmount + "\t=\t" + String.valueOf(price) + "\n";
-            total += price;
+            articlePrice = (articlePrice >= 1000) ? articlePrice *= 0.8 : articlePrice;
+            this.totalPrice += articlePrice;
+            printArticlePrice(article);
         }
+    }
 
-        result += "\nTotal price:\t" + String.valueOf(total) + "\n";
-
-        return result;
-    }*/
+    private void printArticlePrice(Article article){
+        System.out.println("\t" + article.getBike().getProductName() + "\tx\t" + article.getPurchaseAmount() + "\t=\t " + this.articlePrice);
+    }
+    private void printTotalPrice(){
+        System.out.println("\ntotal price: \t" + this.totalPrice);
+    }
 
 }
