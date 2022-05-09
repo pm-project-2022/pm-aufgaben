@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BromptonTest {
-    
     private Brompton brompton;
 
     @Before
