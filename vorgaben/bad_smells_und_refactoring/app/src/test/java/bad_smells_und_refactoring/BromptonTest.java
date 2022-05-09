@@ -2,16 +2,15 @@ package bad_smells_und_refactoring;
 
 import static org.junit.Assert.assertNotNull;
 
-
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class BromptonTest {
     
-    public static Brompton brompton;
+    private Brompton brompton;
 
-    @BeforeClass
-    public static void setUp(){
+    @Before
+    public void setUp(){
         brompton = new Brompton("Brompton B1", 599.99, 20, 3, 1);
     }
 
