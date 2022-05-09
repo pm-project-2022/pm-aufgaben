@@ -5,99 +5,11 @@ import java.util.Date;
 
 public class Bill {
 
-    private String customerName;
-    private String nickname;
-    private Date birthday;
-    private String email;
-    private String street;
-    private String streetNumber;
-    private int postalCode;
-    private String city;
-    private ArrayList<Article> articles;
+    public CustomerData customerData;
+    public ArrayList<Article> articles;
 
     public Bill(String cn, String n, String s, String sn, int pc, Date b, String e, String c) {
-        customerName = cn;
-        nickname = n;
-        street = s;
-        streetNumber = sn;
-        postalCode = pc;
-        birthday = b;
-        email = e;
-        city = c;
         articles = new ArrayList<Article>();
-    }
-
-
-    public String getCustomerName() {
-        return this.customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getNickname() {
-        return this.nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public Date getBirthday() {
-        return this.birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getStreet() {
-        return this.street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getStreetNumber() {
-        return this.streetNumber;
-    }
-
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
-    }
-
-    public int getPostalCode() {
-        return this.postalCode;
-    }
-
-    public void setPostalCode(int postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCity() {
-        return this.city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public ArrayList<Article> getArticles() {
-        return this.articles;
-    }
-
-    public void setArticles(ArrayList<Article> articles) {
-        this.articles = articles;
     }
 
 
