@@ -13,8 +13,8 @@
 
 ---
 ## Bill
-Single Responsibility. Eine Rechnung sollte nicht die um die Einzelheiten des Aufbaues der Kundendaten kümmern.
-(Extract Method) 
+-Single Responsibility. Eine Rechnung sollte nicht die um die Einzelheiten des Aufbaues der Kundendaten kümmern.
+(Extract Method/Class und Move Field/Method)
 
 ---
 ## CustomerData
