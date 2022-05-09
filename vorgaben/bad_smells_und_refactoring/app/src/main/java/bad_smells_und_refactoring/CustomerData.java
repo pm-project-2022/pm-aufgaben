@@ -88,4 +88,7 @@ public class CustomerData {
         this.city = city;
     }
     
+    public void printCustomerData(){
+        System.out.print("Customername: " + this.customerName + "\nStreet: " + this.street + " " + this.streetNumber + "\nCity: " + this.postalCode + " " + this.city + "\nBirthday: " + this.birthday + "\nEmail: " + this.email + "\n\n");
+    }
 }
