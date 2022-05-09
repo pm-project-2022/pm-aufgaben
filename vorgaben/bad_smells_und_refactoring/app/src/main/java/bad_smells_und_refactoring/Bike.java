@@ -2,12 +2,12 @@ package bad_smells_und_refactoring;
 
 public class Bike {
 
-    private String productName;
-    private double price;
-    private int maxSpeed;
-    private int rearGearsCount;
-    private int frontGearsCount;
-    private Integer batteryCapacity;
+    public String productName;
+    public double price;
+    public int maxSpeed;
+    public int rearGearsCount;
+    public int frontGearsCount;
+    
 
     public Bike(String pn, double p, int ms, int rgc, int fgc){
         this.productName = pn;
@@ -56,16 +56,7 @@ public class Bike {
 
     public void setFrontGearsCount(int frontGearsCount) {
         this.frontGearsCount = frontGearsCount;
-    }
-
-    public Integer getBatteryCapacity() {
-        return this.batteryCapacity;
-    }
-
-    public void setBatteryCapacity(Integer batteryCapacity) {
-        this.batteryCapacity = batteryCapacity;
-    }
-    
+    } 
 
     public int getGearsCount() {
         return this.rearGearsCount * this.frontGearsCount;
