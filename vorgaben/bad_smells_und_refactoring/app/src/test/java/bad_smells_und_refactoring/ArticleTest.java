@@ -12,7 +12,7 @@ public class ArticleTest {
 
     @Before
     public void setUp(){
-        this.article = new Article(new Bike("Bike1", 200.99, 20 ,3,1), 1);
+        this.article = new Article(new Bike("Bike1", 200.99, 20 ,3,1,"Bike"), 1);
     }
 
     /**
@@ -37,7 +37,7 @@ public class ArticleTest {
     @Test
     public void setBike(){
         Bike oldBike = this.article.getBike();
-        this.article.setBike(new Bike("Bike2", 200.99, 20 ,3,1));
+        this.article.setBike(new Bike("Bike2", 200.99, 20 ,3,1, "Bike"));
         assertNotEquals(oldBike, this.article.getBike());
     }
 
