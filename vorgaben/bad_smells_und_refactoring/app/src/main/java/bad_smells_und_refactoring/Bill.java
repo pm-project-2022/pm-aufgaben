@@ -1,15 +1,15 @@
 package bad_smells_und_refactoring;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class Bill {
 
     public CustomerData customerData;
     public ArrayList<Article> articles;
 
-    public Bill(String cn, String n, String s, String sn, int pc, Date b, String e, String c) {
-        articles = new ArrayList<Article>();
+    public Bill(ArrayList<Article> articles) {
+        this.articles = articles;
     }
 
 
