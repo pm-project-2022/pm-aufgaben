@@ -12,7 +12,7 @@ public class BikeTest {
 
     @Before
     public void setUp() {
-        this.bike = new Bike("Bike1", 499.99, 20, 1, 1);
+        this.bike = new Bike("Bike1", 499.99, 20, 1, 1, "Bike");
     }
 
     /**
@@ -119,5 +119,13 @@ public class BikeTest {
     @Test
     public void testGetGearsCount(){
         assertEquals(1, this.bike.getGearsCount());
+    }
+
+    /**
+     * lässt sich der biketyp zurückgeben
+     */
+    @Test
+    public void testGetBikeTyp(){
+        assertEquals("Bike", this.bike.getBikeType());
     }
 }
