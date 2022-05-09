@@ -8,6 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
     ArticleTest.class,
     BikeTest.class,
+    BillTest.class,
     BromptonTest.class,
     CustomerDataTest.class,
     EbikeTest.class,
