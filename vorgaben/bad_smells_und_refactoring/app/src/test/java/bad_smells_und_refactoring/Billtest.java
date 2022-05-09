@@ -17,9 +17,14 @@ public class BillTest {
         this.bill = new Bill("Max Mustermann", "MaMu", "Musterstrasse", "5", 01234, new Date() , "max@mustermann.de", "Musterstadt");
     }
 
+    /**
+     * Lässt sich eine Rechnung erstellen
+     */
     @Test
     public void getBill(){
         assertNotNull(this.bill);
     }
+
+
     
 }
