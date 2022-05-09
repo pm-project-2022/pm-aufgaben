@@ -19,7 +19,7 @@ public class MountainbikeTest {
      * Laesst sich ein Brompton anlegen
      */
     @Test
-    public void testBrompton(){
+    public void testMountainBike(){
         assertNotNull(mountainbike);
     }
 }

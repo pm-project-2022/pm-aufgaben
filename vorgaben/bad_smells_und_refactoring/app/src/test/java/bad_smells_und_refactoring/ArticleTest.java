@@ -41,10 +41,12 @@ public class ArticleTest {
         assertNotEquals(oldBike, this.article.getBike());
     }
 
+    @Test
     public void getPurchaseAmount(){
         assertEquals(1, this.article.getPurchaseAmount());
     }
 
+    @Test
     public void setPurchaseAmount(){
         int oldPurchaseAmount = this.article.getPurchaseAmount();
         this.article.setPurchaseAmount(20);

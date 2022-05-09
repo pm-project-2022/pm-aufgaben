@@ -2,6 +2,10 @@ package bad_smells_und_refactoring;
 
 import java.util.Date;
 
+/**
+ * Bündelt die Kundendaten
+ */
+
 public class CustomerData {
     private String customerName;
     private String nickname;
@@ -12,17 +16,28 @@ public class CustomerData {
     private int postalCode;
     private String city;
 
-    public CustomerData(String cn, String n, Date b, String e, String s, String sn, int pc,  String c){
-        this.customerName = cn;
-        this.nickname = n;
-        this.birthday = b;
-        this.email = e;
-        this.street = s;
-        this.streetNumber = sn;
-        this.postalCode = pc;
-        this.city = c;
+    /**
+     * Konstruktor
+     * @param customerName Name des Kunden
+     * @param nickname alias des Kunden
+     * @param birthday Geburtsdatum des Kunden
+     * @param email Email des Kunden
+     * @param street Straße des Wohnorts des Kunden
+     * @param streetNumber Hausnummer des Kunden
+     * @param postalCode Postleitzahl des Kunden
+     * @param city Wohnort des Kunden
+     */
+    public CustomerData(String customerName, String nickname, Date birthday, String email, String street,
+            String streetNumber, int postalCode, String city) {
+        this.customerName = customerName;
+        this.nickname = nickname;
+        this.birthday = birthday;
+        this.email = email;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.postalCode = postalCode;
+        this.city = city;
     }
-
 
     public String getCustomerName() {
         return this.customerName;
@@ -87,8 +102,13 @@ public class CustomerData {
     public void setCity(String city) {
         this.city = city;
     }
-    
-    public void printCustomerData(){
-        System.out.print("Customername: " + this.customerName + "\nStreet: " + this.street + " " + this.streetNumber + "\nCity: " + this.postalCode + " " + this.city + "\nBirthday: " + this.birthday + "\nEmail: " + this.email + "\n\n");
+
+    /**
+     * Gibt die Kundendaten auf der Konsole aus
+     */
+    public void printCustomerData() {
+        System.out.print("Customername: " + this.customerName + "\nStreet: " + this.street + " " + this.streetNumber
+                + "\nCity: " + this.postalCode + " " + this.city + "\nBirthday: " + this.birthday + "\nEmail: "
+                + this.email + "\n\n");
     }
 }
