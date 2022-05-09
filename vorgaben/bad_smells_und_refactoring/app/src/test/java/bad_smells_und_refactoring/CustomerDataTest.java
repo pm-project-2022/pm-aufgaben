@@ -3,6 +3,7 @@ package bad_smells_und_refactoring;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -106,5 +107,73 @@ public class CustomerDataTest {
     /**
      * lässt sich eine straße zurückgeben
      */
+    @Test
+    public void testGetStreet(){
+        assertEquals("musterstraße", this.customerData.getStreet());
+    }
+
+    /**
+     * lässt sich eine straße ändern
+     */
+    @Test
+    public void testSetStreet(){
+        String oldStreet = this.customerData.getStreet();
+        this.customerData.setStreet("new Street");
+        assertNotEquals(oldStreet, this.customerData.getStreet());
+    }
+
+    /**
+     * lässt sich die hausnummer zurückgeben
+     */
+    @Test
+    public void testGetStreetNumber(){
+        assertEquals("8", this.customerData.getStreetNumber());
+    }
+
+    /**
+     * lässt sich die Hausnummer ändern
+     */
+    @Test
+    public void testSetStreetNumber(){
+        String oldStreetNumber = this.customerData.getStreetNumber();
+        this.customerData.setStreetNumber("9");
+        assertNotEquals(oldStreetNumber, this.customerData.getStreetNumber());
+    }
+
+    /**
+     * lässt sich die postleitzahl zurückgeben
+     */
+    @Test
+    public void testGetPostalCode(){
+        assertEquals(01234, this.customerData.getPostalCode());
+    }
+
+    /**
+     * lässt sich die postleitzahl ändern
+     */
+    @Test
+    public void testSetPostalCode(){
+        int oldPostalCode = this.customerData.getPostalCode();
+        this.customerData.setPostalCode(12345);
+        assertNotEquals(oldPostalCode, this.customerData.getPostalCode());
+    }
+
+    /**
+     * lässt sich die stadt zurückgeben
+     */
+    @Test
+    public void testGetCity(){
+        assertEquals("Musterstadt", this.customerData.getCity());
+    }
+
+    /**
+     * lässt sich die Stadt ändern
+     */
+    @Test 
+    public void testSetCity(){
+        String oldCity = this.customerData.getCity();
+        this.customerData.setCity("city");
+        assertNotEquals(oldCity, this.customerData.getCity());
+    }
 
 }
