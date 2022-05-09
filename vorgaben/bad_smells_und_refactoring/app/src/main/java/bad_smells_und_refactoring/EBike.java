@@ -4,7 +4,7 @@ public class EBike extends Bike {
     private Integer batteryCapacity;
 
     public EBike(String pn, double p, int ms, int rgc, int fgc, int batteryCapacity) {
-        super(pn, p, ms, rgc, fgc);
+        super(pn, p, ms, rgc, fgc, "EBike");
         this.batteryCapacity = batteryCapacity;
     }
 
