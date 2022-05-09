@@ -2,11 +2,11 @@ package bad_smells_und_refactoring;
 
 public class Bike {
 
-    public String productName;
-    public double price;
-    public int maxSpeed;
-    public int rearGearsCount;
-    public int frontGearsCount;
+    private String productName;
+    private double price;
+    private int maxSpeed;
+    private int rearGearsCount;
+    private int frontGearsCount;
     
 
     public Bike(String pn, double p, int ms, int rgc, int fgc){
