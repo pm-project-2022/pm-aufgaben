@@ -57,7 +57,7 @@ public class mainGui extends JFrame {
                 f1.setVisible(false);
                 f1.setLocation(800,300);
                 f1.add(kGUI.getPanel());
-                f1.setSize(230,295);
+                f1.setSize(580,310);
                 f1.setVisible(true);
             }
         });
@@ -69,7 +69,7 @@ public class mainGui extends JFrame {
                 f1.setVisible(false);
                 f1.setLocation(800,300);
                 f1.add(wGUI.getPanel());
-                f1.setSize(230,295);
+                f1.setSize(580,310);
                 f1.setVisible(true);
             }
         });
@@ -81,7 +81,7 @@ public class mainGui extends JFrame {
                 f1.setVisible(false);
                 f1.setLocation(800,300);
                 f1.add(hGUI.getPanel());
-                f1.setSize(230,295);
+                f1.setSize(580,315);
                 f1.setVisible(true);
             }
         });

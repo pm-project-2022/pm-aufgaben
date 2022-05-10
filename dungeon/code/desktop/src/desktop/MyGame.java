@@ -82,7 +82,6 @@ public class MyGame extends MainController {
         entityController.add(hero);
         initHud();
 
-
         levelAPI.setGenerator(new LevelLoader());
         // load the first level
         try {
@@ -123,7 +122,6 @@ public class MyGame extends MainController {
 
     @Override
     protected void endFrame() {
-
 
         if (levelAPI.getCurrentLevel().isOnEndTile(hero)) {
             try {
