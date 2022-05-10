@@ -218,13 +218,13 @@ public class Hero extends Moveable {
     }
 
     private void showInventory() {
-        if (Gdx.input.isKeyPressed(Input.Keys.I)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             this.inventory.showInventory();
         }
     }
 
     private void printStats() {
-        if (Gdx.input.isKeyPressed(Input.Keys.C)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             System.out.println(this.attributes.toString());
         }
     }
