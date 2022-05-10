@@ -13,7 +13,7 @@ import Entities.Moveable.Hero.Classes.Wizard;
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.Monster;
 import Entities.Moveable.Monster.MonsterFactory;
-import Gui.Gui;
+import Gui.mainGUI.mainGui;
 import HUD.ExpBar;
 import HUD.HealthBar;
 import HUD.ManaBar;
@@ -30,7 +30,6 @@ import tools.Point;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class MyGame extends MainController {
     public Hero hero;
     private int currentFloor;
@@ -39,20 +38,19 @@ public class MyGame extends MainController {
     private ArrayList<Item> chests;
     private ArrayList<Item> traps;
     private ArrayList<FriendlyNPC> npcs;
-    private Gui gui;
+    private mainGui gui;
     private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, deathScreen;
 
 
     @Override
     protected void setup() {
-
         //Initiates Gui and waits on input
         try {
-            gui = new Gui();
+            gui = new mainGui();
             while(!gui.getBool()){
                 Thread.sleep(1000);
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
@@ -254,6 +252,7 @@ public class MyGame extends MainController {
     }
 
     private void restartGame() {
+
         if (gui.getChara() == 1) {
             hero = new Knight(painter, batch);
         }
