@@ -1,3 +1,5 @@
+package mocking;
+
 public class Utility {
     private int intResult = 0;
     private Evil evilClass;
