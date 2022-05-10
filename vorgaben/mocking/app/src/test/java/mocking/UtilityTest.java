@@ -8,7 +8,7 @@ import org.junit.Test;
 
 
 import mocking.Utility;
-
+// test
 // Ergänzen Sie UtilityTest so, dass alle Testmethoden grün werden.
 // Die vorgegebenen Klassen dürfen nicht geändert werden.
 // Die Testaufrufe müssen auch erhalten bleiben.
