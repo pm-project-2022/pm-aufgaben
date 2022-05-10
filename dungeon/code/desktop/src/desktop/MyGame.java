@@ -20,6 +20,7 @@ import HUD.ManaBar;
 import Traps.TrapFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import controller.MainController;
@@ -27,7 +28,6 @@ import level.generator.LevelLoader.LevelLoader;
 import level.generator.dungeong.graphg.NoSolutionException;
 import tools.Point;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MyGame extends MainController {
@@ -41,13 +41,17 @@ public class MyGame extends MainController {
     private mainGui gui;
     private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, deathScreen;
 
+    public static Sound death, newLevel, walking, itemPickup, hit, lvlUp,
+        talkNpc, stepTraps, useItem, openChest, equipItem, dropItem,backgroundMusic;
 
     @Override
     protected void setup() {
+        initSounds();
+        backgroundMusic.loop(0.1f);
         //Initiates Gui and waits on input
         try {
             gui = new mainGui();
-            while(!gui.getBool()){
+            while (!gui.getBool()) {
                 Thread.sleep(1000);
             }
         } catch (InterruptedException e) {
@@ -99,19 +103,19 @@ public class MyGame extends MainController {
             levelMANA.setText(hero.getAttributes().getCurrentMana() + " / " + hero.getAttributes().getMaxMana());
             levelCounter.setText("Floor " + currentFloor);
             heroStats.setText("AtkP: " + hero.getAttributes().getAttackPower() + "\nDefP: "
-                    + hero.getAttributes().getDefensePower() +
-                    "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy()
-                    + "\nExp: " + hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
+                + hero.getAttributes().getDefensePower() +
+                "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy()
+                + "\nExp: " + hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
             heroLevel.setText("Level: " + hero.getAttributes().getLevel());
             deathScreen.setText("");
-        }else{
+        } else {
             levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
             deathScreen.setText("Gamer Over\n`r` to restart");
             if (Gdx.input.isKeyPressed(Input.Keys.R)) {
                 restartGame();
             }
         }
-        }
+    }
 
     /**
      * clears stage on endframe
@@ -152,6 +156,7 @@ public class MyGame extends MainController {
                 this.items.clear();
                 this.traps.clear();
                 this.npcs.clear();
+                newLevel.play(0.4f);
                 levelAPI.loadLevel();
             } catch (NoSolutionException e) {
                 e.printStackTrace();
@@ -171,6 +176,25 @@ public class MyGame extends MainController {
         initItems();
         initChest();
         initNpc();
+    }
+
+    /**
+     * initiates sounds
+     */
+    private void initSounds(){
+        death = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_deathscream_robot1.wav"));
+        newLevel = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_sounds_interaction1.wav"));
+        walking = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_movement_footsteps1a.wav"));
+        itemPickup = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_sounds_interaction19.wav"));
+        hit = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_sounds_impact1.wav"));
+        lvlUp = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_sounds_powerup2.wav"));
+        talkNpc = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_menu_move4.wav"));
+        stepTraps = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_sounds_error7.wav"));
+        useItem = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_sounds_interaction11.wav"));
+        openChest = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_coin_cluster1.wav"));
+        equipItem = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_wpn_dagger.wav"));
+        dropItem = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_movement_ladder1b.wav"));
+        backgroundMusic = Gdx.audio.newSound(Gdx.files.internal("Sounds/looperman-l-2922083-0277368-thxrtx-loop-8bit.wav"));
     }
 
     /**

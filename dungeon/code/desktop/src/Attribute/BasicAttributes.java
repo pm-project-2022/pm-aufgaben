@@ -1,5 +1,7 @@
 package Attribute;
 
+import desktop.MyGame;
+
 public abstract class BasicAttributes {
     // Manages current hp for heroes, items and monsters
     protected int currentHP;
@@ -234,6 +236,7 @@ public abstract class BasicAttributes {
         this.evasion += 5;
         this.currentExp = this.currentExp - this.expForLvlUp;
         this.expForLvlUp *= 2;
+        MyGame.lvlUp.play(0.1f);
     }
 
     @Override

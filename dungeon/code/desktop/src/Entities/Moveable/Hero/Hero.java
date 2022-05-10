@@ -8,12 +8,18 @@ import Inventory.Inventory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import desktop.MyGame;
 import graphic.Animation;
 import graphic.Painter;
 import level.elements.Level;
 import tools.Point;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
@@ -23,14 +29,13 @@ public class Hero extends Moveable {
     protected boolean viewDirection;
     protected boolean heroDead;
     protected ArrayList<Item> floorItems;
-    protected ArrayList<Item> availableItems;
     protected ArrayList<Item> chests;
     protected ArrayList<Item> traps;
     protected ArrayList<FriendlyNPC> npcs;
     protected Inventory inventory;
     protected Logger log;
     protected String name;
-
+    protected int walkingCount,trapCount = 0;
     public Hero(Painter painter, SpriteBatch batch) {
         super(painter, batch);
         this.viewDirection = true;
@@ -108,7 +113,12 @@ public class Hero extends Moveable {
 
     private boolean movementUpdate(boolean keyPressed, Point currentPosition) {
         Point newPosition = new Point(currentPosition);
+
         if (keyPressed) {
+            walkingCount++;
+            if(walkingCount%10==0){
+                MyGame.walking.play(0.05f);
+            }
             // Wenn die Taste W gedrückt ist, bewege dich nach oben
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
                 newPosition.y += this.attributes.getMovementSpeed();
@@ -148,6 +158,7 @@ public class Hero extends Moveable {
                 if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == item.getCurrentFloor()
                         .getTileAt(item.getPosition().toCoordinate()) && item.getIsOnFloor()) {
                     if (this.inventory.addItem(item)) {
+                        MyGame.itemPickup.play(0.2f);
                         item.setIsOnFloor(false);
                         item.setPickUp(true);
                         item.setPosition(this.currentPosition);
@@ -172,11 +183,15 @@ public class Hero extends Moveable {
     private void equipItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
             this.inventory.equipItem(0);
+            MyGame.equipItem.play(0.1f);
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
             this.inventory.equipItem(1);
+            MyGame.equipItem.play(0.1f);
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
             this.inventory.equipItem(2);
+            MyGame.equipItem.play(0.1f);
         }
+
     }
 
     private void itemViewDirection() {
@@ -190,6 +205,7 @@ public class Hero extends Moveable {
     private void dropItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             this.inventory.dropItem();
+            MyGame.dropItem.play(0.1f);
         }
 
     }
@@ -197,6 +213,7 @@ public class Hero extends Moveable {
     private void consumeItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             this.inventory.consume(this);
+            MyGame.useItem.play(0.1f);
         }
     }
 
@@ -217,6 +234,7 @@ public class Hero extends Moveable {
         if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == chests.get(0).getCurrentFloor()
                     .getTileAt(chests.get(0).getPosition().toCoordinate()) && chests.get(0).getIsOnFloor()) {
+                MyGame.openChest.play(0.1f);
                 chests.get(0).setRemoveOrConsume(true);
                 chests.get(1).setIsOnFloor(true);
                 this.floorItems.add(chests.get(1));
@@ -230,6 +248,11 @@ public class Hero extends Moveable {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == traps.getCurrentFloor()
                     .getTileAt(traps.getPosition().toCoordinate())) {
                 traps.setIsOnFloor(true);
+                trapCount++;
+                if(trapCount%5==0){
+                    MyGame.stepTraps.play(0.1f);
+                }
+
                 attributes.setCurrentHP(attributes.getCurrentHP() - 1);
             }
         }
@@ -240,7 +263,7 @@ public class Hero extends Moveable {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == npc.getCurrentFloor()
                     .getTileAt(npc.getPosition().toCoordinate())) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-
+                    MyGame.talkNpc.play(0.1f);
                     for (int i = 0; i < floorItems.size(); i++) {
                         if (!floorItems.get(i).getPickUp()) {
                             if (inventory.addItem(floorItems.get(i))) {
@@ -262,9 +285,10 @@ public class Hero extends Moveable {
     private void updateDead(){
         if(this.attributes.getCurrentHP() <= 0){
             this.heroDead = true;
+            MyGame.death.play(0.4f);
         }
     }
-    
+
     public void setPosition(Point newPosition){
         this.currentPosition = newPosition;
     }

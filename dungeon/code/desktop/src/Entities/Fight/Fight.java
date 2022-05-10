@@ -2,6 +2,7 @@ package Entities.Fight;
 
 import Entities.Moveable.Monster.Monster;
 import Helper.Booleans;
+import desktop.MyGame;
 
 import java.util.Random;
 
@@ -41,9 +42,11 @@ public class Fight {
         //monster does dmg to hero
         if(this.monster.getAttributes().getAccuracy() > this.monster.getHero().getAttributes().getEvasion()){
             this.fightResult.setHeroDmg(calculateHeroDmg());
+            MyGame.hit.play(0.2f);
         }else{
             if(calculateHit()){
                 this.fightResult.setHeroDmg(calculateHeroDmg());
+                MyGame.hit.play(0.2f);
             }else{
                 this.fightResult.setHeroDmg(false);
             }
@@ -52,9 +55,11 @@ public class Fight {
         //hero does dmg to monster
         if (this.monster.getHero().getAttributes().getAccuracy() > this.monster.getAttributes().getEvasion()) {
             this.fightResult.setMonsterDmg(calculateDamageMonster());
+            MyGame.hit.play(0.2f);
         } else {
             if(calculateHit()){
                 this.fightResult.setMonsterDmg(calculateDamageMonster());
+                MyGame.hit.play(0.2f);
             }else{
                 this.fightResult.setMonsterDmg(false);
             }
