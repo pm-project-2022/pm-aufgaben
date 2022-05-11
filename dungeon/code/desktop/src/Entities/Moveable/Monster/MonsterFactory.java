@@ -40,22 +40,22 @@ public class MonsterFactory {
                 monsterQuantityMax = 3;
 
             } else if (currentFloor <= 10) {
-                monsterQuantityMin = 3;
-                monsterQuantityMax = 6;
+                monsterQuantityMin = 1;
+                monsterQuantityMax = 2;
             } else {
                 monsterQuantityMin = 1;
-                monsterQuantityMax = 3;
+                monsterQuantityMax = 2;
             }
         }else{
-            if (currentFloor < 3) {
+            if (currentFloor <=5) {
                 return 0;
 
             } else if (currentFloor <= 10) {
                 monsterQuantityMin = 1;
                 monsterQuantityMax = 2;
             } else {
-                monsterQuantityMin = 3;
-                monsterQuantityMax = 6;
+                monsterQuantityMin = 2;
+                monsterQuantityMax = 3;
             }
         }
         return random.nextInt(monsterQuantityMin + monsterQuantityMax) + monsterQuantityMin;
