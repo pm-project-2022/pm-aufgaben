@@ -42,15 +42,24 @@ new FormModel {
 					"y": 235
 					"width": 103
 				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/Screenshot 2022-05-10 221807wizard.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 220
+					"y": -5
+					"width": 360
+					"height": 280
+				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
 				"y": 0
-				"height": 270
-				"width": 220
+				"height": 285
+				"width": 580
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 220, 295 )
-			"location": new java.awt.Point( 255, 100 )
+			"size": new java.awt.Dimension( 580, 320 )
+			"location": new java.awt.Point( 255, 95 )
 		} )
 	}
 }

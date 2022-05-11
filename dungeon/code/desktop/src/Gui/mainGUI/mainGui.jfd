@@ -64,7 +64,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label3"
-					"text": "<html>Wizards are supreme magic-users,<br/>\ndefined and united as a class by the<br/>\nspells they cast.<br/>\nTheir magic conjures elementals from other planes<html>\n\n"
+					"text": "<html>Wizards are supreme magic-users,<br/>\ndefined and united as a class by the<br/>\nspells they cast.<br/>\nTheir magic conjures elementals from other planes.<html>\n\n"
 					"verticalAlignment": 1
 					"border": new javax.swing.border.TitledBorder( null, "Wizard", 4, 0, null, sfield java.awt.Color black )
 					"foreground": sfield java.awt.Color black
@@ -76,7 +76,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label4"
-					"text": "<html>Secretive. Elusive. Tactical.<br/>\nThese three words best describes a<br/>\nhunter. They are clean, methodical killers, striking fear<br/>\ninto the hearts of their enemies.<html>"
+					"text": "<html>Secretive. Elusive. Tactical.<br/>\nThese three words best describe a<br/>\nhunter. They are clean, methodical killers, striking fear<br/>\ninto the hearts of their enemies.<html>"
 					"verticalAlignment": 1
 					"border": new javax.swing.border.TitledBorder( null, "Hunter", 4, 0, null, sfield java.awt.Color black )
 					"foreground": sfield java.awt.Color black

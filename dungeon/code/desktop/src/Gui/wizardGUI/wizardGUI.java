@@ -34,6 +34,7 @@ public class wizardGUI extends JFrame {
         label2 = new JLabel();
         buttonConfirm = new JButton();
         buttonDecline = new JButton();
+        label1 = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -64,6 +65,11 @@ public class wizardGUI extends JFrame {
             panel1.add(buttonDecline);
             buttonDecline.setBounds(115, 235, 103, buttonDecline.getPreferredSize().height);
 
+            //---- label1 ----
+            label1.setIcon(new ImageIcon(getClass().getResource("/guiAssets/Screenshot 2022-05-10 221807wizard.png")));
+            panel1.add(label1);
+            label1.setBounds(220, -5, 360, 280);
+
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -80,7 +86,7 @@ public class wizardGUI extends JFrame {
             }
         }
         contentPane.add(panel1);
-        panel1.setBounds(0, 0, 220, 270);
+        panel1.setBounds(0, 0, 580, 285);
 
         {
             // compute preferred size
@@ -107,5 +113,6 @@ public class wizardGUI extends JFrame {
     private JLabel label2;
     private JButton buttonConfirm;
     private JButton buttonDecline;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

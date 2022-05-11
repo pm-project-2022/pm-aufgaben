@@ -55,9 +55,9 @@ public class mainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 f1.remove(panel1);
                 f1.setVisible(false);
-                f1.setLocation(800,300);
+                f1.setLocation(600,350);
                 f1.add(kGUI.getPanel());
-                f1.setSize(230,295);
+                f1.setSize(580,310);
                 f1.setVisible(true);
             }
         });
@@ -67,9 +67,9 @@ public class mainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 f1.remove(panel1);
                 f1.setVisible(false);
-                f1.setLocation(800,300);
+                f1.setLocation(600,350);
                 f1.add(wGUI.getPanel());
-                f1.setSize(230,295);
+                f1.setSize(580,310);
                 f1.setVisible(true);
             }
         });
@@ -79,9 +79,9 @@ public class mainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 f1.remove(panel1);
                 f1.setVisible(false);
-                f1.setLocation(800,300);
+                f1.setLocation(600,350);
                 f1.add(hGUI.getPanel());
-                f1.setSize(230,295);
+                f1.setSize(580,315);
                 f1.setVisible(true);
             }
         });
@@ -205,7 +205,7 @@ public class mainGui extends JFrame {
             label2.setBounds(0, 120, 220, 135);
 
             //---- label3 ----
-            label3.setText("<html>Wizards are supreme magic-users,<br/>\ndefined and united as a class by the<br/>\nspells they cast.<br/>\nTheir magic conjures elementals from other planes<html>\n\n");
+            label3.setText("<html>Wizards are supreme magic-users,<br/>\ndefined and united as a class by the<br/>\nspells they cast.<br/>\nTheir magic conjures elementals from other planes.<html>\n\n");
             label3.setVerticalAlignment(SwingConstants.TOP);
             label3.setBorder(new TitledBorder(null, "Wizard", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION, null, Color.black));
             label3.setForeground(Color.black);
@@ -213,7 +213,7 @@ public class mainGui extends JFrame {
             label3.setBounds(220, 120, 220, 135);
 
             //---- label4 ----
-            label4.setText("<html>Secretive. Elusive. Tactical.<br/>\nThese three words best describes a<br/>\nhunter. They are clean, methodical killers, striking fear<br/>\ninto the hearts of their enemies.<html>");
+            label4.setText("<html>Secretive. Elusive. Tactical.<br/>\nThese three words best describe a<br/>\nhunter. They are clean, methodical killers, striking fear<br/>\ninto the hearts of their enemies.<html>");
             label4.setVerticalAlignment(SwingConstants.TOP);
             label4.setBorder(new TitledBorder(null, "Hunter", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION, null, Color.black));
             label4.setForeground(Color.black);

@@ -22,6 +22,7 @@ public class hunterGUI extends JFrame {
         label2 = new JLabel();
         buttonConfirm = new JButton();
         buttonDecline = new JButton();
+        label1 = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -52,6 +53,11 @@ public class hunterGUI extends JFrame {
             panel1.add(buttonDecline);
             buttonDecline.setBounds(115, 235, 103, buttonDecline.getPreferredSize().height);
 
+            //---- label1 ----
+            label1.setIcon(new ImageIcon(getClass().getResource("/guiAssets/Screenshot 2022-05-10 221807hunter.png")));
+            panel1.add(label1);
+            label1.setBounds(220, 0, label1.getPreferredSize().width, 280);
+
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -68,7 +74,7 @@ public class hunterGUI extends JFrame {
             }
         }
         contentPane.add(panel1);
-        panel1.setBounds(0, 0, 220, 270);
+        panel1.setBounds(0, 0, 585, 305);
 
         {
             // compute preferred size
@@ -106,5 +112,6 @@ public class hunterGUI extends JFrame {
     private JLabel label2;
     private JButton buttonConfirm;
     private JButton buttonDecline;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
