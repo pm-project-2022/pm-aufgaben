@@ -61,20 +61,16 @@ public class AggressiveMovement implements IMovement{
             }
         }
 
-
-
         if(fightresult.getHeroDmg()){
             this.newHeroPoint = new Point(monster.getHero().getPosition());
             if(this.runDirection){
                 this.newHeroPoint.x += 1.0f;
             }else{
-                this.newHeroPoint.y -= 1.0f;
+                this.newHeroPoint.x -= 1.0f;
             }
 
             if(monster.getHero().getCurrentFloor().getTileAt(this.newHeroPoint.toCoordinate()).isAccessible()){
                 monster.getHero().setPosition(this.newHeroPoint);
-            }else{
-                monster.getHero().setPosition(monster.getHero().getPosition());
             }
         }
 

@@ -73,8 +73,6 @@ public class PatrolXAxis implements IMovement {
             }
             if(monster.getHero().getCurrentFloor().getTileAt(this.newHeroPoint.toCoordinate()).isAccessible()){
                 monster.getHero().setPosition(this.newHeroPoint);
-            }else{
-                monster.getHero().setPosition(monster.getHero().getPosition());
             }
         }
 

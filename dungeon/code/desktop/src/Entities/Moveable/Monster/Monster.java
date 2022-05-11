@@ -44,17 +44,25 @@ public class Monster extends Moveable {
             if (heroInRoom()) {
                 this.movementBehaviour = this.aggressiveBehaviour;
                 walkingCount++;
-                if (walkingCount % 5 == 0 && this.attributes.getCurrentHP() > this.attributes.getMaxHP() / 2) {
+                if (this.attributes.getCurrentHP() > this.attributes.getMaxHP() / 2) {
+                    if (walkingCount % 5 == 0) {
+                        this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
+                        this.currentPosition = pointBooleanTransmitter.getPoint();
+                        animations();
+                    }
+                } else {
+                    this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection());
                     this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
                     this.currentPosition = pointBooleanTransmitter.getPoint();
                     animations();
                 }
-            }else{
+            } else {
                 this.movementBehaviour = this.initialMovementBehaviour;
                 this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
                 this.currentPosition = pointBooleanTransmitter.getPoint();
                 animations();
             }
+
         }
     }
 
