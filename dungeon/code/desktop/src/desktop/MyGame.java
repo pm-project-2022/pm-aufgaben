@@ -12,6 +12,7 @@ import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.Monster;
 import Entities.Moveable.Monster.MonsterFactory;
 import Gui.mainGUI.mainGui;
+import HUD.LvlBar;
 import HUD.ExpBar;
 import HUD.HealthBar;
 import HUD.ManaBar;
@@ -37,7 +38,7 @@ public class MyGame extends MainController {
     private ArrayList<Item> traps;
     private ArrayList<FriendlyNPC> npcs;
     private mainGui gui;
-    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, deathScreen;
+    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, heroXp, deathScreen;
 
     public static Sound death, newLevel, walking, itemPickup, hit, lvlUp,
         talkNpc, stepTraps, useItem, openChest, equipItem, dropItem,backgroundMusic;
@@ -101,9 +102,9 @@ public class MyGame extends MainController {
             levelCounter.setText("Floor " + currentFloor);
             heroStats.setText("AtkP: " + hero.getAttributes().getAttackPower() + "\nDefP: "
                 + hero.getAttributes().getDefensePower() +
-                "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy()
-                + "\nExp: " + hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
+                "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy());
             heroLevel.setText("Level: " + hero.getAttributes().getLevel());
+            this.heroXp.setText(hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
             deathScreen.setText("");
         } else {
             levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
@@ -261,10 +262,13 @@ public class MyGame extends MainController {
         levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
         heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 500, 420);
         heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
-        this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 170, 150);
+        this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 170, 150); 
+        this.heroXp = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 310, 0);
+        this.heroXp.setAlignment(1);
         hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
         hudController.add(new ManaBar(hudPainter, hudBatch, new Point(0, -290)));
-        hudController.add(new ExpBar(hudPainter, hudBatch, new Point(200, 90)));
+        hudController.add(new ExpBar(hudPainter, hudBatch, new Point(200, 120)));
+        hudController.add(new LvlBar(hudPainter, hudBatch, new Point(200, 90)));
     }
 
     private void restartGame() {
@@ -279,8 +283,6 @@ public class MyGame extends MainController {
             hero = new Hunter(painter, batch);
         }
         this.currentFloor = 0;
-        this.hero.getAttributes().setCurrentHP(20);
-        this.hero.getAttributes().setCurrentMana(20);
         this.monster.clear();
         this.items.clear();
         this.traps.clear();
