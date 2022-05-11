@@ -5,6 +5,7 @@ import Attribute.BasicAttributes;
 public class MonsterAttributes extends BasicAttributes {
 
     public MonsterAttributes(int currentHP, int attackPower, int defensePower, int accuracy, int evasion, int level, int currentExp, float movementSpeed){
+        this.maxHP = currentHP * level;
         this.currentHP = currentHP * level;
         this.attackPower = attackPower * level;
         this.defensePower = defensePower * level;

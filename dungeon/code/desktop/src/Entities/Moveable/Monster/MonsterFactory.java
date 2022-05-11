@@ -63,7 +63,7 @@ public class MonsterFactory {
     }
 
     private static IMovement createMovement(){
-        /*Random random = new Random();
+        Random random = new Random();
         int monsterQuantityMin = 1;
         int monsterQuantityMax = 2;
          ;
@@ -71,9 +71,7 @@ public class MonsterFactory {
             return new PatrolXAxis();
         }else{
             return new PatrolYAxis();
-        }*/
-
-        return new AggressiveMovement();
+        }
     }
 
 }

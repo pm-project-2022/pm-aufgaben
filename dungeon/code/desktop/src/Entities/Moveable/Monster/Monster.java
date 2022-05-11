@@ -2,6 +2,7 @@ package Entities.Moveable.Monster;
 
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
+import Entities.Moveable.Monster.MonsterMovement.ComplexBehaviour.AggressiveMovement;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.Idle;
 import Entities.Moveable.Moveable;
 import Helper.PointBooleanTransmitter;
@@ -15,12 +16,17 @@ public class Monster extends Moveable {
     private Hero hero;
 
     private IMovement movementBehaviour;
+    private IMovement initialMovementBehaviour;
+    private IMovement aggressiveBehaviour;
     private PointBooleanTransmitter pointBooleanTransmitter;
+    private int walkingCount;
 
     public Monster(Painter painter, SpriteBatch batch, Hero hero, IMovement movementBehaviour) {
         super(painter, batch);
         this.hero = hero;
         this.movementBehaviour = movementBehaviour;
+        this.initialMovementBehaviour = movementBehaviour;
+        this.aggressiveBehaviour = new AggressiveMovement();
     }
 
     public void setLevel(Level currentFloor) {
@@ -35,17 +41,33 @@ public class Monster extends Moveable {
     @Override
     public void update() {
         if (!this.hero.getHeroDead()) {
-            this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
-            this.currentPosition = pointBooleanTransmitter.getPoint();
-            animations();
+            if (heroInRoom()) {
+                this.movementBehaviour = this.aggressiveBehaviour;
+                walkingCount++;
+                if (walkingCount % 5 == 0 && this.attributes.getCurrentHP() > this.attributes.getMaxHP() / 2) {
+                    this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
+                    this.currentPosition = pointBooleanTransmitter.getPoint();
+                    animations();
+                }
+            }else{
+                this.movementBehaviour = this.initialMovementBehaviour;
+                this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
+                this.currentPosition = pointBooleanTransmitter.getPoint();
+                animations();
+            }
         }
+    }
+
+    private boolean heroInRoom() {
+        return this.currentFloor.getRoomToPoint(this.currentPosition.toCoordinate()) == this.hero.getCurrentFloor()
+                .getRoomToPoint(this.hero.getPosition().toCoordinate());
     }
 
     private void animations() {
 
         if (this.pointBooleanTransmitter.getCollision()) {
             this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection()) {
-                
+
             };
 
             if (this.pointBooleanTransmitter.getRunDirection()) {
