@@ -6,7 +6,6 @@ import graphic.HUDPainter;
 import tools.Point;
 
 public class ExpBar extends HUDElement {
-
     /**
      * Hud element expbar
      */
@@ -28,4 +27,5 @@ public class ExpBar extends HUDElement {
     public String getTexturePath() {
         return texturePath;
     }
+    
 }
