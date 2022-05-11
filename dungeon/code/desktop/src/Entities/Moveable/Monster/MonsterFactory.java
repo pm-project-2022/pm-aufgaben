@@ -2,6 +2,7 @@ package Entities.Moveable.Monster;
 
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
+import Entities.Moveable.Monster.MonsterMovement.ComplexBehaviour.AggressiveMovement;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.PatrolXAxis;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.PatrolYAxis;
 import Entities.Moveable.Monster.NormalMonster.Chort;
@@ -62,7 +63,7 @@ public class MonsterFactory {
     }
 
     private static IMovement createMovement(){
-        Random random = new Random();
+        /*Random random = new Random();
         int monsterQuantityMin = 1;
         int monsterQuantityMax = 2;
          ;
@@ -70,7 +71,9 @@ public class MonsterFactory {
             return new PatrolXAxis();
         }else{
             return new PatrolYAxis();
-        }
+        }*/
+
+        return new AggressiveMovement();
     }
 
 }
