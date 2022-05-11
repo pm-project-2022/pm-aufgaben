@@ -48,9 +48,6 @@ public class Monster extends Moveable {
                 
             };
 
-            // this.movementBehaviour = new
-            // Idle(this.pointBooleanTransmitter.getRunDirection());
-
             if (this.pointBooleanTransmitter.getRunDirection()) {
                 this.activeAnimation = this.idleAnimation;
             } else {
