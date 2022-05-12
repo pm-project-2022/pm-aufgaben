@@ -39,7 +39,7 @@ public class AggressiveMovement implements IMovement{
         }
         
         if(this.newPosition == monster.getHero().getPosition()){
-            fightTrigger(monster);
+            new Fight(monster).fight();
         }
 
         if (monster.getCurrentFloor().getTileAt(newPosition.toCoordinate()).isAccessible()) {
@@ -48,33 +48,5 @@ public class AggressiveMovement implements IMovement{
             return new PointBooleanTransmitter(this.runDirection, false, monster.getPosition());
         }
 
-    }
-
-    private void fightTrigger(Monster monster){
-        Fight fight = new Fight(monster);
-        Booleans fightresult = fight.fight();
-        if(fightresult.getMonsterDmg()){
-            if(this.runDirection){
-                this.newPosition.x -= 1.0f;
-            }else{
-                this.newPosition.x += 1.0f;
-            }
-        }
-
-        if(fightresult.getHeroDmg()){
-            this.newHeroPoint = new Point(monster.getHero().getPosition());
-            if(this.runDirection){
-                this.newHeroPoint.x += 1.0f;
-            }else{
-                this.newHeroPoint.x -= 1.0f;
-            }
-
-            if(monster.getHero().getCurrentFloor().getTileAt(this.newHeroPoint.toCoordinate()).isAccessible()){
-                monster.getHero().setPosition(this.newHeroPoint);
-            }
-        }
-
-        
-    }
-    
+    }    
 }

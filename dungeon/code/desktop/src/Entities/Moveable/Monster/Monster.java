@@ -3,9 +3,13 @@ package Entities.Moveable.Monster;
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
 import Entities.Moveable.Monster.MonsterMovement.ComplexBehaviour.AggressiveMovement;
+import Entities.Moveable.Monster.MonsterMovement.ComplexBehaviour.Escape;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.Idle;
 import Entities.Moveable.Moveable;
 import Helper.PointBooleanTransmitter;
+
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Animation;
 import graphic.Painter;
@@ -15,13 +19,16 @@ import tools.Point;
 
 public class Monster extends Moveable {
     private Hero hero;
-    private boolean firstTime;
+    private ArrayList<Monster> monster;
     private IMovement movementBehaviour;
     private IMovement initialMovementBehaviour;
     private IMovement aggressiveBehaviour;
+    private IMovement escapeBehavior;
     private PointBooleanTransmitter pointBooleanTransmitter;
-    private Room escapeRoom;
+    private Point escapeRoom;
     private int walkingCount;
+    private boolean escape;
+    private boolean callForHelp;
 
     public Monster(Painter painter, SpriteBatch batch, Hero hero, IMovement movementBehaviour) {
         super(painter, batch);
@@ -29,7 +36,9 @@ public class Monster extends Moveable {
         this.movementBehaviour = movementBehaviour;
         this.initialMovementBehaviour = movementBehaviour;
         this.aggressiveBehaviour = new AggressiveMovement();
-        this.firstTime = true;
+        this.escapeBehavior = new Escape();
+        this.escape = true;
+        this.callForHelp = false;
     }
 
     public void setLevel(Level currentFloor) {
@@ -41,31 +50,79 @@ public class Monster extends Moveable {
         return this.hero;
     }
 
+    public void setMonster(ArrayList<Monster> monster) {
+        this.monster = monster;
+    }
+
     @Override
     public void update() {
         if (!this.hero.getHeroDead()) {
-            if (heroInRoom() && firstTime) {
+
+            if (heroInRoom() && this.attributes.getCurrentHP() > this.attributes.getMaxHP() / 2) {
                 this.movementBehaviour = this.aggressiveBehaviour;
                 walkingCount++;
-                if (this.attributes.getCurrentHP() > this.attributes.getMaxHP() / 2) {
-                    if (walkingCount % 5 == 0) {
-                        this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
-                        this.currentPosition = pointBooleanTransmitter.getPoint();
-                        animations();
-                    }
-                } else {
-                    this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection());
+                if (walkingCount % 5 == 0) {
                     this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
                     this.currentPosition = pointBooleanTransmitter.getPoint();
                     animations();
                 }
+            } else if (this.attributes.getCurrentHP() <= this.attributes.getMaxHP() / 2
+                    && this.attributes.getCurrentHP() > this.attributes.getMaxHP() / 4) {
+                this.movementBehaviour = this.escapeBehavior;
+                if (this.escape) {
+                    this.escapeRoom = currentFloor.getRandomRoom().getRandomFloorTile().getCoordinate().toPoint();
+                    this.escape = false;
+                }
+                walkingCount++;
+                if (walkingCount % 7 == 0) {
+                    this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
+                    this.currentPosition = pointBooleanTransmitter.getPoint();
+                    if (this.pointBooleanTransmitter.getPoint() == this.escapeRoom) {
+                        this.escape = true;
+                    }
+                    animations();
+                }
+            } else if (this.attributes.getCurrentHP() <= this.attributes.getMaxHP() / 4) {
+                if (!callForHelp) {
+                    for (Monster monster : this.monster) {
+                        if (monster.getAttributes().getCurrentHP() > monster.getAttributes().getMaxHP() / 4) {
+                            Room room = this.currentFloor.getRoomToPoint(this.currentPosition.toCoordinate());
+                            monster.setCurrentPosition(room.getRandomFloorTile().getCoordinate().toPoint());
+                            callForHelp = true;
+                            return;
+                        }
+                    }
+                }
+                this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection());
+                this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
+                this.currentPosition = pointBooleanTransmitter.getPoint();
+                animations();
             } else {
                 this.movementBehaviour = this.initialMovementBehaviour;
                 this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
                 this.currentPosition = pointBooleanTransmitter.getPoint();
                 animations();
             }
-
+            /*
+             * if (heroInRoom()) {
+             * this.movementBehaviour = this.aggressiveBehaviour;
+             * walkingCount++;
+             * if (this.attributes.getCurrentHP() > this.attributes.getMaxHP() / 2) {
+             * if (walkingCount % 5 == 0) {
+             * this.pointBooleanTransmitter =
+             * this.movementBehaviour.getMonsterMovement(this);
+             * this.currentPosition = pointBooleanTransmitter.getPoint();
+             * animations();
+             * }
+             * }
+             * } else {
+             * this.movementBehaviour = this.initialMovementBehaviour;
+             * this.pointBooleanTransmitter =
+             * this.movementBehaviour.getMonsterMovement(this);
+             * this.currentPosition = pointBooleanTransmitter.getPoint();
+             * animations();
+             * }
+             */
         }
     }
 
@@ -97,6 +154,10 @@ public class Monster extends Moveable {
         }
     }
 
+    public Point getEscapeRoom() {
+        return escapeRoom;
+    }
+
     @Override
     public boolean removable() {
         if (this.attributes.getCurrentHP() == 0) {
@@ -105,6 +166,10 @@ public class Monster extends Moveable {
         } else {
             return false;
         }
+    }
+
+    public void setCurrentPosition(Point point) {
+        this.currentPosition = point;
     }
 
     @Override

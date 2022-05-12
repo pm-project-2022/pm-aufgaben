@@ -13,7 +13,7 @@ public class Imp extends Monster {
 
     public Imp(Painter painter, SpriteBatch batch, Hero hero, IMovement movementBehaviour, int floorLevel) {
         super(painter, batch, hero, movementBehaviour);
-        this.attributes = new MonsterAttributes(10,10,10,10,10,floorLevel,10,0.15f);
+        this.attributes = new MonsterAttributes(160,10,10,10,10,floorLevel,10,0.15f);
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
     }
 

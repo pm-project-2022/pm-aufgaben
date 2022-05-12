@@ -200,6 +200,7 @@ public class MyGame extends MainController {
     private void initMons() {
         this.monster = MonsterFactory.monFac(painter, batch, this.hero, this.currentFloor);
         for (Monster monster : this.monster) {
+            monster.setMonster(this.monster);
             monster.setLevel(levelAPI.getCurrentLevel());
             entityController.add(monster);
         }
