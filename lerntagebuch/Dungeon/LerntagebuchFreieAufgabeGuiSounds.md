@@ -1,5 +1,5 @@
 ---
-title: "Lerntagebuch zur Bearbeitung der Dungeon-Aufgaben items, Inventar, Monster und Nahkampf"
+title: "Lerntagebuch zur Bearbeitung der Dungeon-Aufgaben Freie Aufgabe Basics und Schlaue Monster"
 author:
 -   "Jan Rau (jan_niklas.rau@fh-bielefeld.de)"
 -   "kenny-Joe Koch (kenny-joe.koch@fh-bielefeld.de)"
@@ -11,13 +11,12 @@ author:
 In dieser Aufgabe ging es darum, ein Graphical User Interface für die Auswahl einer Charakterklasse
 zu erstellen. Dieses GUI soll die Texturen der Charakterklassen, die Stats als Text
 und die Stats als Diagramm zeigen. Zudem soll ein Soundsystem implementiert werden. Jeder Aktion wird also
-ein Sound zugewiesen.
+ein Sound zugewiesen. Außerdem wurden verschiedene komplexere Verhaltensmuster für Monster implementiert.
 
 # Ansatz und Modellierung
 Da wir bereits ein kleines Graphical User Interface geschrieben hatten, haben wir dieses
 komplett überarbeitet. Davor haben wir uns aber erst ein Layout ausgedacht, wie es später
 aussehen sollte. Die Sounds, die benutzt werden sollen haben wir aus dem Internet.
-Diese wurden frei zur Verfügung gestellt.
 
 # Umsetzung
 Der erste Schritt war es das Layout für die MainGUI umzusetzen. Dafür haben wir uns ein
@@ -45,7 +44,14 @@ wie z.B. das Gehen nicht 30 mal pro Sekunde ausgeführt werden sollen, haben wir
 Methode überlegt, um die Frames zu zählen. Diese Anzahl der Frames haben wir dann mit dem 
 modulo-Operator verknüpft. So kann man sagen, dass ein Sound nur alle 0,5 Sek etc. ausgeführt werden soll.
 
+Die komplexeren Verhaltensmuster richten sich nach den HP-Werten der Monster und der Position des Helden. Wenn sich
+der Held mit einem Monster in einen Raum befindet und dieses mehr als 50% HP hat, wird der Held von diesem angegriffen.
+Sollte der HP-Wert des Monsters auf unter 50% fallen, befindet sich das Monster im Fluchtmodus und läuft unberechenbar 
+vor dem Helden weg. Fällt das Monster unter 25% Hp ruft es mit letzter Kraft nach einem kampffähigen Monster, dass ihm 
+zur Hilfe eilt. Danach verfällt es in die Idle-Animation.
+
 # Postmortem
 Wirkliche Probleme gab es nicht, die Implementierung des GUI hat nur sehr viel
-Zeit gekostet, da alles angepasst werden musste. Zudem kam dann noch die Bildbearbeitung,
+Zeit gekostet, da alles angepasst werden musste. Zudem kam dann noch die Bildbearbeitung, Auch hier gab es an sich keine großen
+Probleme, da wir mit dem einfachen Verhalten eine solide Basis aufgebaut haben auf der wir aufbauen konnten.
 
