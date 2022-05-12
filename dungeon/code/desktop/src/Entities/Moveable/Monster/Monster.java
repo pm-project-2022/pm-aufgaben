@@ -54,7 +54,6 @@ public class Monster extends Moveable {
                         animations();
                     }
                 } else {
-                    this.firstTime = false;
                     this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection());
                     this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
                     this.currentPosition = pointBooleanTransmitter.getPoint();
