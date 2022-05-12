@@ -10,15 +10,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Animation;
 import graphic.Painter;
 import level.elements.Level;
+import level.elements.room.Room;
 import tools.Point;
 
 public class Monster extends Moveable {
     private Hero hero;
-
+    private boolean firstTime;
     private IMovement movementBehaviour;
     private IMovement initialMovementBehaviour;
     private IMovement aggressiveBehaviour;
     private PointBooleanTransmitter pointBooleanTransmitter;
+    private Room escapeRoom;
     private int walkingCount;
 
     public Monster(Painter painter, SpriteBatch batch, Hero hero, IMovement movementBehaviour) {
@@ -27,6 +29,7 @@ public class Monster extends Moveable {
         this.movementBehaviour = movementBehaviour;
         this.initialMovementBehaviour = movementBehaviour;
         this.aggressiveBehaviour = new AggressiveMovement();
+        this.firstTime = true;
     }
 
     public void setLevel(Level currentFloor) {
@@ -41,7 +44,7 @@ public class Monster extends Moveable {
     @Override
     public void update() {
         if (!this.hero.getHeroDead()) {
-            if (heroInRoom()) {
+            if (heroInRoom() && firstTime) {
                 this.movementBehaviour = this.aggressiveBehaviour;
                 walkingCount++;
                 if (this.attributes.getCurrentHP() > this.attributes.getMaxHP() / 2) {
@@ -51,6 +54,7 @@ public class Monster extends Moveable {
                         animations();
                     }
                 } else {
+                    this.firstTime = false;
                     this.movementBehaviour = new Idle(this.pointBooleanTransmitter.getRunDirection());
                     this.pointBooleanTransmitter = this.movementBehaviour.getMonsterMovement(this);
                     this.currentPosition = pointBooleanTransmitter.getPoint();
