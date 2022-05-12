@@ -19,12 +19,12 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/forestwithwizard.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/wizardGif.gif" )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 0
 					"y": 0
 					"width": 220
-					"height": 110
+					"height": 120
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonConfirm"

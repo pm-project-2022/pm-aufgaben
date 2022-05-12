@@ -51,9 +51,9 @@ public class wizardGUI extends JFrame {
             wizardStats.setBounds(0, 120, 220, 104);
 
             //---- label2 ----
-            label2.setIcon(new ImageIcon(getClass().getResource("/guiAssets/forestwithwizard.png")));
+            label2.setIcon(new ImageIcon(getClass().getResource("/guiAssets/wizardGif.gif")));
             panel1.add(label2);
-            label2.setBounds(0, 0, 220, 110);
+            label2.setBounds(0, 0, 220, 120);
 
             //---- buttonConfirm ----
             buttonConfirm.setText("Yes");

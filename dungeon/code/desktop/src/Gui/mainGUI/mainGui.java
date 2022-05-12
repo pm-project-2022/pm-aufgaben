@@ -161,6 +161,8 @@ public class mainGui extends JFrame {
         label2 = new JLabel();
         label3 = new JLabel();
         label4 = new JLabel();
+        label5 = new JLabel();
+        label6 = new JLabel();
 
         //======== this ========
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -174,9 +176,9 @@ public class mainGui extends JFrame {
             panel1.setLayout(null);
 
             //---- label1 ----
-            label1.setIcon(new ImageIcon(getClass().getResource("/guiAssets/forestwithall.png")));
+            label1.setIcon(new ImageIcon(getClass().getResource("/guiAssets/knightGif.gif")));
             panel1.add(label1);
-            label1.setBounds(0, -5, 660, 125);
+            label1.setBounds(0, -5, 220, 125);
 
             //---- knightButton ----
             knightButton.setText("Knight");
@@ -219,6 +221,16 @@ public class mainGui extends JFrame {
             label4.setForeground(Color.black);
             panel1.add(label4);
             label4.setBounds(440, 120, 220, 135);
+
+            //---- label5 ----
+            label5.setIcon(new ImageIcon(getClass().getResource("/guiAssets/wizardGif.gif")));
+            panel1.add(label5);
+            label5.setBounds(220, -5, 220, 125);
+
+            //---- label6 ----
+            label6.setIcon(new ImageIcon(getClass().getResource("/guiAssets/hunterGif.gif")));
+            panel1.add(label6);
+            label6.setBounds(440, -5, 220, 125);
 
             {
                 // compute preferred size
@@ -276,5 +288,7 @@ public class mainGui extends JFrame {
     private JLabel label2;
     private JLabel label3;
     private JLabel label4;
+    private JLabel label5;
+    private JLabel label6;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

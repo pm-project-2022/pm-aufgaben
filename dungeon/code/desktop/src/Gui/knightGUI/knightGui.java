@@ -50,7 +50,7 @@ public class knightGui extends JFrame {
             knightStats.setBounds(0, 120, 220, 104);
 
             //---- label2 ----
-            label2.setIcon(new ImageIcon(getClass().getResource("/guiAssets/forestwithknight.png")));
+            label2.setIcon(new ImageIcon(getClass().getResource("/guiAssets/knightGif.gif")));
             panel1.add(label2);
             label2.setBounds(0, 0, 220, 110);
 
