@@ -1,0 +1,64 @@
+JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "knightStats"
+					"text": "<html><pre>HP: 75     Mana: 125<br/>AtkP: 75   DefP: 75<br/>Accu: 70   Eva: 70<br/>This Character?<pre><html>"
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 0
+					"y": 120
+					"width": 220
+					"height": 104
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/forestwithhunter.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 0
+					"y": 0
+					"width": 220
+					"height": 110
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonConfirm"
+					"text": "Yes"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 0
+					"y": 235
+					"width": 105
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonDecline"
+					"text": "No"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 115
+					"y": 235
+					"width": 103
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/Screenshot 2022-05-10 221807hunter.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 220
+					"y": 0
+					"height": 280
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 0
+				"height": 305
+				"width": 585
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 585, 340 )
+			"location": new java.awt.Point( 145, 90 )
+		} )
+	}
+}

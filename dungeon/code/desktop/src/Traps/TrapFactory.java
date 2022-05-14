@@ -21,7 +21,7 @@ public class TrapFactory {
      */
     public static ArrayList<Item> trapFac(Painter painter, SpriteBatch batch) {
         ArrayList<Item> traps = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 2; i++){
             traps.add(new Traps(painter,batch));
         }
 

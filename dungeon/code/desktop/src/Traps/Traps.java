@@ -35,7 +35,7 @@ public class Traps extends Item {
             activeAnimation = idleAnimation;
         }
         else{
-            activeAnimation = idleAnimation;
+            activeAnimation = this.invisible;
         }
     }
     

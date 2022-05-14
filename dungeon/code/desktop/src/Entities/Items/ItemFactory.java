@@ -18,7 +18,7 @@ public class ItemFactory {
      */
     public static ArrayList<Item> itemFac(Painter painter, SpriteBatch batch) {
         ArrayList<Item> items = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             int ranNum = new Random().nextInt(5);
             switch (ranNum) {
                 case 0: items.add(new HPPot(painter, batch));break;

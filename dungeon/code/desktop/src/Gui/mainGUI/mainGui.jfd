@@ -1,0 +1,117 @@
+JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			"$sizePolicy": 1
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/logo/logo16x16.png" )
+			"title": "Choose your Character!"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/knightGif.gif" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"x": 0
+					"y": -5
+					"height": 125
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "knightButton"
+					"text": "Knight"
+					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 0
+					"y": 255
+					"width": 220
+					"height": 25
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "wizardButton"
+					"text": "Wizard"
+					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 25
+					"x": 220
+					"y": 255
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "hunterButton"
+					"text": "Hunter"
+					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 225
+					"height": 25
+					"x": 440
+					"y": 255
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "<html>A knight is a proud, skilled melee<br/>\ncombatant who fights in the name<br/>\nof honor and chivalry.<html>\n"
+					"verticalAlignment": 1
+					"border": new javax.swing.border.TitledBorder( null, "Knight", 4, 0, null, sfield java.awt.Color black )
+					"foreground": sfield java.awt.Color black
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 0
+					"y": 120
+					"width": 220
+					"height": 135
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "<html>Wizards are supreme magic-users,<br/>\ndefined and united as a class by the<br/>\nspells they cast.<br/>\nTheir magic conjures elementals from other planes.<html>\n\n"
+					"verticalAlignment": 1
+					"border": new javax.swing.border.TitledBorder( null, "Wizard", 4, 0, null, sfield java.awt.Color black )
+					"foreground": sfield java.awt.Color black
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 135
+					"x": 220
+					"y": 120
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "<html>Secretive. Elusive. Tactical.<br/>\nThese three words best describe a<br/>\nhunter. They are clean, methodical killers, striking fear<br/>\ninto the hearts of their enemies.<html>"
+					"verticalAlignment": 1
+					"border": new javax.swing.border.TitledBorder( null, "Hunter", 4, 0, null, sfield java.awt.Color black )
+					"foreground": sfield java.awt.Color black
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 135
+					"x": 440
+					"y": 120
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label5"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/wizardGif.gif" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 125
+					"x": 220
+					"y": -5
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label6"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/hunterGif.gif" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 220
+					"height": 125
+					"x": 440
+					"y": -5
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 0
+				"y": 0
+				"height": 295
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 70, 15 )
+			"size": new java.awt.Dimension( 660, 325 )
+		} )
+	}
+}
