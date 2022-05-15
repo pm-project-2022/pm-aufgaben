@@ -167,3 +167,5 @@ war/
 # GitLab #
 ##########
 code/*_log.txt
+
+bin/
