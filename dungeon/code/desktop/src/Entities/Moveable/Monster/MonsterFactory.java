@@ -2,7 +2,6 @@ package Entities.Moveable.Monster;
 
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
-import Entities.Moveable.Monster.MonsterMovement.ComplexBehaviour.AggressiveMovement;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.PatrolXAxis;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.PatrolYAxis;
 import Entities.Moveable.Monster.NormalMonster.Chort;
