@@ -41,7 +41,7 @@ pdf/
 *.log
 *.jar
 hs_err_pid*
-bin/**/*
+bin/
 .metadata/
 .gradle/**
 /**/build/**
@@ -167,4 +167,3 @@ war/
 # GitLab #
 ##########
 code/*_log.txt
-
