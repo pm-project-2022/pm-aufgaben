@@ -1,65 +1,101 @@
 package Entities.Moveable.Monster.MonsterMovement.ComplexBehaviour;
 
-import com.badlogic.gdx.ai.pfa.GraphPath;
-
 import Entities.Fight.Fight;
 import Entities.Moveable.Monster.Monster;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
-import Helper.Booleans;
+import com.badlogic.gdx.ai.pfa.GraphPath;
 import Helper.PointBooleanTransmitter;
 import level.elements.room.Tile;
 import tools.Point;
 
+/**
+ * Wenn dieses Verhalten ausgelöst wird, läuft das Monster unvorhersehbar vom dem Helden weg.
+ */
+
 public class Escape implements IMovement {
+    //startpunkt der fluchtroute
     private Point newPosition;
-    private Point escapePositio;
+
+    //endpunkt der fluchtroute
+    private Point escapePosition;
+    private Point expectedEscapePosition;
+    private boolean escapePositionReached;
     private boolean runDirection;
     private boolean collision;
+    private int counter;
 
     public Escape() {
+        this.escapePositionReached = true;
         this.runDirection = true;
         this.collision = false;
+        this.counter = 0;
     }
 
     @Override
     public PointBooleanTransmitter getMonsterMovement(Monster monster) {
         this.newPosition = new Point(monster.getPosition());
-        GraphPath<Tile> path = monster.getCurrentFloor().findPath(
+        if (this.escapePositionReached) {
+            calculateEscapePosition(monster);
+        }
+        this.counter++;
+        if (this.counter % 6 == 0) {
+            buildEscapePatch(monster);
+        }
+
+        if(monster.getCurrentFloor().getTileAt(monster.getPosition().toCoordinate()) == monster.getHero().getCurrentFloor().getTileAt(monster.getHero().getPosition().toCoordinate())){
+            startFight(monster);
+        }
+
+        if (monster.getCurrentFloor().getTileAt(escapePosition.toCoordinate()) == monster.getCurrentFloor()
+                .getTileAt(this.newPosition.toCoordinate())) {
+            this.escapePositionReached = true;
+        }
+        return new PointBooleanTransmitter(this.runDirection, this.collision, this.newPosition);
+    }
+
+    /**
+     * erzeugt den endpunkt der fluchtroute
+     * @param monster current monster
+     */
+    private void calculateEscapePosition(Monster monster) {
+        do {
+            this.expectedEscapePosition = monster.getCurrentFloor().getRandomRoom().getRandomFloorTile().getCoordinate()
+                    .toPoint();
+        } while (!monster.getCurrentFloor().getTileAt(this.expectedEscapePosition.toCoordinate()).isAccessible());
+        this.escapePosition = this.expectedEscapePosition;
+        this.escapePositionReached = false;
+    }
+
+    /**
+     * baut eine fluchtroute ausgehend vom startpunkt und endpunkt
+     * @param monster current monster
+     */
+    private void buildEscapePatch(Monster monster) {
+        GraphPath<Tile> escapePath = monster.getCurrentFloor().findPath(
                 monster.getCurrentFloor().getTileAt(monster.getPosition().toCoordinate()),
-                monster.getCurrentFloor().getTileAt(monster.getEscapeRoom().toCoordinate()));
-        
-        if (path.getCount() > 1) {
-            this.newPosition = path.get(1).getCoordinate().toPoint();
+                monster.getCurrentFloor().getTileAt(this.escapePosition.toCoordinate()));
+
+        if (escapePath.getCount() > 1) {
+            this.newPosition = escapePath.get(1).getCoordinate().toPoint();
             if (this.newPosition.x < monster.getPosition().x) {
                 this.runDirection = true;
             } else {
                 this.runDirection = false;
             }
         } else {
-            this.newPosition = monster.getEscapeRoom();
+            this.newPosition = this.escapePosition;
         }
 
-        if (monster.getCurrentFloor().getTileAt(monster.getPosition().toCoordinate()) == monster.getHero().getCurrentFloor().getTileAt(monster.getHero().getPosition().toCoordinate())) {
-            new Fight(monster).fight();
-        }
-
-        if (monster.getCurrentFloor().getTileAt(newPosition.toCoordinate()).isAccessible()) {
-            return new PointBooleanTransmitter(this.runDirection, false, this.newPosition);
-        } else {
-            return new PointBooleanTransmitter(this.runDirection, false, monster.getPosition());
-        }
     }
 
-    /*private void fightTrigger(Monster monster) {
+    /**
+     * initiates a fight between the current monster and the hero
+     * 
+     * @param monster
+     */
+    private void startFight(Monster monster) {
         Fight fight = new Fight(monster);
-        Booleans fightresult = fight.fight();
-        if (fightresult.getMonsterDmg()) {
-            if (this.runDirection) {
-                this.newPosition.x -= 1.0f;
-            } else {
-                this.newPosition.x += 1.0f;
-            }
-        }
+        fight.fight();
+    }
 
-    }*/
 }
