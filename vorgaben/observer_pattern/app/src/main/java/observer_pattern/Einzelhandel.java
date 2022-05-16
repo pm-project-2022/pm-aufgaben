@@ -3,8 +3,10 @@ package observer_pattern;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
-public class Einzelhandel {
+public class Einzelhandel implements IObserver{
+    private static final Logger LOGGER = Logger.getLogger(Einzelhandel.class.getName());
     private HashMap<WarenTyp, Integer> lager;
     private Grosshandel grosshandel;
     private List<Auftrag> auftraege;
@@ -13,6 +15,7 @@ public class Einzelhandel {
         lager = new HashMap<>();
         auftraege = new ArrayList<>();
         this.grosshandel = grosshandel;
+        this.grosshandel.register(this);
     }
 
     /**
@@ -23,6 +26,7 @@ public class Einzelhandel {
      */
     public void bestellen(Auftrag auftrag) {
         auftraege.add(auftrag);
+        LOGGER.info("Auftrag: " + auftrag.getAnzahl() + " " + auftrag.getWarenTyp() + " wurde hinzufügt");
     }
 
     /**
@@ -34,6 +38,7 @@ public class Einzelhandel {
     public void empfangen(Auftrag auftrag) {
         lager.put(auftrag.getWarenTyp(), lager.getOrDefault(auftrag.getWarenTyp(), 0) + auftrag.getAnzahl());
         auftraege.remove(auftrag);
+        LOGGER.info("Neue Lieferung angekommen. Inhalt: " + auftrag.getAnzahl() + " " + auftrag.getWarenTyp());
     }
 
     /**
@@ -53,5 +58,11 @@ public class Einzelhandel {
      */
     public boolean hatAuftraege() {
         return auftraege.size() > 0;
+    }
+
+    @Override
+    public void update(String observerableMessage) {
+        LOGGER.info(observerableMessage);
+        
     }
 }
