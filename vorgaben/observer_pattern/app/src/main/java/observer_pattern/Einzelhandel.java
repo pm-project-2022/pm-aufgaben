@@ -26,7 +26,7 @@ public class Einzelhandel implements IObserver{
      */
     public void bestellen(Auftrag auftrag) {
         auftraege.add(auftrag);
-        LOGGER.info("Auftrag: " + auftrag.getAnzahl() + " " + auftrag.getWarenTyp() + " wurde hinzufügt");
+        LOGGER.info("Auftrag: " + auftrag.getAnzahl() + " " + auftrag.getWarenTyp() + " wurde hinzufügt\n");
     }
 
     /**
@@ -38,7 +38,7 @@ public class Einzelhandel implements IObserver{
     public void empfangen(Auftrag auftrag) {
         lager.put(auftrag.getWarenTyp(), lager.getOrDefault(auftrag.getWarenTyp(), 0) + auftrag.getAnzahl());
         auftraege.remove(auftrag);
-        LOGGER.info("Neue Lieferung angekommen. Inhalt: " + auftrag.getAnzahl() + " " + auftrag.getWarenTyp());
+        LOGGER.info("Neue Lieferung angekommen. Inhalt: " + auftrag.getAnzahl() + " " + auftrag.getWarenTyp()+ "\n");
     }
 
     /**

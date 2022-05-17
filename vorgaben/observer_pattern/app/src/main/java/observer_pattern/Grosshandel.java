@@ -24,7 +24,7 @@ public class Grosshandel {
      */
     public void register(IObserver observer){
         this.observers.add(observer);
-        LOGGER.info("Observer hat sich angemeldet");
+        LOGGER.info("Observer hat sich angemeldet\n");
     }
 
     /**
@@ -39,19 +39,25 @@ public class Grosshandel {
     public boolean bestellen(Einzelhandel kunde, Auftrag auftrag) {
         if (lager.getOrDefault(auftrag.getWarenTyp(), 0) >= auftrag.getAnzahl()) {
             lager.put(auftrag.getWarenTyp(), lager.get(auftrag.getWarenTyp()) - auftrag.getAnzahl());
-            LOGGER.info("Auftrag wurde ausgeführt.");
-            notifyObserver(kunde, "Auftrag wurde ausgeführt, die Ware befindet sich auf dem Weg.");
+            LOGGER.info("Auftrag wurde ausgeführt.\n");
+            notifyObserver(kunde, "Auftrag wurde ausgeführt, die Ware befindet sich auf dem Weg.\n");
             kunde.empfangen(auftrag);
             return true;
         }
-        LOGGER.warning("Lagerbestand nicht ausreichend.");
-        notifyObserver(kunde, "Auftrag kann nicht ausgeführt werden. Der Lagerbestand ist nicht ausreichend");
+        LOGGER.warning("Lagerbestand nicht ausreichend.\n");
+        notifyObserver(kunde, "Auftrag kann nicht ausgeführt werden. Der Lagerbestand ist nicht ausreichend\n");
         return false;
     }
 
+    /**
+     * benachrichtigt den kunden wenn dieser als observer registiert ist
+     * @param kunde der zu benachrichtigen kunde
+     * @param observerableMessage nachricht an den kunden
+     */
     private void notifyObserver(Einzelhandel kunde, String observerableMessage){
         for (IObserver observer : observers) {
             if(observer.equals(kunde)){
+                LOGGER.info("Observer wird benachrichtigt.\n");
                 kunde.update(observerableMessage);
             }
         }
@@ -66,6 +72,7 @@ public class Grosshandel {
         Map.Entry<WarenTyp, Integer> kleinsterBestand = findeKleinstenBestand();
         int zusatzMenge = random.nextInt(1, 5);
         kleinsterBestand.setValue(kleinsterBestand.getValue() + zusatzMenge);
+        LOGGER.info(kleinsterBestand.getKey() + "-Bestand wurde auf" + kleinsterBestand.getValue() + " erhöht\n");
     }
 
     private Map.Entry<WarenTyp, Integer> findeKleinstenBestand() {
