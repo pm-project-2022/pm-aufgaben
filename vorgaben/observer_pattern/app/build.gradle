@@ -26,5 +26,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'observer_pattern.App'
+    mainClass = 'observer_pattern.Main'
 }
