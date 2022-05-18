@@ -98,11 +98,11 @@ public class MyGame extends MainController {
     protected void beginFrame() {
         if (!this.hero.getHeroDead()) {
             levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
-            levelMANA.setText(hero.getAttributes().getCurrentMana() + " / " + hero.getAttributes().getMaxMana());
+            levelMANA.setText(hero.getAttributes().getCurrentMana() + " / " + hero.getAttributes().getAuraMana());
             levelCounter.setText("Floor " + currentFloor);
-            heroStats.setText("AtkP: " + hero.getAttributes().getAttackPower() + "\nDefP: "
-                + hero.getAttributes().getDefensePower() +
-                "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy());
+            heroStats.setText("AtkP: " + hero.getAttributes().getAuraAttackPower() + "\nDefP: "
+                + hero.getAttributes().getAuraDefensePower() +
+                "\nEva: " + hero.getAttributes().getAuraEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy());
             heroLevel.setText("Level: " + hero.getAttributes().getLevel());
             this.heroXp.setText(hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
             deathScreen.setText("");
