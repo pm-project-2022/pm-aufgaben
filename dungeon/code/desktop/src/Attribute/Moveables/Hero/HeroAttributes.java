@@ -10,10 +10,14 @@ public class HeroAttributes extends BasicAttributes {
         this.maxHP = hp;
         this.currentMana = mana;
         this.maxMana = mana;
+        this.auraMana = mana;
         this.attackPower = atkP;
+        this.auraAttackPower = atkP;
+        this.auraDefensePower = defP;
         this.defensePower = defP;
         this.accuracy = acc;
         this.evasion = eva;
+        this.auraEvasion = eva;
         this.level = level;
         this.currentExp = exp;
         this.expForLvlUp = expForLvlUp;
