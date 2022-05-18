@@ -15,27 +15,38 @@ import level.elements.Level;
 import tools.Point;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
 import Logger.ColumnFormatter;
+import Skills.BasicSkill;
 
 public class Hero extends Moveable {
+    // blickrichtung des helds
     protected boolean viewDirection;
+
+    // statsu ob der held lebt oder tot ist
     protected boolean heroDead;
+
+    // listen mit entitys
     protected ArrayList<Item> floorItems;
     protected ArrayList<Item> chests;
     protected ArrayList<Item> traps;
     protected ArrayList<FriendlyNPC> npcs;
+
+    // inventar
     protected Inventory inventory;
+
+    // Skills
+    protected BasicSkill aura;
+
+    // Logger
     protected Logger log;
     protected String name;
-    protected int walkingCount,trapCount = 0;
+
+    // counter
+    protected int walkingCount, trapCount = 0;
+
     public Hero(Painter painter, SpriteBatch batch) {
         super(painter, batch);
         this.viewDirection = true;
@@ -62,7 +73,6 @@ public class Hero extends Moveable {
     public void update() {
         if (!this.heroDead) {
             animations(movementUpdate(movementKeyPressed(), this.currentPosition));
-            updateExp();
             pickUpItem();
             updateInventoryItemPosition();
             equipItem();
@@ -70,11 +80,12 @@ public class Hero extends Moveable {
             dropItem();
             consumeItem();
             showInventory();
-            printStats();
             openChest();
             stepOnTrap();
             talkToNpc();
             updateDead();
+            manageSkills();
+            updateStats();
         }
     }
 
@@ -116,7 +127,7 @@ public class Hero extends Moveable {
 
         if (keyPressed) {
             walkingCount++;
-            if(walkingCount%10==0){
+            if (walkingCount % 10 == 0) {
                 MyGame.walking.play(0.05f);
             }
             // Wenn die Taste W gedrückt ist, bewege dich nach oben
@@ -146,9 +157,27 @@ public class Hero extends Moveable {
         }
     }
 
-    private void updateExp() {
-        if (this.attributes.getExp() >= this.attributes.getExpForLvlUp()) {
+    /**
+     * checkt ob der charakter ein level aufsteigen kann oder nicht
+     * @return true, wenn ja, false wenn nein
+     */
+    private boolean updateExp() {
+        if(this.attributes.getExp() >= this.attributes.getExpForLvlUp()){
+            return true;
+        }else{
+            return false;
+        }        
+    }
+
+    /**
+     * updates die stats nach einem level up
+     */
+    private void updateStats(){
+        if(updateExp()){
             this.attributes.updateHeroLevelAndStats();
+            if(this.aura.getAuraAttributes().getActive()){
+                this.aura.activateAura(this);
+            }
         }
     }
 
@@ -223,13 +252,6 @@ public class Hero extends Moveable {
         }
     }
 
-    private void printStats() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            System.out.println(this.attributes.toString());
-        }
-    }
-
-
     private void openChest() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == chests.get(0).getCurrentFloor()
@@ -249,7 +271,7 @@ public class Hero extends Moveable {
                     .getTileAt(traps.getPosition().toCoordinate())) {
                 traps.setIsOnFloor(true);
                 trapCount++;
-                if(trapCount%5==0){
+                if (trapCount % 5 == 0) {
                     MyGame.stepTraps.play(0.1f);
                 }
 
@@ -282,14 +304,35 @@ public class Hero extends Moveable {
         }
     }
 
-    private void updateDead(){
-        if(this.attributes.getCurrentHP() <= 0){
+    private void updateDead() {
+        if (this.attributes.getCurrentHP() <= 0) {
             this.heroDead = true;
             MyGame.death.play(0.4f);
         }
     }
 
-    public void setPosition(Point newPosition){
+    private void manageSkills() {
+        auraSkill();
+    }
+
+    private void auraSkill() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+            if (this.attributes.getLevel() < this.aura.getAuraAttributes().getAuraLevel()) {
+                log.warning("Level ist zu niedrig um die Aura zu aktivieren");
+            } else if (!this.aura.getAuraAttributes().getActive()) {
+                this.aura.activateAura(this);
+                log.info("Status: " + this.aura.getAuraAttributes().getActive());
+                this.aura.getAuraAttributes().setActive(!this.aura.getAuraAttributes().getActive());
+                System.out.println();
+            } else {
+                this.aura.deactiveAura(this);
+                log.info("Status: " + this.aura.getAuraAttributes().getActive());
+                this.aura.getAuraAttributes().setActive(!this.aura.getAuraAttributes().getActive());
+            }
+        }
+    }
+
+    public void setPosition(Point newPosition) {
         this.currentPosition = newPosition;
     }
 
@@ -322,7 +365,7 @@ public class Hero extends Moveable {
         this.heroDead = dead;
     }
 
-    public ArrayList<Item> getTraps(){
+    public ArrayList<Item> getTraps() {
         return this.traps;
     }
 
