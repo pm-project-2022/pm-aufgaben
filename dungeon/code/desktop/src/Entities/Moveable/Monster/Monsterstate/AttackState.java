@@ -1,41 +1,24 @@
 package Entities.Moveable.Monster.Monsterstate;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import Entities.Moveable.Monster.Monster;
-import Logger.ColumnFormatter;
+
 
 /**
  * AttackState eines Monsters. In Diesem State bewegt sich das Monster, sofern es mehr als 50% der maxHp hat und der Held im Raum ist auf diesen zu um ihn zu attackieren.
  */
 
 public class AttackState extends State implements IState {
-    
-    private Logger log;
 
     public AttackState(){
-        initLogger();
-    }
-
-    /**
-     * initiiert den logger
-     */
-    private void initLogger(){
-        log = Logger.getLogger("AttackState Logger");
-        ConsoleHandler ch = new ConsoleHandler();
-        ch.setLevel(Level.ALL);
-        ch.setFormatter(new ColumnFormatter());
-        log.addHandler(ch);
-        log.setLevel(Level.ALL);
-        log.setUseParentHandlers(false);
+        super(AttackState.class.getName());
     }
 
     @Override
     public void movement(Monster monster) {
-        if(!monster.getMovementBehaviour().equals(monster.getAttackBehaviour())){
+        if(!this.setBehaviour){
             monster.setMovementBehaviour(monster.getAttackBehaviour() );
-            log.info("Monster befindet sich AttackState");
+            STATELOGGER.info("Monster befindet sich AttackState");
+            this.setBehaviour = true;
         }
         exit(monster);
     }
@@ -47,16 +30,20 @@ public class AttackState extends State implements IState {
     private void exit(Monster monster){
         if(!heroInRoom(monster) && hpThresholdAggresivePatrolState(monster)){
             monster.setCurrentState(monster.getPatrolState());
-            log.info("Monster verlässt den AttackState und wechselt in den PatrolState.");
+            STATELOGGER.info("Monster verlässt den AttackState und wechselt in den PatrolState.");
+            this.setBehaviour = false;
         }else if(hpThresholdEscapeState(monster)){
             monster.setCurrentState(monster.getEscapeState());
-            log.info("Monster verlässt den AttackState und wechselt in den EscapeState.");
+            STATELOGGER.info("Monster verlässt den AttackState und wechselt in den EscapeState.");
+            this.setBehaviour = false;
         }else if(hpThresholdHelpState(monster)){
             monster.setCurrentState(monster.getHelpState());
-            log.info("Monster verlässt den Attackstate und wechselt in den HelpState.");
+            STATELOGGER.info("Monster verlässt den Attackstate und wechselt in den HelpState.");
+            this.setBehaviour = false;
         }else if(hpThresholdDeathState(monster)){
             monster.setCurrentState(monster.getDeathState());
-            log.info("Monster verlässt den AttackeState und wechselt in den DeathState.");
+            STATELOGGER.info("Monster verlässt den AttackeState und wechselt in den DeathState.");
+            this.setBehaviour = false;
         }
     }
 }

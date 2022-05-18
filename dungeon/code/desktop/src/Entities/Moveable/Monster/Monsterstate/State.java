@@ -1,11 +1,41 @@
 package Entities.Moveable.Monster.Monsterstate;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import Entities.Moveable.Monster.Monster;
+import Logger.ColumnFormatter;
 
 /**
  * Abstrakte State Klasse, die als Vorlage für die Monsterstates agiert. Sie beinhaltet einen Logger und einen Großteil der State exit-Conditions.
  */
 
 public abstract class State {
+
+    protected Logger STATELOGGER;
+    protected boolean setBehaviour;
+
+    public State(String classname){
+        initLogger(classname);
+        this.setBehaviour = false;
+    }
+
+     /**
+     * initiiert den logger
+     */
+    private void initLogger(String classname){
+        STATELOGGER = Logger.getLogger(classname);
+        for (Handler handler : STATELOGGER.getHandlers()) {
+            STATELOGGER.removeHandler(handler);
+        }
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setLevel(Level.ALL);
+        ch.setFormatter(new ColumnFormatter());
+        STATELOGGER.addHandler(ch);
+        STATELOGGER.setLevel(Level.ALL);
+        STATELOGGER.setUseParentHandlers(false);
+    }
 
     /**
      * Teil der exit-Condition zum Wechsel zwischen Attack und Patrol State. Ein Monster greift den Helden an, wenn sie sich im selben Raum befinden 
