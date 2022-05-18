@@ -219,9 +219,9 @@ public class Inventory {
                 hero.getAttributes().setCurrentHP(hp);
             }
         } else if (this.inventory[index].getItemName().equals("Mana Potion")) {
-            int mana = this.inventory[index].getAttributes().getCurrentMana() + hero.getAttributes().getCurrentMana();
-            if (mana > hero.getAttributes().getMaxMana()) {
-                hero.getAttributes().setCurrentMana(hero.getAttributes().getMaxMana());
+            int mana = this.inventory[index].getAttributes().getCurrentMana() + hero.getAttributes().getAuraMana();
+            if (mana > hero.getAttributes().getAuraMana()) {
+                hero.getAttributes().setCurrentMana(hero.getAttributes().getAuraMana());
             } else {
                 hero.getAttributes().setCurrentMana(mana);
             }
