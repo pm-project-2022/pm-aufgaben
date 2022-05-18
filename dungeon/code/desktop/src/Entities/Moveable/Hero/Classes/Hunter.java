@@ -2,6 +2,8 @@ package Entities.Moveable.Hero.Classes;
 
 import Attribute.Moveables.Hero.HeroAttributes;
 import Entities.Moveable.Hero.Hero;
+import Skills.Auras.HunterAura;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
 
@@ -14,6 +16,7 @@ public class Hunter extends Hero {
         this.attributes = new HeroAttributes(75,125,75,75,70,70,1,0,10,0.2f);
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
         this.name = "Hunter";
+        this.aura = new HunterAura(painter, batch);
     }
 
     /**
