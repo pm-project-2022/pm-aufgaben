@@ -2,6 +2,10 @@ package Attribute.Skills;
 
 import Attribute.BasicAttributes;
 
+/**
+ * Attribute Klasse für die Auraskills
+ */
+
 public class AuraAttributes extends BasicAttributes {
     private final int cooldown;
     private final int manaStorage;
@@ -47,6 +51,10 @@ public class AuraAttributes extends BasicAttributes {
         this.isActive = isActive;
     }
 
+    /**
+     * getter für isActive
+     * @return isActive
+     */
     public boolean getActive(){
         return this.isActive;
     }

@@ -7,6 +7,10 @@ import Helper.Booleans;
 import Helper.PointBooleanTransmitter;
 import tools.Point;
 
+/**
+ * lässt das monster entlang sder x achse patrollieren
+ */
+
 public class PatrolXAxis implements IMovement {
     private boolean runDirectionX;
     private boolean collision;

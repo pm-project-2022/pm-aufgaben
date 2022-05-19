@@ -6,6 +6,9 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Erstellt die Fallen auf dem Boden jedes Levels
+ */
 
 public class TrapFactory {
 

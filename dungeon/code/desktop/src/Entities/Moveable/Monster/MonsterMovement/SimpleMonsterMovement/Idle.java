@@ -7,6 +7,11 @@ import Helper.Booleans;
 import Helper.PointBooleanTransmitter;
 import tools.Point;
 
+/**
+ * versetzt das monster in eine idle animation
+ */
+
+
 public class Idle implements IMovement {
     private boolean idle;
     private Point newPosition;

@@ -2,6 +2,10 @@ package Attribute.Moveables.Monster;
 
 import Attribute.BasicAttributes;
 
+/**
+ * Attribute Klasse für monster
+ */
+
 public class MonsterAttributes extends BasicAttributes {
 
     public MonsterAttributes(int currentHP, int attackPower, int defensePower, int accuracy, int evasion, int level, int currentExp, float movementSpeed){

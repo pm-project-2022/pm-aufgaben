@@ -2,6 +2,10 @@ package Attribute;
 
 import desktop.MyGame;
 
+/**
+ * Vorlageklasse für die verschiedenen Attributklassen
+ */
+
 public abstract class BasicAttributes {
     // Manages current hp for heroes, items and monsters
     protected int currentHP;
@@ -294,6 +298,9 @@ public abstract class BasicAttributes {
         this.movementSpeed = movementSpeed;
     }
 
+    /**
+     * Updated die Hero sstats nach jedem level up 
+     */
     public void updateHeroLevelAndStats(){
         this.level += 1;
         this.maxHP +=20;

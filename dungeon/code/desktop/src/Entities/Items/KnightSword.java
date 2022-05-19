@@ -5,6 +5,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Waffe des Ritters
+ */
+
 public class KnightSword extends Item {
 
     public KnightSword(Painter painter, SpriteBatch batch) {

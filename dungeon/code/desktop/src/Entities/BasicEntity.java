@@ -8,6 +8,10 @@ import graphic.Painter;
 import level.elements.Level;
 import tools.Point;
 
+/**
+ * Vorlageklasse jeder Entität
+ */
+
 public abstract class BasicEntity extends Animatable {
     //manages the attributes of an entity
     protected BasicAttributes attributes;

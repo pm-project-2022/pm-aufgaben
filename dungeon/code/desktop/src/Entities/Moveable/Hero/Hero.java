@@ -21,6 +21,10 @@ import java.util.logging.Logger;
 import Logger.ColumnFormatter;
 import Skills.BasicSkill;
 
+/**
+ * Verwaltet die allgemeinen Attribute und Eigenschaften des Helds
+ */
+
 public class Hero extends Moveable {
     // blickrichtung des helds
     protected boolean viewDirection;

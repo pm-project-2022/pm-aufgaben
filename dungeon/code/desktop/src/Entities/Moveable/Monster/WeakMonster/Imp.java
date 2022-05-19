@@ -9,6 +9,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * eine ausprägung eines schwachen monsters
+ */
+
 public class Imp extends Monster {
 
     public Imp(Painter painter, SpriteBatch batch, Hero hero, IMovement movementBehaviour, int floorLevel) {

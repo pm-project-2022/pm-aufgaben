@@ -2,6 +2,10 @@ package Helper;
 
 import tools.Point;
 
+/**
+ * Hilsklasse um booleans und positions gleichzeitig zurückzugeben
+ */
+
 public class PointBooleanTransmitter {
     private boolean runDirection;
     private boolean collision;

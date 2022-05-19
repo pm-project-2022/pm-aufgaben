@@ -10,6 +10,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Verwaltet die klassenspezifischen Attribute wie Animationen und Stats für den Wizzard
+ */
+
 public class Wizard extends Hero {
 
     public Wizard(Painter painter, SpriteBatch batch) {

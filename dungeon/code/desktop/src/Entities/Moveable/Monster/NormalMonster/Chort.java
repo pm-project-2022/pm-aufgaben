@@ -9,6 +9,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Eine Ausprägung eines normalstarken monsters
+ */
+
 public class Chort extends Monster {
 
     public Chort(Painter painter, SpriteBatch batch, Hero hero, IMovement movementBehaviour, int floorLevel) {

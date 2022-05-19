@@ -6,6 +6,9 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * MP Pot Klasse. Verwaltet die Stats der MP pots
+ */
 
 public class MPPot extends Item{
 

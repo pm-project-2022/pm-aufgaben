@@ -9,6 +9,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Verwaltet die klassenspezifischen Attribute wie Animationen und Stats für den Hunter
+ */
+
 public class Hunter extends Hero {
 
     public Hunter(Painter painter, SpriteBatch batch) {

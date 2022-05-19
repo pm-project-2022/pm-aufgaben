@@ -7,6 +7,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Vorlageklasse jeder Entität die sich bewegen kann
+ */
+
 public class Moveable extends BasicEntity{
     //stores the animations
 

@@ -3,6 +3,10 @@ package Entities.Moveable.Monster.MonsterMovement;
 import Entities.Moveable.Monster.Monster;
 import Helper.PointBooleanTransmitter;
 
+/**
+ * Implementiert das Movementverhalten eines Monsters
+ */
+
 public interface IMovement {
 
     /**

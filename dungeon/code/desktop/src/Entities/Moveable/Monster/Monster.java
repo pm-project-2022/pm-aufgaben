@@ -21,6 +21,10 @@ import graphic.Painter;
 import level.elements.Level;
 import tools.Point;
 
+/**
+ * Verwaltet die allgemeinen Attribute und Eigenschaften der monster
+ */
+
 public class Monster extends Moveable {
     private Hero hero;
 

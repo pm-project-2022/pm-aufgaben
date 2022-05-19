@@ -10,6 +10,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Verwaltet die klassenspezifischen Attribute wie Animationen und Stats für den knight
+ */
+
 public class Knight extends Hero {
 
     public Knight(Painter painter, SpriteBatch batch) {

@@ -2,6 +2,10 @@ package Attribute.Moveables.Hero;
 
 import Attribute.BasicAttributes;
 
+/**
+ * Attribute Klasse für den Helden
+ */
+
 public class HeroAttributes extends BasicAttributes {
 
     public HeroAttributes(int hp, int mana, int atkP, int defP, int acc, int eva, int level, int exp, int expForLvlUp,

@@ -257,6 +257,9 @@ public class MyGame extends MainController {
         this.hero.setNpcs(npcs);
     }
 
+    /**
+     * Initiiert das hud
+     */
     private void initHud() {
         levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
         levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
@@ -272,6 +275,9 @@ public class MyGame extends MainController {
         hudController.add(new LvlBar(hudPainter, hudBatch, new Point(200, 90)));
     }
 
+    /**
+     * startet das spiel nach em tod neu
+     */
     private void restartGame() {
 
         if (gui.getChara() == 1) {

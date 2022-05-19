@@ -2,6 +2,11 @@ package Attribute.Skills;
 
 import Attribute.BasicAttributes;
 
+/**
+ * /**
+ * Attribute Klasse für den convert Ressources skill
+ */
+
 public class ConvertAttributes extends BasicAttributes {
     private final int cooldown;
     private final int mana;

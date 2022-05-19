@@ -10,6 +10,10 @@ import graphic.Painter;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Produziert eine neue chest zufälligen inhalt
+ */
+
 public class ChestFactory {
 
     private ChestFactory() {

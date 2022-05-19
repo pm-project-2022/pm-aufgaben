@@ -6,6 +6,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Verwaltet die traps
+ */
+
 public class Traps extends Item {
 
     public Traps(Painter painter, SpriteBatch batch) {
