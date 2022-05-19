@@ -11,7 +11,7 @@ public class ConvertMPToHP extends BasicSkill{
    
     public ConvertMPToHP(Painter painter, SpriteBatch batch) {
         super(painter, batch);
-        this.convertAttributes = new ConvertAttributes(25,25,2,150,0);
+        this.convertAttributes = new ConvertAttributes(25,25,2,150);
     }
     
     public void convert(Hero hero){
