@@ -22,7 +22,7 @@ public class Knight extends Hero {
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
         this.name = "Knight";
         this.aura = new KnightAura(painter, batch);
-        this.convertRessoure = new ConvertMPToHP(painter, batch);
+        this.convert = new ConvertMPToHP(painter, batch);
     }
 
     /**

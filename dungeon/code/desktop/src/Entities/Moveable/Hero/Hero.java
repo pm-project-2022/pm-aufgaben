@@ -43,8 +43,8 @@ public class Hero extends Moveable {
 
     // Skills
     protected BasicSkill aura;
-    protected BasicSkill convertRessoure;
-    private int cooldownConvertRessource = 0;
+    protected BasicSkill convert;
+    private int convertCooldown = 0;
     // Logger
     protected Logger log;
     protected String name;
@@ -341,24 +341,24 @@ public class Hero extends Moveable {
 
     private void convertSkill(){
         if(Gdx.input.isKeyJustPressed(Input.Keys.X)){
-            if(this.attributes.getLevel() < this.convertRessoure.getConvertAttributes().getSkillLevel()){
+            if(this.attributes.getLevel() < this.convert.getConvertAttributes().getSkillLevel()){
                 log.warning("Level ist zu niedrig um den Skill zu benutzen");
-            }else if(!this.convertRessoure.enoughRessources(this)){
+            }else if(!this.convert.enoughRessources(this)){
                 log.warning("Nicht genügend Leben oder Mana vorhanden.");
-            }else if(this.cooldownConvertRessource > 0){
+            }else if(this.convertCooldown > 0){
                 log.warning("Skill ist auf Cooldown.");
             }else{
-                this.convertRessoure.convert(this);
+                this.convert.convert(this);
                 log.info("Cooldown startet");
-                this.cooldownConvertRessource = 150;
+                this.convertCooldown = this.convert.getConvertAttributes().getCooldown();
 
             }
         }
     }
 
     private void convertRessourcesCD(){
-       if(this.cooldownConvertRessource > 0){
-           this.cooldownConvertRessource--;
+       if(this.convertCooldown > 0){
+           this.convertCooldown--;
        }
     }
 
