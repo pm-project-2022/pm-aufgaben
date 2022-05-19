@@ -3,6 +3,7 @@ package Entities.Moveable.Hero.Classes;
 import Attribute.Moveables.Hero.HeroAttributes;
 import Entities.Moveable.Hero.Hero;
 import Skills.Auras.KnightAura;
+import Skills.ConvertStats.ConvertMPToHP;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
@@ -17,6 +18,7 @@ public class Knight extends Hero {
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
         this.name = "Knight";
         this.aura = new KnightAura(painter, batch);
+        this.convertRessoure = new ConvertMPToHP(painter, batch);
     }
 
     /**

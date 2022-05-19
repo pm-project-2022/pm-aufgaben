@@ -3,6 +3,7 @@ package Entities.Moveable.Hero.Classes;
 import Attribute.Moveables.Hero.HeroAttributes;
 import Entities.Moveable.Hero.Hero;
 import Skills.Auras.WizzardAura;
+import Skills.ConvertStats.ConvertHptoMana;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
@@ -17,6 +18,7 @@ public class Wizard extends Hero {
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
         this.name = "Wizard";
         this.aura = new WizzardAura(painter, batch);
+        this.convertRessoure = new ConvertHptoMana(painter, batch);
     }
 
     /**
