@@ -12,9 +12,7 @@ import java.util.ArrayList;
  */
 
 public class Moveable extends BasicEntity{
-    //stores the animations
-
-    protected Animation idleMirroredAnimation;
+   
     protected Animation runAnimation;
     protected Animation runMirroredAnimation;
 
