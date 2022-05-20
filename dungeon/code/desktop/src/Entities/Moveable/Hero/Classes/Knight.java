@@ -1,6 +1,7 @@
 package Entities.Moveable.Hero.Classes;
 
 import Attribute.Moveables.Hero.HeroAttributes;
+import Entities.Fight.Ranged.RangedFight;
 import Entities.Moveable.Hero.Hero;
 import Skills.Auras.KnightAura;
 import Skills.ConvertStats.ConvertMPToHP;
@@ -23,6 +24,10 @@ public class Knight extends Hero {
         this.name = "Knight";
         this.aura = new KnightAura(painter, batch);
         this.convert = new ConvertMPToHP(painter, batch);
+    }
+
+    public void setRangedFight(RangedFight rangedFight){
+        this.rangedFight = rangedFight;
     }
 
     /**
