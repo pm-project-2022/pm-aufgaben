@@ -1,5 +1,6 @@
-package Entities.Fight;
+package Entities.Fight.Melee;
 
+import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.Monster;
 import Helper.Booleans;
 import desktop.MyGame;
@@ -12,11 +13,12 @@ import java.util.Random;
 
 public class Fight {
     private Monster monster;
+    private Hero hero;
 
-    //hitchance
+    // hitchance
     private int hit;
 
-    //damage dealt
+    // damage dealt
     private int dmg;
 
     private Booleans fightResult;
@@ -25,6 +27,7 @@ public class Fight {
 
     /**
      * Constructor
+     * 
      * @param monster attacked by the hero
      */
     public Fight(Monster monster) {
@@ -33,34 +36,52 @@ public class Fight {
         this.fightResult = new Booleans();
     }
 
+    public Fight(Hero hero, Monster monster) {
+        this.hero = hero;
+        this.monster = monster;
+        this.random = new Random();
+    }
+
+    public void rangedFight() {
+        if (this.hero.getAttributes().getAccuracy() > this.monster.getAttributes().getEvasion()) {
+            calculateDamageMonster();
+        } else {
+            if (calculateHit()) {
+                calculateDamageMonster();
+                MyGame.hit.play(0.2f);
+            }
+        }
+    }
+
     /**
      * starts the fight
+     * 
      * @return dealt damage or not
      */
 
     public Booleans fight() {
-        //monster does dmg to hero
-        if(this.monster.getAttributes().getAccuracy() > this.monster.getHero().getAttributes().getEvasion()){
+        // monster does dmg to hero
+        if (this.monster.getAttributes().getAccuracy() > this.monster.getHero().getAttributes().getEvasion()) {
             this.fightResult.setHeroDmg(calculateHeroDmg());
             MyGame.hit.play(0.2f);
-        }else{
-            if(calculateHit()){
+        } else {
+            if (calculateHit()) {
                 this.fightResult.setHeroDmg(calculateHeroDmg());
                 MyGame.hit.play(0.2f);
-            }else{
+            } else {
                 this.fightResult.setHeroDmg(false);
             }
         }
 
-        //hero does dmg to monster
+        // hero does dmg to monster
         if (this.monster.getHero().getAttributes().getAccuracy() > this.monster.getAttributes().getEvasion()) {
             this.fightResult.setMonsterDmg(calculateDamageMonster());
             MyGame.hit.play(0.2f);
         } else {
-            if(calculateHit()){
+            if (calculateHit()) {
                 this.fightResult.setMonsterDmg(calculateDamageMonster());
                 MyGame.hit.play(0.2f);
-            }else{
+            } else {
                 this.fightResult.setMonsterDmg(false);
             }
         }
@@ -70,6 +91,7 @@ public class Fight {
 
     /**
      * calculate if the hit misses or not
+     * 
      * @return hit miss or not
      */
 
@@ -81,17 +103,19 @@ public class Fight {
         return false;
     }
 
-    private boolean calculateHeroDmg(){
-        if(this.monster.getAttributes().getAttackPower() > this.monster.getHero().getAttributes().getDefensePower()){
-            this.dmg = (this.monster.getHero().getAttributes().getDefensePower() - this.monster.getAttributes().getAttackPower());
+    private boolean calculateHeroDmg() {
+        if (this.monster.getAttributes().getAttackPower() > this.monster.getHero().getAttributes().getDefensePower()) {
+            this.dmg = (this.monster.getHero().getAttributes().getDefensePower()
+                    - this.monster.getAttributes().getAttackPower());
             int heroHp = this.monster.getHero().getAttributes().getCurrentHP() + this.dmg;
-            if(heroHp < 0 ){
+            if (heroHp < 0) {
                 this.monster.getHero().getAttributes().setCurrentHP(0);
-            }else{
+            } else {
                 this.monster.getHero().getAttributes().setCurrentHP(heroHp);
             }
-        }else{
-            this.monster.getHero().getAttributes().setCurrentHP(this.monster.getHero().getAttributes().getCurrentHP() - 1);
+        } else {
+            this.monster.getHero().getAttributes()
+                    .setCurrentHP(this.monster.getHero().getAttributes().getCurrentHP() - 1);
         }
 
         return true;
@@ -99,24 +123,26 @@ public class Fight {
 
     /**
      * calculates damage if the hit was successful
+     * 
      * @return true
      */
     private boolean calculateDamageMonster() {
         if (this.monster.getHero().getAttributes().getAttackPower() > this.monster.getAttributes().getDefensePower()) {
-            this.dmg = (this.monster.getAttributes().getDefensePower() - this.monster.getHero().getAttributes().getAttackPower());
+            this.dmg = (this.monster.getAttributes().getDefensePower()
+                    - this.monster.getHero().getAttributes().getAttackPower());
             int monHP = this.monster.getAttributes().getCurrentHP() + this.dmg;
             if (monHP < 0) {
                 this.monster.getAttributes().setCurrentHP(0);
 
-                //System.out.println(this.monster.getAttributes().toString());
+                // System.out.println(this.monster.getAttributes().toString());
 
             } else {
                 this.monster.getAttributes().setCurrentHP(monHP);
-                //System.out.println(this.monster.getAttributes().toString());
+                // System.out.println(this.monster.getAttributes().toString());
             }
         } else {
             this.monster.getAttributes().setCurrentHP(this.monster.getAttributes().getCurrentHP() - 1);
-            //System.out.println(this.monster.getAttributes().toString());
+            // System.out.println(this.monster.getAttributes().toString());
 
         }
         return true;
