@@ -18,6 +18,7 @@ public abstract class BasicEntity extends Animatable {
 
     protected Animation activeAnimation;
     protected Animation idleAnimation;
+    protected Animation idleMirroredAnimation;
 
     //stores the current position and current floor of an entity
     protected Point currentPosition;
