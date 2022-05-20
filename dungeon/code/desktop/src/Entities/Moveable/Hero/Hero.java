@@ -1,8 +1,10 @@
 package Entities.Moveable.Hero;
 
+import Entities.Fight.Ranged.RangedFight;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.Items.Item;
 import Entities.Moveable.Moveable;
+import Entities.Moveable.Monster.Monster;
 import Helper.PointBooleanTransmitter;
 import Inventory.Inventory;
 import com.badlogic.gdx.Gdx;
@@ -37,14 +39,17 @@ public class Hero extends Moveable {
     protected ArrayList<Item> chests;
     protected ArrayList<Item> traps;
     protected ArrayList<FriendlyNPC> npcs;
+    protected ArrayList<Monster> monster;
 
     // inventar
     protected Inventory inventory;
 
     // Skills
+    protected RangedFight rangedFight;
     protected BasicSkill aura;
     protected BasicSkill convert;
     private int convertCooldown = 0;
+    private int convertDuration = 0;
     // Logger
     protected Logger log;
     protected String name;
@@ -317,9 +322,24 @@ public class Hero extends Moveable {
     }
 
     private void manageSkills() {
+        rangedAttack();
         auraSkill();
         convertSkill();
-        convertRessourcesCD();
+        convertCD();
+        if(this.name.equals("Hunter")){
+            hunterConvertDuration();
+        }
+    }
+
+    private void rangedAttack(){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Y)) {
+            if(this.attributes.getCurrentMana() >= 5){
+                this.rangedFight.startRangedAttack();
+                this.attributes.setCurrentMana(this.attributes.getCurrentMana() - 5);
+            }else{
+                log.warning("Nicht genügend Mana");
+            }
+        }
     }
 
     private void auraSkill() {
@@ -339,6 +359,10 @@ public class Hero extends Moveable {
         }
     }
 
+    public void setRangedFight(RangedFight rangedFight){
+        this.rangedFight = rangedFight;
+    }
+
     private void convertSkill(){
         if(Gdx.input.isKeyJustPressed(Input.Keys.X)){
             if(this.attributes.getLevel() < this.convert.getConvertAttributes().getSkillLevel()){
@@ -351,15 +375,27 @@ public class Hero extends Moveable {
                 this.convert.convert(this);
                 log.info("Cooldown startet");
                 this.convertCooldown = this.convert.getConvertAttributes().getCooldown();
+                if(this.name.equals("Hunter")){
+                    this.convertDuration = this.convert.getConvertAttributes().getDuration();
+                }
 
             }
         }
     }
 
-    private void convertRessourcesCD(){
+    private void convertCD(){
        if(this.convertCooldown > 0){
            this.convertCooldown--;
        }
+    }
+
+    private void hunterConvertDuration(){
+        if(this.convertDuration > 0){
+            this.convertDuration--;
+            if(this.convertDuration == 0){
+                this.attributes.setMovementSpeed(this.attributes.getMovementSpeed() - this.convert.getConvertAttributes().getMovementSpeed());
+            }
+        }
     }
 
     public void setPosition(Point newPosition) {
@@ -401,6 +437,18 @@ public class Hero extends Moveable {
 
     public boolean getHeroDead() {
         return this.heroDead;
+    }
+
+    public boolean getViewDirection(){
+        return this.viewDirection;
+    }
+
+    public void setMonster(ArrayList<Monster> monster) {
+        this.monster = monster;
+    }
+
+    public ArrayList<Monster> getMonster() {
+        return monster;
     }
 
     @Override
