@@ -1,6 +1,8 @@
 package desktop;
 
 import Entities.Chest.ChestFactory;
+import Entities.Fight.Ranged.KnightRanged;
+import Entities.Fight.Ranged.RangedFight;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
 import Entities.Items.Item;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 
 public class MyGame extends MainController {
     public Hero hero;
+    private RangedFight rangedFight;
     private int currentFloor;
     private ArrayList<Monster> monster;
     private ArrayList<Item> items;
@@ -60,6 +63,8 @@ public class MyGame extends MainController {
         //Initiates chosen hero
         if (gui.getChara() == 1) {
             hero = new Knight(painter, batch);
+            this.rangedFight = new KnightRanged(painter, batch, hero);
+            this.hero.setRangedFight(this.rangedFight);
         }
         if (gui.getChara() == 2) {
             hero = new Wizard(painter, batch);
@@ -79,6 +84,7 @@ public class MyGame extends MainController {
         // spawns hero
         camera.follow(hero);
         entityController.add(hero);
+        entityController.add(rangedFight);
         initHud();
 
         levelAPI.setGenerator(new LevelLoader());
@@ -173,6 +179,8 @@ public class MyGame extends MainController {
         initItems();
         initChest();
         initNpc();
+        this.rangedFight.setLevel(this.hero.getCurrentFloor());
+        this.hero.setMonster(monster);
     }
 
     /**
