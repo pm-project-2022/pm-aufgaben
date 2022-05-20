@@ -42,6 +42,9 @@ public class Fight {
         this.random = new Random();
     }
 
+    /**
+     * kalkuliert den schaden an einem monster nach einem erfolgreichen treffer
+     */
     public void rangedFight() {
         if (this.hero.getAttributes().getAccuracy() > this.monster.getAttributes().getEvasion()) {
             calculateDamageMonster();

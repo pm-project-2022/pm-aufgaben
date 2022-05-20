@@ -13,6 +13,10 @@ import graphic.Painter;
 import level.elements.Level;
 import tools.Point;
 
+/**
+ * Basisklasse für den ranged fight
+ */
+
 public class RangedFight extends BasicEntity {
     private Animation invis;
     private boolean isInvis;
@@ -27,6 +31,10 @@ public class RangedFight extends BasicEntity {
         this.hero = hero;
     }
 
+    /**
+     * setzt das level und die position der rangedattacke initial
+     * @param level currentlevel
+     */
     public void setLevel(Level level) {
         this.currentFloor = level;
         this.currentPosition = hero.getPosition();
@@ -60,11 +68,17 @@ public class RangedFight extends BasicEntity {
         }
     }
 
+    /**
+     * startet die ranged attacke
+     */
     public void startRangedAttack() {
         this.rangedAttack = true;
         this.isInvis = false;
     }
 
+    /**
+     * updated die position des projektiles der ranged attack
+     */
     public void rangeAttack() {
         Point newPosition = new Point(this.currentPosition);
         if (this.hero.getViewDirection()) {

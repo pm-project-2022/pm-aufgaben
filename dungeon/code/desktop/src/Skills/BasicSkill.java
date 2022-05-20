@@ -28,19 +28,36 @@ public abstract class BasicSkill extends BasicEntity{
         return convertAttributes;
     }
 
+    /**
+     * aktiviert die aura des heldens
+     * @param hero held
+     */
     public void activateAura(Hero hero){
     
 
     }
-
+    
+    /**
+     * deaktiviert die aura des heldebs
+     * @param hero held
+     */
     public void deactiveAura(Hero hero){
         
     }
 
+    /**
+     * konvertiert die stats des heldens in andere
+     * @param hero held
+     */
     public void convert(Hero hero){
 
     }
 
+    /**
+     * checkt ob die stats des helden hoch genug sind um konvertieren zu können
+     * @param hero held
+     * @return true wenn ja, sonst false
+     */
     public boolean enoughRessources(Hero hero){
         return true;
     }

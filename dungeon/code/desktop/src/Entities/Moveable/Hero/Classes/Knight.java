@@ -26,6 +26,9 @@ public class Knight extends Hero {
         this.convert = new ConvertMPToHP(painter, batch);
     }
 
+    /**
+     * setzt die ranged attacke des knights
+     */
     public void setRangedFight(RangedFight rangedFight){
         this.rangedFight = rangedFight;
     }

@@ -28,10 +28,18 @@ public abstract class BasicEntity extends Animatable {
         super(painter, batch);
     }
 
+    /**
+     * gibt die attribute zurück
+     * @return attribute
+     */
     public BasicAttributes getAttributes(){
         return this.attributes;
     }
 
+    /**
+     * gibt das aktuelle level zurück
+     * @return aktuelle level
+     */
     public Level getCurrentFloor(){
         return this.currentFloor;
     }

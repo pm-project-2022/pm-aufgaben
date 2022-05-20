@@ -8,6 +8,10 @@ import Entities.Moveable.Hero.Hero;
 import graphic.Animation;
 import graphic.Painter;
 
+/**
+ * Initiiert die Animation der ranged attacke für den knight
+ */
+
 public class KnightRanged extends RangedFight {
 
     public KnightRanged(Painter painter, SpriteBatch batch, Hero hero) {

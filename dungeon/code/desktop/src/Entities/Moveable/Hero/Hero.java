@@ -69,6 +69,9 @@ public class Hero extends Moveable {
         initLogger();
     }
 
+    /**
+     * initiiert den logger
+     */
     private void initLogger() {
         log = Logger.getLogger("Hero");
         log.setUseParentHandlers(false);
@@ -132,6 +135,12 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * ändert die position des heldens nach erfolgreicher tasteneingabe
+     * @param keyPressed taste wurde gedrückt
+     * @param currentPosition aktuelle position des heldens
+     * @return true wenn sich der held erfolgreich bewegen konnte, ansonsten false
+     */
     private boolean movementUpdate(boolean keyPressed, Point currentPosition) {
         Point newPosition = new Point(currentPosition);
 
@@ -191,6 +200,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * steht der held auf einem item, kann man mit dieser funktionen das item aufheben
+     */
     private void pickUpItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             for (Item item : this.floorItems) {
@@ -208,6 +220,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * updated die position der items im inventar
+     */
     private void updateInventoryItemPosition() {
         if (this.inventory.isEmpty()) {
         } else {
@@ -219,6 +234,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * rüstet einen gegenstand aus
+     */
     private void equipItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
             this.inventory.equipItem(0);
@@ -233,6 +251,9 @@ public class Hero extends Moveable {
 
     }
 
+    /**
+     * verwartet die animationen des items
+     */
     private void itemViewDirection() {
         for (Item item : this.inventory.getInventory()) {
             if (item != null && item.isEquipped()) {
@@ -241,6 +262,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * droppt ein items aus dem inventar
+     */
     private void dropItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             this.inventory.dropItem();
@@ -249,6 +273,9 @@ public class Hero extends Moveable {
 
     }
 
+    /**
+     * benutzt ein item aus dem inventar
+     */
     private void consumeItem() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             this.inventory.consume(this);
@@ -256,12 +283,18 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * gibt das inventar auf der konsole aus
+     */
     private void showInventory() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             this.inventory.showInventory();
         }
     }
 
+    /**
+     * öffnet eine kiste
+     */
     private void openChest() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.T)) {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == chests.get(0).getCurrentFloor()
@@ -275,6 +308,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * wird ausgelöstet wenn der held sich auf einer falle befindet
+     */
     private void stepOnTrap() {
         for (Item traps : traps) {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == traps.getCurrentFloor()
@@ -290,6 +326,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * lässt den helden mit einem npc interagieren
+     */
     private void talkToNpc() {
         for (FriendlyNPC npc : npcs) {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == npc.getCurrentFloor()
@@ -314,6 +353,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * checkt ob der held noch am leben ist
+     */
     private void updateDead() {
         if (this.attributes.getCurrentHP() <= 0) {
             this.heroDead = true;
@@ -321,6 +363,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * verwaltet die verschiedenen skills
+     */
     private void manageSkills() {
         rangedAttack();
         auraSkill();
@@ -331,6 +376,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * startet eine ranged attacke
+     */
     private void rangedAttack(){
         if (Gdx.input.isKeyJustPressed(Input.Keys.Y)) {
             if(this.attributes.getCurrentMana() >= 5){
@@ -342,6 +390,9 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * aktiviert den aura skill des heldens
+     */
     private void auraSkill() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             if (this.attributes.getLevel() < this.aura.getAuraAttributes().getAuraLevel()) {
@@ -359,10 +410,17 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * setzt den rangedfight
+     * @param rangedFight
+     */
     public void setRangedFight(RangedFight rangedFight){
         this.rangedFight = rangedFight;
     }
 
+    /**
+     * aktiviert den convert skill
+     */
     private void convertSkill(){
         if(Gdx.input.isKeyJustPressed(Input.Keys.X)){
             if(this.attributes.getLevel() < this.convert.getConvertAttributes().getSkillLevel()){
@@ -383,12 +441,18 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * verwaltet den cooldown des convert skills
+     */
     private void convertCD(){
        if(this.convertCooldown > 0){
            this.convertCooldown--;
        }
     }
 
+    /**
+     * verwaltet die duration des hunter convert skills
+     */
     private void hunterConvertDuration(){
         if(this.convertDuration > 0){
             this.convertDuration--;
@@ -398,10 +462,18 @@ public class Hero extends Moveable {
         }
     }
 
+    /**
+     * setter für die position
+     * @param newPosition neue position
+     */
     public void setPosition(Point newPosition) {
         this.currentPosition = newPosition;
     }
 
+    /**
+     * setzt das level und den helden zum levelload auf den start tile
+     * @param currentFloor aktuelles level
+     */
     public void setLevel(Level currentFloor) {
         this.currentFloor = currentFloor;
         this.currentPosition = this.currentFloor.getStartTile().getCoordinate().toPoint();
@@ -411,42 +483,82 @@ public class Hero extends Moveable {
         this.floorItems = floorItems;
     }
 
+    /**
+     * setzt die traps
+     * @param floorTraps traps
+     */
     public void setFloorTraps(ArrayList<Item> floorTraps) {
         this.traps = floorTraps;
     }
 
+    /**
+     * setzt die npcs
+     * @param npcs npc
+     */
     public void setNpcs(ArrayList<FriendlyNPC> npcs) {
         this.npcs = npcs;
     }
 
+    /**
+     * setzt die kisten
+     * @param chests kisten
+     */
     public void setFloorChests(ArrayList<Item> chests) {
         this.chests = chests;
     }
 
+    /**
+     * gibt den namen des heldens zurück
+     * @return name des heldens
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * ändert den status des heldens
+     * @param dead true wenn der held tot ist, false wenn nicht
+     */
     public void setHeroDead(boolean dead) {
         this.heroDead = dead;
     }
 
+    /**
+     * gibt die traps zurück
+     * @return traps
+     */
     public ArrayList<Item> getTraps() {
         return this.traps;
     }
 
+    /**
+     * gibt den heldenstatus zurück
+     * @return true wenn er tot ist, sonst false
+     */
     public boolean getHeroDead() {
         return this.heroDead;
     }
 
+    /**
+     * gibt die blickrichtung des heldens zurück
+     * @return true wenn er nach rechts, false wenn er nach links guckt
+     */
     public boolean getViewDirection(){
         return this.viewDirection;
     }
 
+    /**
+     * setzt die monster in dem level
+     * @param monster monster
+     */
     public void setMonster(ArrayList<Monster> monster) {
         this.monster = monster;
     }
 
+    /**
+     * gibt die monster in dem level zurück
+     * @return
+     */
     public ArrayList<Monster> getMonster() {
         return monster;
     }
