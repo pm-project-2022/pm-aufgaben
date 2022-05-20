@@ -2,7 +2,7 @@ package Entities.Moveable.Monster.MonsterMovement.ComplexBehaviour;
 
 import com.badlogic.gdx.ai.pfa.GraphPath;
 
-import Entities.Fight.Fight;
+import Entities.Fight.Melee.Fight;
 import Entities.Moveable.Monster.Monster;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
 import Helper.Booleans;
