@@ -9,14 +9,14 @@ public class Tintendrucker extends Drucker {
     }
 
     @Override
-    protected void scannen() {
-        // TODO Auto-generated method stub
+    protected String scannen() {
+       return "Scanne das Dokument mit dem Tintendrucker.";
         
     }
 
     @Override
-    protected void drucken() {
-        // TODO Auto-generated method stub
+    protected String drucken() {
+       return  "Drucke das Dokument auf dem Tintendrucker.";
         
     }
     
