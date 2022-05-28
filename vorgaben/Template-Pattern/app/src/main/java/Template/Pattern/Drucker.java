@@ -7,8 +7,8 @@ public abstract class Drucker {
 
 
     public final void kopieren(){
-        scannen();
-        drucken();
+        log.info(scannen());
+        log.info(drucken());
     }
 
     abstract protected String scannen();
