@@ -2,8 +2,8 @@ package Template.Pattern;
 
 public abstract class Drucker {
 
-    public final void kopieren(){
-        
+    public final String kopieren(){
+        return scannen() + " " + drucken();
     }
 
     abstract protected String scannen();
