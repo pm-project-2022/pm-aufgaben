@@ -1,12 +1,6 @@
 package Template.Pattern;
 
-import java.util.logging.Logger;
-
 public class Laserdrucker extends Drucker {
-
-    public Laserdrucker(){
-        this.log = Logger.getLogger("Laserdruckerlogger");
-    }
 
     @Override
     protected String scannen() {
