@@ -11,6 +11,6 @@ public abstract class Drucker {
         drucken();
     }
 
-    abstract protected void scannen();
-    abstract protected void drucken();
+    abstract protected String scannen();
+    abstract protected String drucken();
 }
