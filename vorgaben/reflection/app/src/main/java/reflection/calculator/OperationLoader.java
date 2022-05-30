@@ -1,6 +1,8 @@
 package reflection.calculator;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -17,6 +19,14 @@ public class OperationLoader {
      */
     public static Map<String, IOperation> loadOperations(File directory) {
         log.info("Operationen werden eingelesen");
+        try {
+            URL[] operations = new URL[]{directory.toURI().toURL()};
+        } catch (MalformedURLException e) {
+            log.severe("Argument ist null oder das Protokoll ist unbekannt");
+        }
+
+        
+
         return null;
     }
 }
