@@ -1,69 +1,66 @@
-package reflection.calculator;
+package calculator;
+
+import operations.*;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
-import reflection.operations.IOperation;
-
-
 public class OperationLoader {
-    private static Logger log = Logger.getLogger(OperationLoader.class.getName());
+
+    static Logger LOGGER = Logger.getLogger(OperationLoader.class.getName());
 
     /**
      * Loads the operation classes from a directory.
      *
      * @param directory the directory to search for operation classes
-     * @return a map with the operations and their names, or an empty map if none
-     *         were found
+     * @return a map with the operations and their names, or an empty map if none were found
      */
-    public static Map<String, IOperation> loadOperations(File directory) {
-        Map<String, IOperation> operations = new HashMap<>();
+    public static Map<String, IOperation> loadOperations(File directory){
+
+        HashMap<String, IOperation> map = new HashMap<>();
+
         try {
 
-            URL[] ua = new URL[] { directory.toURI().toURL() };
+            URL[] ua = new URL[]{directory.toURI().toURL()};
             URLClassLoader ucl = URLClassLoader.newInstance(ua);
-            Class<?> classAddition = Class.forName("Addition", true, ucl);
 
-            Object eve = classAddition.getDeclaredConstructor().newInstance();
-            Class<?>[] params = new Class<?>[]{int.class, int.class};
-            Method method = classAddition.getMethod("doOperation", params);
-            log.info(String.valueOf(method.invoke(eve, 1,2)));
+            // Load .class files
+            Class<?> add = ucl.loadClass("operations.Addieren");
+            Class<?> sub = ucl.loadClass("operations.Subtrahieren");
+            Class<?> mul = ucl.loadClass("operations.Multiplizieren");
 
-            //Annotation annotation = classAddition.getDeclaredAnnotations()[0];
+            LOGGER.info("Loaded .class Files");
 
-        } catch (MalformedURLException e) {
-            log.severe("Argument ist null oder das Protokoll ist unbekannt");
-        } catch (ClassNotFoundException e) {
-            log.severe("Klasse konnte nicht gefunden werden.");
-        } catch (SecurityException e) {
-            
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-           
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-           
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-           
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-           
-            e.printStackTrace();
+            // Create instance from .class Files
+            IOperation instanceAdd = (IOperation) add.getDeclaredConstructor().newInstance();
+            IOperation instanceSub = (IOperation) sub.getDeclaredConstructor().newInstance();
+            IOperation instanceMult = (IOperation) mul.getDeclaredConstructor().newInstance();
+
+            LOGGER.info("Created instances of .class Files");
+
+            // Get Name value from Annotations
+            String nameAdd = add.getAnnotation(MathOperation.class).operation();
+            String nameSub = sub.getAnnotation(MathOperation.class).operation();
+            String nameMulti = mul.getAnnotation(MathOperation.class).operation();
+
+            // fill hash map
+            map.put(nameAdd, instanceAdd);
+            map.put(nameSub, instanceSub);
+            map.put(nameMulti, instanceMult);
+
+        } catch (MalformedURLException | ClassNotFoundException | InvocationTargetException | InstantiationException |
+                 IllegalAccessException | NoSuchElementException | NoSuchMethodException e) {
+            LOGGER.severe(e.getMessage());
         }
 
-        return operations;
+        return map;
     }
+
 }

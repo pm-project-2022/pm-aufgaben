@@ -1,5 +1,4 @@
-package reflection.calculator;
-
+package calculator;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,8 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Map;
 import javax.swing.*;
-
-import reflection.operations.IOperation;
+import operations.IOperation;
 
 public class CalculatorUI extends JFrame {
 
