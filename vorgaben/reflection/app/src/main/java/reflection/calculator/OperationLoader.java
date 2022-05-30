@@ -3,6 +3,7 @@ package reflection.calculator;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -21,8 +22,15 @@ public class OperationLoader {
         log.info("Operationen werden eingelesen");
         try {
             URL[] operations = new URL[]{directory.toURI().toURL()};
+            URLClassLoader ucl = URLClassLoader.newInstance(operations);
+            Class<?> addition = ucl.loadClass("Addition");
+            Class<?> subtraktion = ucl.loadClass("Subtraktion");
+            Class<?> multiplikation = ucl.loadClass("Multiplikation");
+            Class<?> division = ucl.loadClass("Division");
         } catch (MalformedURLException e) {
             log.severe("Argument ist null oder das Protokoll ist unbekannt");
+        } catch (ClassNotFoundException e) {
+            log.severe("Klasse konnte nicht gefunden werden.");
         }
 
         
