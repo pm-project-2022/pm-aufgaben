@@ -2,7 +2,7 @@ public class Division implements IOperation {
 
     @Override
     public int doOperation(int a, int b) {
-        return 0;
+        return a/b;
     }
     
 }
