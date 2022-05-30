@@ -1,3 +1,4 @@
+@Rechenweg("Multiplikation")
 public class Multiplikation implements IOperation {
 
     @Override

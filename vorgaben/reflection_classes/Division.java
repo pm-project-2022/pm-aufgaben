@@ -1,3 +1,4 @@
+@Rechenweg("Division")
 public class Division implements IOperation {
 
     @Override

@@ -1,3 +1,4 @@
+@Rechenweg("Subtraktion")
 public class Subtraktion implements IOperation {
 
     @Override
