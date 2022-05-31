@@ -2,6 +2,9 @@ package Template.Pattern;
 
 import java.util.logging.Logger;
 
+/**
+ * Tintendrucker implementation der abtrakten Klasse Drucker
+ */
 public class Tintendrucker extends Drucker {
    Logger log = Logger.getLogger(Main.class.getName());
 
