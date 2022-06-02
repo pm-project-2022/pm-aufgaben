@@ -5,6 +5,8 @@ import Entities.Fight.Ranged.KnightRanged;
 import Entities.Fight.Ranged.RangedFight;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
+import Entities.FriendlyNPCs.MinigameNPC;
+import Entities.FriendlyNPCs.MinigameNpcFactory;
 import Entities.Items.Item;
 import Entities.Items.ItemFactory;
 import Entities.Moveable.Hero.Classes.Hunter;
@@ -40,8 +42,10 @@ public class MyGame extends MainController {
     private ArrayList<Item> chests;
     private ArrayList<Item> traps;
     private ArrayList<FriendlyNPC> npcs;
+    private ArrayList<MinigameNPC> minigameNPCS;
     private mainGui gui;
-    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, heroXp, deathScreen;
+    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, heroXp, deathScreen,
+        money;
 
     public static Sound death, newLevel, walking, itemPickup, hit, lvlUp,
         talkNpc, stepTraps, useItem, openChest, equipItem, dropItem,backgroundMusic;
@@ -112,6 +116,7 @@ public class MyGame extends MainController {
             heroLevel.setText("Level: " + hero.getAttributes().getLevel());
             this.heroXp.setText(hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
             deathScreen.setText("");
+            money.setText("Money: " + hero.getMoney());
         } else {
             levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
             deathScreen.setText("Gamer Over\n`r` to restart");
@@ -147,6 +152,10 @@ public class MyGame extends MainController {
                     entityController.remove(npc);
                 }
 
+                for (MinigameNPC npc : this.minigameNPCS) {
+                    entityController.remove(npc);
+                }
+
                 if (currentFloor % 5 == 0) {
                     for (Item chests : this.chests) {
                         if (chests.getIsOnFloor() || !chests.getPickUp()) {
@@ -179,6 +188,7 @@ public class MyGame extends MainController {
         initItems();
         initChest();
         initNpc();
+        initMinigameNpc();
         this.rangedFight.setLevel(this.hero.getCurrentFloor());
         this.hero.setMonster(monster);
     }
@@ -265,16 +275,26 @@ public class MyGame extends MainController {
         this.hero.setNpcs(npcs);
     }
 
+    private void initMinigameNpc() {
+        this.minigameNPCS = MinigameNpcFactory.npcFac(painter, batch);
+        for (MinigameNPC npc : minigameNPCS) {
+            npc.setLevel(levelAPI.getCurrentLevel());
+            entityController.add(npc);
+        }
+        this.hero.setMinigameNpcs(minigameNPCS);
+    }
+
     /**
      * Initiiert das hud
      */
     private void initHud() {
+        money = hudController.drawText("","ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.YELLOW, 20,40,40,500,300);
         levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
         levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
         levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
         heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 500, 420);
         heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
-        this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 170, 150); 
+        this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 170, 150);
         this.heroXp = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 310, 0);
         this.heroXp.setAlignment(1);
         hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
@@ -284,7 +304,7 @@ public class MyGame extends MainController {
     }
 
     /**
-     * startet das spiel nach em tod neu
+     * startet das spiel nach dem tod neu
      */
     private void restartGame() {
 

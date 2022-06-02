@@ -37,7 +37,7 @@ public class Monster extends Moveable {
     private IMovement attackBehaviour;
     private IMovement escapeBehavior;
     private IMovement helpBehaviour;
-    
+
     //monster states
     private IState currentState;
     private IState patrolState;
@@ -48,7 +48,7 @@ public class Monster extends Moveable {
 
     //hilfsattribute um die position und animationen des monsters zu setzen
     private PointBooleanTransmitter pointBooleanTransmitter;
-    
+
 
     public Monster(Painter painter, SpriteBatch batch, Hero hero, IMovement movementBehaviour) {
         super(painter, batch);
@@ -59,7 +59,7 @@ public class Monster extends Moveable {
         this.patrolBehaviour = movementBehaviour;
         this.attackBehaviour = new AggressiveMovement();
         this.escapeBehavior = new Escape();
-        this.helpBehaviour = new Help(); 
+        this.helpBehaviour = new Help();
 
         //monster states
         this.patrolState = new PatrolState();
@@ -112,6 +112,7 @@ public class Monster extends Moveable {
     public boolean removable() {
         if (this.currentState == this.deathState) {
             this.hero.getAttributes().setExp(this.attributes.getExp() + this.hero.getAttributes().getExp());
+            this.hero.setMoney(hero.getMoney()+10);
             return true;
         } else {
             return false;
@@ -239,7 +240,7 @@ public class Monster extends Moveable {
     }
 
     /**
-     * setzt die aktuelle ebene und platziert das monster on level-load an eine random stelle der ebene 
+     * setzt die aktuelle ebene und platziert das monster on level-load an eine random stelle der ebene
      * @param currentFloor aktuelle ebene
      */
     public void setLevel(Level currentFloor) {
@@ -263,6 +264,6 @@ public class Monster extends Moveable {
     @Override
     public Point getPosition() {
         return this.currentPosition;
-    }   
+    }
 
 }
