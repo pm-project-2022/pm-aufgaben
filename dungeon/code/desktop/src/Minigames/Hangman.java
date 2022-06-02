@@ -1,19 +1,39 @@
 package Minigames;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class Hangman {
 
-    private String[] words = {"terminator", "banana", "computer", "cow", "rain", "water"};
+    private String[] words;
     private String word;
     private String notGuessedChar;
     private int count;
     private boolean won;
     private final Logger LOGGER = Logger.getLogger(getClass().getName());
 
-    public void initHangman() {
 
+    private void fillArray() throws IOException {
+        List<String> list= new ArrayList<>();
+        BufferedReader bf = new BufferedReader(new FileReader("dungeon/code/desktop/src/Minigames/words.txt"));
+        String line = bf.readLine();
+
+        while (line != null) {
+            list.add(line);
+            line = bf.readLine();
+        }
+        bf.close();
+
+        words = list.toArray(new String[0]);
+    }
+    public void initHangman() throws IOException {
+        fillArray();
         Scanner sc = new Scanner(System.in);
         word = words[(int) (Math.random() * words.length)];
         notGuessedChar = new String(new char[word.length()]).replace("\0", "*");

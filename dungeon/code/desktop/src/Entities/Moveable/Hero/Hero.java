@@ -9,6 +9,7 @@ import Entities.Moveable.Monster.Monster;
 import Helper.PointBooleanTransmitter;
 import Inventory.Inventory;
 import Minigames.Hangman;
+import Minigames.RPS;
 import Minigames.TicTacToeMain;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -19,6 +20,8 @@ import graphic.Painter;
 import level.elements.Level;
 import tools.Point;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -63,6 +66,7 @@ public class Hero extends Moveable {
 
     protected TicTacToeMain t;
     protected Hangman h;
+    protected RPS rps;
     // counter
     protected int walkingCount, trapCount = 0;
 
@@ -79,6 +83,8 @@ public class Hero extends Moveable {
         this.npcs = new ArrayList<>();
         this.money = 0;
         this.t = new TicTacToeMain();
+        this.rps = new RPS();
+        this.h = new Hangman();
         initLogger();
     }
 
@@ -376,8 +382,8 @@ public class Hero extends Moveable {
                 .getTileAt(npc.getPosition().toCoordinate())) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
                     MyGame.talkNpc.play(0.1f);
-                    if (getMoney() < 30) {
-                        log.warning("Zu wenig Geld, mindestens 30 Münzen!");
+                    if (getMoney() < -1000) {
+                        log.warning("Zu wenig Geld, mindestens 30 Muenzen!");
                         return;
                     }
                     minigame();
@@ -388,19 +394,26 @@ public class Hero extends Moveable {
 
     public void minigame() {
         Scanner sc = new Scanner(System.in);
-        log.info("\n[1] TicTacToe\n[2] Hangman");
+        log.info("\n[1] TicTacToe\n[2] Schere Stein Papier\n[3] Hangman");
         try {
-            if (sc.nextInt() == 1) {
-                setMoney(getMoney() - 30);
-                t.setVisible(true);
-            } else {
-                log.info("Hangman ausgewaehlt");
-                setMoney(getMoney() - 30);
-                h = new Hangman();
-                h.initHangman();
+            switch (sc.nextInt()) {
+                case 1:
+                    setMoney(getMoney() - 30);
+                    t.setVisible(true);
+                    break;
+                case 2:
+                    setMoney(getMoney() - 30);
+                    rps.initRPS();
+                    break;
+                case 3:
+                    setMoney(getMoney() - 30);
+                    h.initHangman();
+                    break;
             }
         } catch (InputMismatchException e) {
             minigame();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -417,14 +430,15 @@ public class Hero extends Moveable {
             t.setVisible(false);
             log.info("Spiel verloren");
         }
-        try {
-            if (h.getWon()) {
-                setMoney(getMoney() + 40);
-                h.setWon(false);
-            }
-        } catch (NullPointerException ignored) {
-
+        if (rps.getWon()) {
+            setMoney(getMoney() + 40);
+            rps.setWon(false);
         }
+        if (h.getWon()) {
+            setMoney(getMoney() + 40);
+            h.setWon(false);
+        }
+
 
     }
 
