@@ -382,7 +382,7 @@ public class Hero extends Moveable {
                 .getTileAt(npc.getPosition().toCoordinate())) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
                     MyGame.talkNpc.play(0.1f);
-                    if (getMoney() < -1000) {
+                    if (getMoney() < 30) {
                         log.warning("Zu wenig Geld, mindestens 30 Muenzen!");
                         return;
                     }
