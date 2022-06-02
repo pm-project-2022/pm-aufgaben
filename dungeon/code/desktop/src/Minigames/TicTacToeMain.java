@@ -6,9 +6,9 @@ import java.awt.*;
 
 public class TicTacToeMain extends JFrame implements ActionListener {
 
-    private JButton[][] buttons = new JButton[3][3];
-    private JButton playButton = new JButton("Play");
-    private JLabel statusLabel = new JLabel("");
+    private final JButton[][] buttons = new JButton[3][3];
+    private final JButton playButton = new JButton("Play");
+    private final JLabel statusLabel = new JLabel("");
     private TicTacToeAI game = null;
     private int player = 0;
     private int ai = 0;
@@ -17,10 +17,18 @@ public class TicTacToeMain extends JFrame implements ActionListener {
     private boolean won = false;
     private boolean lost = false;
 
+    /**
+     * sets current status
+     * @param s status
+     */
     private void setStatus(String s) {
         statusLabel.setText(s);
     }
 
+    /**
+     * enables all buttons
+     * @param enabled true or false
+     */
     private void setButtonsEnabled(boolean enabled) {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++) {
@@ -29,6 +37,9 @@ public class TicTacToeMain extends JFrame implements ActionListener {
             }
     }
 
+    /**
+     * initializes ttt Gui
+     */
     public TicTacToeMain() {
         setTitle("Tic Tac Toe");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,6 +77,9 @@ public class TicTacToeMain extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * computer makes turn
+     */
     private void computerTurn() {
         if (!isPlay) return;
 
@@ -80,12 +94,19 @@ public class TicTacToeMain extends JFrame implements ActionListener {
         checkState();
     }
 
+    /**
+     * game over with status
+     * @param s current status
+     */
     private void gameOver(String s) {
         setStatus(s);
         setButtonsEnabled(false);
         isPlay = false;
     }
 
+    /**
+     * checks current gamestate
+     */
     private void checkState() {
         if (game.isWin(player)) {
             gameOver("Gewonnen!");
@@ -100,6 +121,11 @@ public class TicTacToeMain extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * clicks a button
+     * @param i index i
+     * @param j index j
+     */
     private void click(int i, int j) {
         if (game.getBoardValue(i, j) == TicTacToeAI.EMPTY) {
             buttons[i][j].setText(chars[player]);
@@ -109,6 +135,10 @@ public class TicTacToeMain extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Button actionPerformer
+     * @param event the event to be processed
+     */
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == playButton) {
             play();
@@ -120,6 +150,9 @@ public class TicTacToeMain extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * initializes turns
+     */
     private void play() {
         game = new TicTacToeAI();
         player = TicTacToeAI.ONE;
@@ -129,18 +162,34 @@ public class TicTacToeMain extends JFrame implements ActionListener {
         isPlay = true;
     }
 
+    /**
+     * getter for won
+     * @return true or false
+     */
     public boolean getWon(){
         return this.won;
     }
 
+    /**
+     * set won status
+     * @param won true or false
+     */
     public void setWon(boolean won){
         this.won = won;
     }
 
+    /**
+     * get lost status
+     * @return true or false
+     */
     public boolean getLost(){
         return lost;
     }
 
+    /**
+     * set lost status
+     * @param lost true or false
+     */
     public void setLost(boolean lost){
         this.lost = lost;
     }

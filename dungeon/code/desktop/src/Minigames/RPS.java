@@ -12,14 +12,24 @@ public class RPS {
     String computerMove;
     Logger log = Logger.getLogger(getClass().getName());
 
+    /**
+     * initializes game
+     */
     public void initRPS() {
         playRockPaperScissors();
     }
 
+    /**
+     * calls determineWinner function with moves
+     */
     private void playRockPaperScissors() {
         determineWinner(getPlayerMove(),getComputerMove());
     }
 
+    /**
+     * player makes a move
+     * @return playerMove
+     */
     private String getPlayerMove(){
         Scanner sc = new Scanner(System.in);
         log.info("Schere Stein Papier");
@@ -33,6 +43,10 @@ public class RPS {
         return playerMove;
     }
 
+    /**
+     * computer makes a move
+     * @return computerMove
+     */
     private String getComputerMove(){
         Random random = new Random();
         int rand = random.nextInt(3)+1;
@@ -44,6 +58,11 @@ public class RPS {
         return computerMove;
     }
 
+    /**
+     * determines the winner
+     * @param player playerMove
+     * @param comp computerMove
+     */
     private void determineWinner(String player, String comp){
 
         if(player == "Stein" && comp == "Schere" || player == "Schere" && comp == "Papier"
@@ -62,10 +81,18 @@ public class RPS {
         }
     }
 
+    /**
+     * getter for won
+     * @return true if won false if not
+     */
     public boolean getWon() {
         return won;
     }
 
+    /**
+     * setter for won
+     * @param won true or false
+     */
     public void setWon(boolean won) {
         this.won = won;
     }

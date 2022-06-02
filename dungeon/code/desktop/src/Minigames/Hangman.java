@@ -1,7 +1,6 @@
 package Minigames;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +18,10 @@ public class Hangman {
     private final Logger LOGGER = Logger.getLogger(getClass().getName());
 
 
+    /**
+     * fills array with words from .txt
+     * @throws IOException
+     */
     private void fillArray() throws IOException {
         List<String> list= new ArrayList<>();
         BufferedReader bf = new BufferedReader(new FileReader("dungeon/code/desktop/src/Minigames/words.txt"));
@@ -32,6 +35,11 @@ public class Hangman {
 
         words = list.toArray(new String[0]);
     }
+
+    /**
+     * initializes hangman game
+     * @throws IOException
+     */
     public void initHangman() throws IOException {
         fillArray();
         Scanner sc = new Scanner(System.in);
@@ -47,6 +55,10 @@ public class Hangman {
 
     }
 
+    /**
+     * checks if guesses are correct
+     * @param guess guessed letter
+     */
     public void hang(String guess) {
         String guessedChar = "";
         for (int i = 0; i < word.length(); i++) {
@@ -71,6 +83,9 @@ public class Hangman {
         }
     }
 
+    /**
+     * prints hangman
+     */
     public void print() {
         if (count == 1) {
             LOGGER.info("Wrong!");
@@ -156,10 +171,18 @@ public class Hangman {
         }
     }
 
+    /**
+     * getter for won
+     * @return true if won false if not
+     */
     public boolean getWon() {
         return this.won;
     }
 
+    /**
+     * setter for won
+     * @param won true or false
+     */
     public void setWon(boolean won) {
         this.won = won;
     }

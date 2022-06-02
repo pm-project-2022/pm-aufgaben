@@ -9,25 +9,42 @@ public class TicTacToeAI {
     public static final int ONE = 1;
     public static final int TWO = 2;
 
+    /**
+     * initializes Board
+     */
     public TicTacToeAI() {
         board = new int[3][3];
     }
 
-    /* get the board value for position (i,j) */
+    /**
+     * gets Boardvalue at index
+     * @param i index i
+     * @param j index j
+     * @return boardvalue
+     */
     public int getBoardValue(int i, int j) {
         if (i < 0 || i >= 3) return EMPTY;
         if (j < 0 || j >= 3) return EMPTY;
         return board[i][j];
     }
 
-    /* set the board value for position (i,j) */
+    /**
+     * sets boardvalue
+     * @param i index i
+     * @param j index j
+     * @param token current toke
+     */
     public void setBoardValue(int i, int j, int token) {
         if (i < 0 || i >= 3) return;
         if (j < 0 || j >= 3) return;
         board[i][j] = token;
     }
 
-    /* calculate the winning move for current token */
+    /**
+     * calculates next winning move with current token
+     * @param token current token
+     * @return next winning move
+     */
     public int[] nextWinningMove(int token) {
 
         for (int i = 0; i < 3; i++)
@@ -42,11 +59,20 @@ public class TicTacToeAI {
         return null;
     }
 
+    /**
+     * inverses playerturn
+     * @param token current token
+     * @return current turn
+     */
     public int inverse(int token) {
         return token == ONE ? TWO : ONE;
     }
 
-    /* calculate the best move for current token */
+    /**
+     * calculates best move with current token
+     * @param token current token
+     * @return best move
+     */
     public int[] nextMove(int token) {
 
         /* lucky position in the center of board*/
@@ -76,7 +102,11 @@ public class TicTacToeAI {
         return null;
     }
 
-    /* determine if current token is win or not win */
+    /**
+     * checks if current token won or not
+     * @param token current token
+     * @return true if won false if not
+     */
     public boolean isWin(int token) {
         final int DI[] = {-1, 0, 1, 1};
         final int DJ[] = {1, 1, 1, 0};
