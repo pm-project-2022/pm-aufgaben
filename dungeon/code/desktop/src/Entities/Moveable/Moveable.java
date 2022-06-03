@@ -7,10 +7,12 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
-public class Moveable extends BasicEntity{
-    //stores the animations
+/**
+ * Vorlageklasse jeder Entität die sich bewegen kann
+ */
 
-    protected Animation idleMirroredAnimation;
+public class Moveable extends BasicEntity{
+   
     protected Animation runAnimation;
     protected Animation runMirroredAnimation;
 

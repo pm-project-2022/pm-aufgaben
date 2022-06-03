@@ -5,6 +5,7 @@ import Entities.Moveable.Hero.Hero;
 import Logger.ColumnFormatter;
 
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,12 +33,15 @@ public class Inventory {
      */
     private void initLogger() {
         log = Logger.getLogger("Inventar");
-        log.setUseParentHandlers(false);
-        log.setLevel(Level.ALL);
+        for (Handler handler : log.getHandlers()) {
+            log.removeHandler(handler);
+        }
         ConsoleHandler ch = new ConsoleHandler();
         ch.setLevel(Level.ALL);
         ch.setFormatter(new ColumnFormatter());
         log.addHandler(ch);
+        log.setUseParentHandlers(false);
+        log.setLevel(Level.ALL);
     }
 
     /**
@@ -215,9 +219,9 @@ public class Inventory {
                 hero.getAttributes().setCurrentHP(hp);
             }
         } else if (this.inventory[index].getItemName().equals("Mana Potion")) {
-            int mana = this.inventory[index].getAttributes().getCurrentMana() + hero.getAttributes().getCurrentMana();
-            if (mana > hero.getAttributes().getMaxMana()) {
-                hero.getAttributes().setCurrentMana(hero.getAttributes().getMaxMana());
+            int mana = this.inventory[index].getAttributes().getCurrentMana() + hero.getAttributes().getAuraMana();
+            if (mana > hero.getAttributes().getAuraMana()) {
+                hero.getAttributes().setCurrentMana(hero.getAttributes().getAuraMana());
             } else {
                 hero.getAttributes().setCurrentMana(mana);
             }

@@ -9,6 +9,10 @@ import tools.Point;
 
 import java.util.ArrayList;
 
+/**
+ * Verwaltet die Animationen, Position und Level eines NPCs
+ */
+
 public class FriendlyNPC extends BasicEntity {
 
     protected Animation idleAnimation;
@@ -25,7 +29,7 @@ public class FriendlyNPC extends BasicEntity {
      * @return animations
      */
     private Animation setAnimation(){
-        ArrayList<String> animation = new ArrayList();
+        ArrayList<String> animation = new ArrayList<>();
         animation.add("character/friendlyNPC/elf_f_idle_anim_f0.png");
         animation.add("character/friendlyNPC/elf_f_idle_anim_f1.png");
         animation.add("character/friendlyNPC/elf_f_idle_anim_f2.png");

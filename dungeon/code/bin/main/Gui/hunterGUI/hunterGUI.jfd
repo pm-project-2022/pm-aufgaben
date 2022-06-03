@@ -19,7 +19,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/forestwithhunter.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/guiAssets/hunterGif.gif" )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 0
 					"y": 0

@@ -2,10 +2,17 @@ package Entities.Moveable.Hero.Classes;
 
 import Attribute.Moveables.Hero.HeroAttributes;
 import Entities.Moveable.Hero.Hero;
+import Skills.Auras.WizzardAura;
+import Skills.ConvertStats.ConvertHptoMana;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
 
 import java.util.ArrayList;
+
+/**
+ * Verwaltet die klassenspezifischen Attribute wie Animationen und Stats für den Wizzard
+ */
 
 public class Wizard extends Hero {
 
@@ -14,6 +21,8 @@ public class Wizard extends Hero {
         this.attributes = new HeroAttributes(50,200,100,50,50,50,1,0,10,0.2f);
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
         this.name = "Wizard";
+        this.aura = new WizzardAura(painter, batch);
+        this.convert = new ConvertHptoMana(painter, batch);
     }
 
     /**

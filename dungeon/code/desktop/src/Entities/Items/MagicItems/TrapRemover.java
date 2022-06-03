@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import Attribute.Items.ManaItems;
 import graphic.Painter;
 
+/**
+ * Entfernt alle Fallen auf einen ebene Wenn es benutzt wird.
+ */
+
 public class TrapRemover extends MagicItem{
     
 

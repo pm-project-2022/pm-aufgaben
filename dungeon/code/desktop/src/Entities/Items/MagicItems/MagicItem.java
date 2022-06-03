@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import Entities.Items.Item;
 import graphic.Painter;
 
+/**
+ * Grundklasse der MagicItems. Behinhaltet den Spritze für die Items
+ */
+
 public class MagicItem extends Item {
 
     public MagicItem(Painter painter, SpriteBatch batch) {

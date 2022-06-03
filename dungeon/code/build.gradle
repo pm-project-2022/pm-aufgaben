@@ -45,7 +45,7 @@ dependencies {
     implementation group: "com.google.code.gson", name: "gson", version: gsonVersion
 }
 
-sourceCompatibility = 17
+sourceCompatibility = "17"
 [compileJava, compileTestJava]*.options*.encoding = "UTF-8"
 sourceSets.main.java.srcDirs = ["desktop/src/"]
 sourceSets.main.resources.srcDirs = ["assets/"]

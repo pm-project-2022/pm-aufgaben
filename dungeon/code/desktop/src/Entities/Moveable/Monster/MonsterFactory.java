@@ -2,7 +2,6 @@ package Entities.Moveable.Monster;
 
 import Entities.Moveable.Hero.Hero;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
-import Entities.Moveable.Monster.MonsterMovement.ComplexBehaviour.AggressiveMovement;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.PatrolXAxis;
 import Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement.PatrolYAxis;
 import Entities.Moveable.Monster.NormalMonster.Chort;
@@ -12,6 +11,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+/**
+ * Erstellt neue monster abhängig von der ebene
+ */
 
 public class MonsterFactory {
 
@@ -31,6 +34,9 @@ public class MonsterFactory {
         return monster;
     }
 
+    /**
+     * gibt die anzahl der monster wieder
+     */
     private static int randomizeQuantity(int currentFloor, int monsterclass){
         Random random = new Random();
         int monsterQuantityMin;
@@ -62,6 +68,9 @@ public class MonsterFactory {
         return random.nextInt(monsterQuantityMin + monsterQuantityMax) + monsterQuantityMin;
     }
 
+    /**
+     * Weißt den Monstern zufällig einfach Beweungsmuster zu
+     */
     private static IMovement createMovement(){
         Random random = new Random();
         int monsterQuantityMin = 1;

@@ -6,6 +6,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Item. dass das maximale Mana permanent erhöht
+ */
+
 public class ManaOrb extends Item {
     public ManaOrb(Painter painter, SpriteBatch batch) {
         super(painter, batch);

@@ -6,6 +6,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Verwaltet die Sprites für die Chests
+ */
+
 public class Chest extends Item {
 
     public Chest(Painter painter, SpriteBatch batch) {

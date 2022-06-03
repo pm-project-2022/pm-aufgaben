@@ -5,6 +5,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Gibt einen freundlichen Npcs zurück
+ */
+
 public class FriendlyNpcFactory {
 
     private FriendlyNpcFactory() {

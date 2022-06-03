@@ -1,5 +1,9 @@
 package Helper;
 
+/**
+ * Hilsklasse um mehr als einen boolean zuruückzugeben
+ */
+
 public class Booleans {
     private boolean monsterDmg;
     private boolean heroDmg;

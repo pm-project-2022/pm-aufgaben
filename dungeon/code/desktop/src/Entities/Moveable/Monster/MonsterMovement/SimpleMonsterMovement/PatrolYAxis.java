@@ -1,11 +1,15 @@
 package Entities.Moveable.Monster.MonsterMovement.SimpleMonsterMovement;
 
-import Entities.Fight.Fight;
+import Entities.Fight.Melee.Fight;
 import Entities.Moveable.Monster.Monster;
 import Entities.Moveable.Monster.MonsterMovement.IMovement;
 import Helper.Booleans;
 import Helper.PointBooleanTransmitter;
 import tools.Point;
+
+/**
+ * lässt das monster entlang sder y achse patrollieren
+ */
 
 public class PatrolYAxis implements IMovement{
 

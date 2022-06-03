@@ -2,10 +2,17 @@ package Entities.Moveable.Hero.Classes;
 
 import Attribute.Moveables.Hero.HeroAttributes;
 import Entities.Moveable.Hero.Hero;
+import Skills.Auras.HunterAura;
+import Skills.ConvertStats.MovementSpeedBoost;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
 
 import java.util.ArrayList;
+
+/**
+ * Verwaltet die klassenspezifischen Attribute wie Animationen und Stats für den Hunter
+ */
 
 public class Hunter extends Hero {
 
@@ -14,6 +21,8 @@ public class Hunter extends Hero {
         this.attributes = new HeroAttributes(75,125,75,75,70,70,1,0,10,0.2f);
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
         this.name = "Hunter";
+        this.aura = new HunterAura(painter, batch);
+        this.convert = new MovementSpeedBoost(painter, batch);
     }
 
     /**

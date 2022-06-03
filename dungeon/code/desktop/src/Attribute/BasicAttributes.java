@@ -2,6 +2,10 @@ package Attribute;
 
 import desktop.MyGame;
 
+/**
+ * Vorlageklasse für die verschiedenen Attributklassen
+ */
+
 public abstract class BasicAttributes {
     // Manages current hp for heroes, items and monsters
     protected int currentHP;
@@ -14,15 +18,19 @@ public abstract class BasicAttributes {
 
     // manages max mana for heroes
     protected int maxMana;
+    protected int auraMana;
 
     // Determines the damage of attacks and resistance to attacks for heroes,
     // monster and items
     protected int attackPower;
+    protected int auraAttackPower;
     protected int defensePower;
+    protected int auraDefensePower;
 
     // Determines the accuracy and evasion for heroes, monster and items
     protected int accuracy;
     protected int evasion;
+    protected int auraEvasion;
 
     // Manages the level of the hero and monsters
     protected int level;
@@ -76,6 +84,22 @@ public abstract class BasicAttributes {
         this.attackPower = attackPower;
     }
 
+    /**
+     * getter für aura attackpower
+     * @return auraattackpower
+     */
+    public int getAuraAttackPower() {
+        return this.auraAttackPower;
+    }
+
+    /**
+     * setter für aura attackpower
+     * @param auraAttackPower new auraattackpower
+     */
+    public void setAuraAttackPower(int auraAttackPower) {
+        this.auraAttackPower = auraAttackPower;
+    }
+
 
     /**
      * get current defense power
@@ -104,6 +128,22 @@ public abstract class BasicAttributes {
     }
 
     /**
+     * getter für aura defense power
+     * @return aura defense power
+     */
+    public int getAuraDefensePower() {
+        return this.auraDefensePower;
+    }
+
+    /**
+     * setter für aura defense power
+     * @param auraDefensePower neue aura defense power
+     */
+    public void setAuraDefensePower(int auraDefensePower) {
+        this.auraDefensePower = auraDefensePower;
+    }
+
+    /**
      * get current evasion
      *
      * @return current evasion
@@ -114,6 +154,22 @@ public abstract class BasicAttributes {
 
     public void setEvasion(int evasion){
         this.evasion = evasion;
+    }
+
+    /**
+     * getter für aura evasion
+     * @return aura evasion
+     */
+    public int getAuraEvasion() {
+        return this.auraEvasion;
+    }
+
+    /**
+     * setter für aura evasion
+     * @param auraEvasion neue aura evasion
+     */
+    public void setAuraEvasion(int auraEvasion) {
+        this.auraEvasion = auraEvasion;
     }
 
     /**
@@ -168,6 +224,22 @@ public abstract class BasicAttributes {
      */
     public void setMaxMana(int maxMana) {
         this.maxMana = maxMana;
+    }
+
+    /**
+     * set mana when aura switches states
+     * @param auraMana new value for aura mana
+     */
+    public void setAuraMana(int auraMana) {
+        this.auraMana = auraMana;
+    }
+    
+    /**
+     * get aura mana
+     * @return aura mana;
+     */
+    public int getAuraMana() {
+        return this.auraMana;
     }
 
     /**
@@ -226,14 +298,21 @@ public abstract class BasicAttributes {
         this.movementSpeed = movementSpeed;
     }
 
+    /**
+     * Updated die Hero sstats nach jedem level up 
+     */
     public void updateHeroLevelAndStats(){
         this.level += 1;
         this.maxHP +=20;
         this.maxMana +=20;
+        this.auraMana += 20;
         this.attackPower += 5;
+        this.auraAttackPower += 5;
         this.defensePower += 5;
+        this.auraDefensePower += 5;
         this.accuracy += 5;
         this.evasion += 5;
+        this.auraEvasion += 5;
         this.currentExp = this.currentExp - this.expForLvlUp;
         this.expForLvlUp *= 2;
         MyGame.lvlUp.play(0.1f);
@@ -245,4 +324,5 @@ public abstract class BasicAttributes {
                 + "\nDefenses: " + this.defensePower + "\nAccuracy" + this.accuracy + "\nEvasion"
                 + this.evasion + "\nLEVEL: " + this.level + "\nEXP: " + this.currentExp + "\n";
     }
+
 }

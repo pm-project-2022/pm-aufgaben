@@ -6,6 +6,10 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * HP Pot Klasse. Verwaltet die Stats der HP pots
+ */
+
 public class HPPot extends Item{
 
     public HPPot(Painter painter, SpriteBatch batch) {

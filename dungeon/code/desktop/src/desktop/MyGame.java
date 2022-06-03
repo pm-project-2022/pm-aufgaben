@@ -1,8 +1,12 @@
 package desktop;
 
 import Entities.Chest.ChestFactory;
+import Entities.Fight.Ranged.KnightRanged;
+import Entities.Fight.Ranged.RangedFight;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
+import Entities.FriendlyNPCs.MinigameNPC;
+import Entities.FriendlyNPCs.MinigameNpcFactory;
 import Entities.Items.Item;
 import Entities.Items.ItemFactory;
 import Entities.Moveable.Hero.Classes.Hunter;
@@ -31,14 +35,17 @@ import java.util.ArrayList;
 
 public class MyGame extends MainController {
     public Hero hero;
+    private RangedFight rangedFight;
     private int currentFloor;
     private ArrayList<Monster> monster;
     private ArrayList<Item> items;
     private ArrayList<Item> chests;
     private ArrayList<Item> traps;
     private ArrayList<FriendlyNPC> npcs;
+    private ArrayList<MinigameNPC> minigameNPCS;
     private mainGui gui;
-    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, heroXp, deathScreen;
+    private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, heroXp, deathScreen,
+        money;
 
     public static Sound death, newLevel, walking, itemPickup, hit, lvlUp,
         talkNpc, stepTraps, useItem, openChest, equipItem, dropItem,backgroundMusic;
@@ -60,6 +67,8 @@ public class MyGame extends MainController {
         //Initiates chosen hero
         if (gui.getChara() == 1) {
             hero = new Knight(painter, batch);
+            this.rangedFight = new KnightRanged(painter, batch, hero);
+            this.hero.setRangedFight(this.rangedFight);
         }
         if (gui.getChara() == 2) {
             hero = new Wizard(painter, batch);
@@ -79,6 +88,7 @@ public class MyGame extends MainController {
         // spawns hero
         camera.follow(hero);
         entityController.add(hero);
+        entityController.add(rangedFight);
         initHud();
 
         levelAPI.setGenerator(new LevelLoader());
@@ -98,14 +108,15 @@ public class MyGame extends MainController {
     protected void beginFrame() {
         if (!this.hero.getHeroDead()) {
             levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
-            levelMANA.setText(hero.getAttributes().getCurrentMana() + " / " + hero.getAttributes().getMaxMana());
+            levelMANA.setText(hero.getAttributes().getCurrentMana() + " / " + hero.getAttributes().getAuraMana());
             levelCounter.setText("Floor " + currentFloor);
-            heroStats.setText("AtkP: " + hero.getAttributes().getAttackPower() + "\nDefP: "
-                + hero.getAttributes().getDefensePower() +
-                "\nEva: " + hero.getAttributes().getEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy());
+            heroStats.setText("AtkP: " + hero.getAttributes().getAuraAttackPower() + "\nDefP: "
+                + hero.getAttributes().getAuraDefensePower() +
+                "\nEva: " + hero.getAttributes().getAuraEvasion() + "\nAccu: " + hero.getAttributes().getAccuracy());
             heroLevel.setText("Level: " + hero.getAttributes().getLevel());
             this.heroXp.setText(hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
             deathScreen.setText("");
+            money.setText("Money: " + hero.getMoney());
         } else {
             levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
             deathScreen.setText("Gamer Over\n`r` to restart");
@@ -141,6 +152,10 @@ public class MyGame extends MainController {
                     entityController.remove(npc);
                 }
 
+                for (MinigameNPC npc : this.minigameNPCS) {
+                    entityController.remove(npc);
+                }
+
                 if (currentFloor % 5 == 0) {
                     for (Item chests : this.chests) {
                         if (chests.getIsOnFloor() || !chests.getPickUp()) {
@@ -173,6 +188,9 @@ public class MyGame extends MainController {
         initItems();
         initChest();
         initNpc();
+        initMinigameNpc();
+        this.rangedFight.setLevel(this.hero.getCurrentFloor());
+        this.hero.setMonster(monster);
     }
 
     /**
@@ -257,13 +275,26 @@ public class MyGame extends MainController {
         this.hero.setNpcs(npcs);
     }
 
+    private void initMinigameNpc() {
+        this.minigameNPCS = MinigameNpcFactory.npcFac(painter, batch);
+        for (MinigameNPC npc : minigameNPCS) {
+            npc.setLevel(levelAPI.getCurrentLevel());
+            entityController.add(npc);
+        }
+        this.hero.setMinigameNpcs(minigameNPCS);
+    }
+
+    /**
+     * Initiiert das hud
+     */
     private void initHud() {
+        money = hudController.drawText("","ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.YELLOW, 20,40,40,500,300);
         levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
         levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
         levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
         heroStats = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 500, 420);
         heroLevel = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 270, 30);
-        this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 170, 150); 
+        this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 170, 150);
         this.heroXp = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 310, 0);
         this.heroXp.setAlignment(1);
         hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
@@ -272,6 +303,9 @@ public class MyGame extends MainController {
         hudController.add(new LvlBar(hudPainter, hudBatch, new Point(200, 90)));
     }
 
+    /**
+     * startet das spiel nach dem tod neu
+     */
     private void restartGame() {
 
         if (gui.getChara() == 1) {

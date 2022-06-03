@@ -8,12 +8,17 @@ import graphic.Painter;
 import level.elements.Level;
 import tools.Point;
 
+/**
+ * Vorlageklasse jeder Entität
+ */
+
 public abstract class BasicEntity extends Animatable {
     //manages the attributes of an entity
     protected BasicAttributes attributes;
 
     protected Animation activeAnimation;
     protected Animation idleAnimation;
+    protected Animation idleMirroredAnimation;
 
     //stores the current position and current floor of an entity
     protected Point currentPosition;
@@ -23,10 +28,18 @@ public abstract class BasicEntity extends Animatable {
         super(painter, batch);
     }
 
+    /**
+     * gibt die attribute zurück
+     * @return attribute
+     */
     public BasicAttributes getAttributes(){
         return this.attributes;
     }
 
+    /**
+     * gibt das aktuelle level zurück
+     * @return aktuelle level
+     */
     public Level getCurrentFloor(){
         return this.currentFloor;
     }

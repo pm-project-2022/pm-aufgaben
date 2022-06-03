@@ -1,11 +1,19 @@
 package Entities.Moveable.Hero.Classes;
 
 import Attribute.Moveables.Hero.HeroAttributes;
+import Entities.Fight.Ranged.RangedFight;
 import Entities.Moveable.Hero.Hero;
+import Skills.Auras.KnightAura;
+import Skills.ConvertStats.ConvertMPToHP;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import graphic.Painter;
 
 import java.util.ArrayList;
+
+/**
+ * Verwaltet die klassenspezifischen Attribute wie Animationen und Stats für den knight
+ */
 
 public class Knight extends Hero {
 
@@ -14,6 +22,15 @@ public class Knight extends Hero {
         this.attributes = new HeroAttributes(100,100,50,100,50,50,1,0,10,0.2f);
         initAnimation(idleAnimation(), idleMirroredAnimation(), runAnimation(), runMirroredAnimation());
         this.name = "Knight";
+        this.aura = new KnightAura(painter, batch);
+        this.convert = new ConvertMPToHP(painter, batch);
+    }
+
+    /**
+     * setzt die ranged attacke des knights
+     */
+    public void setRangedFight(RangedFight rangedFight){
+        this.rangedFight = rangedFight;
     }
 
     /**

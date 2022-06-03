@@ -6,6 +6,10 @@ import graphic.Painter;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Erzeugt eine zuälliger Anzahl von zufälligen Items und gibt diese als Arrayliste zurück
+ */
+
 public class ItemFactory {
     private ItemFactory() {
     }

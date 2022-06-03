@@ -10,6 +10,10 @@ import tools.Point;
 
 import java.util.ArrayList;
 
+/**
+ * Oberklasse aller Items
+ */
+
 public class Item extends BasicEntity {
     protected Animation invisible;
     protected String itemName;

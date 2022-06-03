@@ -6,6 +6,9 @@ import graphic.Painter;
 
 import java.util.ArrayList;
 
+/**
+ * Item. dass das maximale attack power permanent erhöht
+ */
 
 public class StrengthOrb extends Item{
 
