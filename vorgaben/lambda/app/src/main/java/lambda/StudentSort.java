@@ -61,7 +61,7 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_3a(List<Student> students) {
-        // TODO
+        Collections.sort(students, (s1, s2) -> s1.compareByName(s2));
         return students;
     }
 
