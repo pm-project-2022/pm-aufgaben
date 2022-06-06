@@ -1,5 +1,6 @@
 package lambda;
 
+import java.util.Collections;
 import java.util.List;
 
 public class StudentSort {
@@ -48,7 +49,7 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_2b(List<Student> students) {
-        // TODO
+        Collections.sort(students, Student::compareByAge);
         return students;
     }
 
