@@ -12,7 +12,8 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_1a(List<Student> students) {
-        // TODO
+        students.sort((Student s1, Student s2) -> s1.getBirthday().compareTo(s2.getBirthday()));
+        System.out.println(students);
         return students;
     }
 
@@ -23,7 +24,6 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_1b(List<Student> students) {
-        // TODO
         return students;
     }
 
