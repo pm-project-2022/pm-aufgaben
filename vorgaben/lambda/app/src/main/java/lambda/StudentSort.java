@@ -1,6 +1,5 @@
 package lambda;
 
-import java.util.Collections;
 import java.util.List;
 
 public class StudentSort {
@@ -49,7 +48,7 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_2b(List<Student> students) {
-        Collections.sort(students, Student::compareByAge);
+        students.sort(Student::compareByAge);
         return students;
     }
 
@@ -61,7 +60,7 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_3a(List<Student> students) {
-        Collections.sort(students, (s1, s2) -> s1.compareByName(s2));
+        students.sort((s1, s2) -> s1.compareByName(s2));
         return students;
     }
 
@@ -73,7 +72,7 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_3b(List<Student> students) {
-        Collections.sort(students, Student::compareByName);
+        students.sort(Student::compareByName);
         return students;
     }
 
