@@ -85,7 +85,11 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_4a(List<Student> students) {
-        // TODO
+        CompareInterface<Student> cI = (Student s1, Student s2) -> Student.compareByAge(s2,s1);
+        students.sort((s1, s2) -> cI.compare(s1, s2));
+        for (Student student : students) {
+            System.out.println(student.getBirthday());
+        }
         return students;
     }
 
@@ -97,7 +101,11 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_4b(List<Student> students) {
-        // TODO
+        CompareInterface<Student> cI = (Student s1, Student s2) -> s1.compareByName(s2);
+        students.sort((s1, s2) -> cI.compare(s1, s2));
+        for (Student student : students) {
+            System.out.println(student.getBirthday());
+        }
         return students;
     }
 }
