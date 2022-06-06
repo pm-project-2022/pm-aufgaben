@@ -73,7 +73,7 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_3b(List<Student> students) {
-        // TODO
+        Collections.sort(students, Student::compareByName);
         return students;
     }
 
