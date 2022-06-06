@@ -24,6 +24,7 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_1b(List<Student> students) {
+        students.sort((s1, s2) -> s2.getName().compareTo(s1.getName()));
         return students;
     }
 
