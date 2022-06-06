@@ -87,9 +87,6 @@ public class StudentSort {
     public static List<Student> sort_4a(List<Student> students) {
         CompareInterface<Student> cI = (Student s1, Student s2) -> Student.compareByAge(s2,s1);
         students.sort((s1, s2) -> cI.compare(s1, s2));
-        for (Student student : students) {
-            System.out.println(student.getBirthday());
-        }
         return students;
     }
 
@@ -103,9 +100,6 @@ public class StudentSort {
     public static List<Student> sort_4b(List<Student> students) {
         CompareInterface<Student> cI = (Student s1, Student s2) -> s1.compareByName(s2);
         students.sort((s1, s2) -> cI.compare(s1, s2));
-        for (Student student : students) {
-            System.out.println(student.getBirthday());
-        }
         return students;
     }
 }
