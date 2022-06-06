@@ -36,7 +36,7 @@ public class StudentSort {
      * @return die sortierte Liste mit Studierenden
      */
     public static List<Student> sort_2a(List<Student> students) {
-        // TODO
+        students.sort((s1, s2) -> Student.compareByAge(s1, s2));
         return students;
     }
 
