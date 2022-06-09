@@ -17,6 +17,7 @@ public class HPPot extends Item{
         this.itemName = "Health Potion";
         this.itemDescription = "Recharges HP";
         this.attributes = new HPItems(50);
+        this.texture = "potions/flask_red.png";
         setAnimation();
     }
 

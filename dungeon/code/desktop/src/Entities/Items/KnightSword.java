@@ -15,6 +15,7 @@ public class KnightSword extends Item {
         super(painter, batch);
         this.itemName = "Knightsword";
         this.itemDescription = "Sword for a knight.";
+        this.texture = "weapons/weapon_knight_sword.png";
         setAnimation();
     }
 

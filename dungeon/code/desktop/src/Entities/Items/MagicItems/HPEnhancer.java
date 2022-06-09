@@ -15,6 +15,7 @@ public class HPEnhancer extends MagicItem{
         super(painter, batch);
         this.itemName = "HpEnhancer";
         this.attributes = new HPItems(50);
+        this.texture = "magic/skull.png";
     }
 
 }

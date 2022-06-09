@@ -17,6 +17,7 @@ public class StrengthOrb extends Item{
         this.itemName = "Strength Orb";
         this.itemDescription = "Increases attackpower permanently";
         this.attributes = new AttackPowerItems(1);
+        this.texture = "buffEntity/StrengthbuffOrb.png";
         setAnimation();
     }
 

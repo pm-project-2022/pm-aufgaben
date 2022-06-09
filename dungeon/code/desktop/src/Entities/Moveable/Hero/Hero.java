@@ -1,6 +1,7 @@
 package Entities.Moveable.Hero;
 
 import Dialog.DialogGui;
+import Inventory.InventoryGui;
 import Entities.Fight.Ranged.RangedFight;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.MinigameNPC;
@@ -21,7 +22,6 @@ import graphic.Painter;
 import level.elements.Level;
 import tools.Point;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.ConsoleHandler;
@@ -70,6 +70,8 @@ public class Hero extends Moveable {
 
     protected int money;
 
+    protected InventoryGui inventoryGui;
+
     public Hero(Painter painter, SpriteBatch batch) {
         super(painter, batch);
         this.viewDirection = true;
@@ -83,6 +85,7 @@ public class Hero extends Moveable {
         this.t = new TicTacToeMain();
         this.rps = new RPS();
         this.h = new Hangman();
+        this.inventoryGui = new InventoryGui();
         initLogger();
     }
 
@@ -309,7 +312,15 @@ public class Hero extends Moveable {
      */
     private void showInventory() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
-            this.inventory.showInventory();
+            if(!inventoryGui.getVisibility()){
+                inventoryGui.initGui(this);
+                inventoryGui.frame.setVisible(true);
+                inventoryGui.setVisibility(true);
+            }
+            else{
+                inventoryGui.frame.setVisible(false);
+                inventoryGui.setVisibility(false);
+            }
         }
     }
 
@@ -380,7 +391,6 @@ public class Hero extends Moveable {
                 .getTileAt(npc.getPosition().toCoordinate())) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
                     new DialogGui().initGui();
-
                 }
             }
         }
@@ -701,6 +711,10 @@ public class Hero extends Moveable {
     @Override
     public Point getPosition() {
         return this.currentPosition;
+    }
+
+    public Inventory getInventory(){
+        return inventory;
     }
 
 }
