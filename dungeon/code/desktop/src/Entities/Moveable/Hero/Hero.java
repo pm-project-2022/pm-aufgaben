@@ -1,5 +1,6 @@
 package Entities.Moveable.Hero;
 
+import Dialog.DialogGui;
 import Entities.Fight.Ranged.RangedFight;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.MinigameNPC;
@@ -22,10 +23,7 @@ import tools.Point;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
@@ -381,6 +379,19 @@ public class Hero extends Moveable {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == npc.getCurrentFloor()
                 .getTileAt(npc.getPosition().toCoordinate())) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+                    new DialogGui().initGui();
+
+                }
+            }
+        }
+    }
+
+    /*
+    private void talkToMinigameNpc() {
+        for (MinigameNPC npc : minigameNPCS) {
+            if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == npc.getCurrentFloor()
+                .getTileAt(npc.getPosition().toCoordinate())) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
                     MyGame.talkNpc.play(0.1f);
                     if (getMoney() < 30) {
                         log.warning("Zu wenig Geld, mindestens 30 Muenzen!");
@@ -391,6 +402,8 @@ public class Hero extends Moveable {
             }
         }
     }
+    */
+
 
     public void minigame() {
         Scanner sc = new Scanner(System.in);
@@ -438,8 +451,6 @@ public class Hero extends Moveable {
             setMoney(getMoney() + 40);
             h.setWon(false);
         }
-
-
     }
 
     /**
