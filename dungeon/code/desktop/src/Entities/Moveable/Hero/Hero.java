@@ -56,6 +56,9 @@ public class Hero extends Moveable {
     protected RangedFight rangedFight;
     protected BasicSkill aura;
     protected BasicSkill convert;
+    private String fightStatus;
+    private String auraStatus;
+    private String convertStatus;
     private int convertCooldown = 0;
     private int convertDuration = 0;
     // Logger
@@ -86,6 +89,7 @@ public class Hero extends Moveable {
         this.rps = new RPS();
         this.h = new Hangman();
         this.inventoryGui = new InventoryGui();
+        this.fightStatus = "Not enough mana";
         initLogger();
     }
 
@@ -480,7 +484,9 @@ public class Hero extends Moveable {
         rangedAttack();
         auraSkill();
         convertSkill();
-        convertCD();
+        if(convertCooldown != 0){
+            convertCD();
+        }
         if (this.name.equals("Hunter")) {
             hunterConvertDuration();
         }
@@ -495,7 +501,7 @@ public class Hero extends Moveable {
                 this.rangedFight.startRangedAttack();
                 this.attributes.setCurrentMana(this.attributes.getCurrentMana() - 5);
             } else {
-                log.warning("Nicht genügend Mana");
+                
             }
         }
     }
@@ -504,20 +510,27 @@ public class Hero extends Moveable {
      * aktiviert den aura skill des heldens
      */
     private void auraSkill() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            if (this.attributes.getLevel() < this.aura.getAuraAttributes().getAuraLevel()) {
-                log.warning("Level ist zu niedrig um die Aura zu aktivieren");
-            } else if (!this.aura.getAuraAttributes().getActive()) {
-                this.aura.activateAura(this);
-                log.info("Status: " + this.aura.getAuraAttributes().getActive());
-                this.aura.getAuraAttributes().setActive(!this.aura.getAuraAttributes().getActive());
-                System.out.println();
-            } else {
-                this.aura.deactiveAura(this);
-                log.info("Status: " + this.aura.getAuraAttributes().getActive());
-                this.aura.getAuraAttributes().setActive(!this.aura.getAuraAttributes().getActive());
+        if(this.attributes.getLevel() < this.aura.getAuraAttributes().getAuraLevel()){
+            this.auraStatus = "not learned"; 
+        }else{
+            if(this.auraStatus != "aura inactive" && this.auraStatus != "aura active"){
+                this.auraStatus = "aura inactive";
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+                if (this.attributes.getLevel() < this.aura.getAuraAttributes().getAuraLevel()) {
+                } else if (!this.aura.getAuraAttributes().getActive()) {
+                    this.aura.activateAura(this);
+                    this.auraStatus = "aura active";
+                    this.aura.getAuraAttributes().setActive(!this.aura.getAuraAttributes().getActive());
+                    System.out.println();
+                } else {
+                    this.aura.deactiveAura(this);
+                    this.auraStatus = "aura inactive";
+                    this.aura.getAuraAttributes().setActive(!this.aura.getAuraAttributes().getActive());
+                }
             }
         }
+        
     }
 
     /**
@@ -533,23 +546,37 @@ public class Hero extends Moveable {
      * aktiviert den convert skill
      */
     private void convertSkill() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
-            if (this.attributes.getLevel() < this.convert.getConvertAttributes().getSkillLevel()) {
-                log.warning("Level ist zu niedrig um den Skill zu benutzen");
-            } else if (!this.convert.enoughRessources(this)) {
-                log.warning("Nicht genügend Leben oder Mana vorhanden.");
-            } else if (this.convertCooldown > 0) {
-                log.warning("Skill ist auf Cooldown.");
-            } else {
-                this.convert.convert(this);
-                log.info("Cooldown startet");
-                this.convertCooldown = this.convert.getConvertAttributes().getCooldown();
-                if (this.name.equals("Hunter")) {
-                    this.convertDuration = this.convert.getConvertAttributes().getDuration();
+        if(this.attributes.getLevel() < this.convert.getConvertAttributes().getSkillLevel()){
+            this.convertStatus = "not learned"; 
+        }else{
+            if(this.convertStatus == "not learned"){
+                if(!this.convert.enoughRessources(this)){
+                    this.convertStatus = "not enough res";
+                }else{
+                    this.convertStatus = "ready";
                 }
-
             }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+                if (!this.convert.enoughRessources(this)) {
+                    log.warning("Nicht genügend Leben oder Mana vorhanden.");
+                } else if (this.convertCooldown > 0) {
+                    log.warning("Skill ist auf Cooldown.");
+                } else {
+                    this.convert.convert(this);
+                    this.convertStatus = "on cd";
+                    this.convertCooldown = this.convert.getConvertAttributes().getCooldown();
+                    if (this.name.equals("Hunter")) {
+                        this.convertDuration = this.convert.getConvertAttributes().getDuration();
+                    }
+    
+                }
+            }
+            
         }
+
+
+        
     }
 
     /**
@@ -558,6 +585,13 @@ public class Hero extends Moveable {
     private void convertCD() {
         if (this.convertCooldown > 0) {
             this.convertCooldown--;
+        }
+        if(this.convertCooldown == 0){
+            if(this.convert.enoughRessources(this)){
+                this.convertStatus = "ready";
+            }else{
+                this.convertStatus = "not enough res";
+            }
         }
     }
 
@@ -715,6 +749,38 @@ public class Hero extends Moveable {
 
     public Inventory getInventory(){
         return inventory;
+    }
+
+    public RangedFight getRangedFight(){
+        return this.rangedFight;
+    }
+
+    public BasicSkill getConvert() {
+        return convert;
+    }
+
+    public BasicSkill getAura() {
+        return aura;
+    }
+
+    public String getFightStatus() {
+        if(this.attributes.getCurrentMana() < 5){
+            return this.fightStatus;
+        }
+
+        if(this.rangedFight.getIsInvis()){
+            return "ready";
+        }else{
+            return "on cooldown";
+        }
+    }
+
+    public String getAuraStatus() {
+        return auraStatus;
+    }
+
+    public String getConvertStatus() {
+        return convertStatus;
     }
 
 }
