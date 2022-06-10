@@ -1,6 +1,7 @@
 package Entities.Moveable.Hero.Classes;
 
 import Attribute.Moveables.Hero.HeroAttributes;
+import Entities.Fight.Ranged.RangedFight;
 import Entities.Moveable.Hero.Hero;
 import Skills.Auras.WizzardAura;
 import Skills.ConvertStats.ConvertHptoMana;
@@ -23,6 +24,13 @@ public class Wizard extends Hero {
         this.name = "Wizard";
         this.aura = new WizzardAura(painter, batch);
         this.convert = new ConvertHptoMana(painter, batch);
+    }
+
+    /**
+     * setzt die ranged attacke des knights
+     */
+    public void setRangedFight(RangedFight rangedFight){
+        this.rangedFight = rangedFight;
     }
 
     /**

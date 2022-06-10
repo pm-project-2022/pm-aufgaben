@@ -1,6 +1,7 @@
 package Entities.Moveable.Hero.Classes;
 
 import Attribute.Moveables.Hero.HeroAttributes;
+import Entities.Fight.Ranged.RangedFight;
 import Entities.Moveable.Hero.Hero;
 import Skills.Auras.HunterAura;
 import Skills.ConvertStats.MovementSpeedBoost;
@@ -23,6 +24,13 @@ public class Hunter extends Hero {
         this.name = "Hunter";
         this.aura = new HunterAura(painter, batch);
         this.convert = new MovementSpeedBoost(painter, batch);
+    }
+
+    /**
+     * setzt die ranged attacke des knights
+     */
+    public void setRangedFight(RangedFight rangedFight){
+        this.rangedFight = rangedFight;
     }
 
     /**
