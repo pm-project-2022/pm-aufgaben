@@ -1,8 +1,10 @@
 package desktop;
 
 import Entities.Chest.ChestFactory;
+import Entities.Fight.Ranged.HunterRanged;
 import Entities.Fight.Ranged.KnightRanged;
 import Entities.Fight.Ranged.RangedFight;
+import Entities.Fight.Ranged.WizzardRanged;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
 import Entities.FriendlyNPCs.MinigameNPC;
@@ -72,9 +74,13 @@ public class MyGame extends MainController {
         }
         if (gui.getChara() == 2) {
             hero = new Wizard(painter, batch);
+            this.rangedFight = new WizzardRanged(painter, batch, hero);
+            this.hero.setRangedFight(this.rangedFight);
         }
         if (gui.getChara() == 3) {
             hero = new Hunter(painter, batch);
+            this.rangedFight = new HunterRanged(painter, batch, hero);
+            this.hero.setRangedFight(this.rangedFight);
         }
         setup2();
     }
