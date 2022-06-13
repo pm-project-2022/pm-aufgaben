@@ -4,7 +4,7 @@ public class Inorder implements INode {
 
     @Override
     public void accept(IVisitor visitor) {
-        
+        visitor.visit(this);
     }
     
 }
