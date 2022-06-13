@@ -1,6 +1,8 @@
 package visitor_pattern.tree;
 
+import visitor_pattern.Inorder;
 import visitor_pattern.InorderVisitor;
+import visitor_pattern.Postorder;
 import visitor_pattern.PostorderVisitor;
 import visitor_pattern.card.*;
 import java.util.*;
@@ -39,14 +41,16 @@ public class Main {
         System.out.println();
 
         // TODO Visitor
+        Inorder inorder = new Inorder(root);
         InorderVisitor inorderVisitor = new InorderVisitor();
-        root.accept(inorderVisitor);
+        inorder.accept(inorderVisitor);
         System.out.println(inorderVisitor.getInorder());
 
         System.out.println();
 
+        Postorder postorder = new Postorder(root);
         PostorderVisitor postorderVisitor = new PostorderVisitor();
-        root.accept(postorderVisitor);
+        postorder.accept(postorderVisitor);
         System.out.println(postorderVisitor.getPostorder());
     }
 }
