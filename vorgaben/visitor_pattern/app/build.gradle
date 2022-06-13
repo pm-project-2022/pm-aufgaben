@@ -26,5 +26,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'visitor_pattern.App'
+    mainClass = 'visitor_pattern.tree.Main'
 }
