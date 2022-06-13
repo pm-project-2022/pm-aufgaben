@@ -25,66 +25,98 @@ public class BankTest {
         this.testBank = new Bank();
     }
 
+     /**
+     * testet ob eine banl erstellt wird
+     */
     @Test
     public void getBank(){
         assertNotNull(this.testBank);
     }
 
+    /**
+     * testet ob das alter des kunden valid ist
+     */
     @Test
     public void checkCorrectAge(){
         this.userKonto = new Konto("Max", 15, 15);
         assertTrue(this.testBank.checkAge(this.userKonto));
     }
 
+    /**
+     * testet ob das alter des kunden invalid ist
+     */
     @Test
     public void checkIncorrectAge(){
         this.userKonto = new Konto("Max", -1, 15);
         assertFalse(this.testBank.checkAge(this.userKonto));
     }
 
+    /**
+     * testet ob der kontostand valid ist
+     */
     @Test
     public void checkCorrectAccBalance(){
         this.userKonto = new Konto("Max", 15, 15);
         assertTrue(this.testBank.checkAccBalance(this.userKonto));
     }
 
+    /**
+     * testet ob der kontostand invalid ist
+     */
     @Test
     public void checkInCorrectAccBalance(){
         this.userKonto = new Konto("Max", 15, -15);
         assertFalse(this.testBank.checkAccBalance(this.userKonto));
     }
 
+    /**
+     * testet den kinderbonus
+     */
     @Test
     public void checkBonusKind(){
         this.userKonto = new Konto("Max", 2, 100);
         assertEquals(0.5, this.testBank.getBonus(userKonto), 0.5f);
     }
 
+    /**
+     * testet den erwachsenen bonus
+     */
     @Test
     public void checkBonusRentner(){
         this.userKonto = new Konto("Max", 67, 100);
         assertEquals(1f, this.testBank.getBonus(userKonto), 0.5f);
     }
 
+    /**
+     * testet wenn es keinen bonus gibt
+     */
     @Test
     public void checkBonusNormal(){
         this.userKonto = new Konto("Max", 35, 100);
         assertEquals(0f, this.testBank.getBonus(userKonto), 0.5f);
     }
     
-
+    /**
+     * testet den zinsatz bei <= 100
+     */
     @Test
     public void checkAccBalanceUnder101(){
         this.userKonto = new Konto("Max", 35, 100);
         assertEquals(1f, this.testBank.getZinsatz(userKonto), 0.5f);
     }
 
+    /**
+     * testet den zinsatz bei <= 1000
+     */
     @Test
     public void checkAccBalanceUnder1001(){
         this.userKonto = new Konto("Max", 35, 1000);
         assertEquals(3f, this.testBank.getZinsatz(userKonto), 0.5f);
     }
 
+    /**
+     * testet den zinsatz bei <= 1000
+     */
     @Test
     public void checkAccBalanceOver1000(){
         this.userKonto = new Konto("Max", 35, 10000);
@@ -106,6 +138,9 @@ public class BankTest {
     }
 
 
+    /**
+     * parametertest, der den gesamtzinsatz ermittelt
+     */
     @Test
     public void checkResult(){
         int newAge = (int) age;
