@@ -7,7 +7,7 @@ import visitor_pattern.card.Card;
  *
  * @param <T> Data-Type to store.
  */
-public class Node<T extends Card> {
+public class Node<T extends Card>{
     private Node leftChild;
     private Node rightChild;
     private T data;
