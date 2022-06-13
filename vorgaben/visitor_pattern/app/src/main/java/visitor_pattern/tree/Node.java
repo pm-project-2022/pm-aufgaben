@@ -84,12 +84,4 @@ public class Node<T extends Card>{
         }
         return dot;
     }
-
-    public void accept(InorderVisitor inorderVisitor){
-        inorderVisitor.visit(this);
-    }
-
-    public void accept(PostorderVisitor postorderVisitor){
-        postorderVisitor.visit(this);
-    }
 }
