@@ -1,5 +1,7 @@
 package visitor_pattern.tree;
 
+import visitor_pattern.InorderVisitor;
+import visitor_pattern.PostorderVisitor;
 import visitor_pattern.card.Card;
 
 /**
@@ -81,5 +83,13 @@ public class Node<T extends Card>{
             dot += rightChild.toDot();
         }
         return dot;
+    }
+
+    public void accept(InorderVisitor inorderVisitor){
+        inorderVisitor.visit(this);
+    }
+
+    public void accept(PostorderVisitor postorderVisitor){
+        postorderVisitor.visit(this);
     }
 }
