@@ -24,6 +24,12 @@ public class PostorderVisitor implements IVisitor{
         
     }
 
+    @Override
+    public void visit(Postorder postorder) {
+        visit(postorder.getRoot());
+        
+    }
+
     public String getPostorder(){
          String returnString = "";
 
@@ -32,6 +38,12 @@ public class PostorderVisitor implements IVisitor{
          }
 
          return returnString;
+    }
+
+    @Override
+    public void visit(Inorder inorder) {
+        // TODO Auto-generated method stub
+        
     }
     
 }

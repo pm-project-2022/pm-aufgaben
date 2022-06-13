@@ -2,10 +2,16 @@ package visitor_pattern;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import visitor_pattern.tree.Node;
 
 public class InorderVisitor implements IVisitor {
     private final List<String> tree = new ArrayList<>();
+
+    @Override
+    public void visit(Inorder inorder) {
+        visit(inorder.getRoot());
+    }
 
     @Override
     public void visit(Node node) {
@@ -29,5 +35,11 @@ public class InorderVisitor implements IVisitor {
 
          return returnString;
     }
+
+	@Override
+	public void visit(Postorder inorder) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }
