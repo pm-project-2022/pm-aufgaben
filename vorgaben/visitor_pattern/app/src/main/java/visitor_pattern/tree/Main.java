@@ -1,5 +1,7 @@
 package visitor_pattern.tree;
 
+import visitor_pattern.InorderVisitor;
+import visitor_pattern.PostorderVisitor;
 import visitor_pattern.card.*;
 import java.util.*;
 
@@ -34,7 +36,17 @@ public class Main {
         cards.remove(0);
         cards.forEach(c -> root.addChild(c));
         System.out.println(root.toDotGraph());
+        System.out.println();
 
         // TODO Visitor
+        InorderVisitor inorderVisitor = new InorderVisitor();
+        root.accept(inorderVisitor);
+        System.out.println(inorderVisitor.getInorder());
+
+        System.out.println();
+
+        PostorderVisitor postorderVisitor = new PostorderVisitor();
+        root.accept(postorderVisitor);
+        System.out.println(postorderVisitor.getPostorder());
     }
 }
