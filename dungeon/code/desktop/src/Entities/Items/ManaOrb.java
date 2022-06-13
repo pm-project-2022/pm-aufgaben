@@ -15,6 +15,7 @@ public class ManaOrb extends Item {
         super(painter, batch);
         this.itemName = "Mana Orb";
         this.itemDescription = "Increases mana permanently";
+        this.texture = "buffEntity/SpeedbuffOrb.png";
         this.attributes = new  ManaItems(1);
         setAnimation();
     }

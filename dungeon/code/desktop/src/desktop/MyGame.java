@@ -1,8 +1,10 @@
 package desktop;
 
 import Entities.Chest.ChestFactory;
+import Entities.Fight.Ranged.HunterRanged;
 import Entities.Fight.Ranged.KnightRanged;
 import Entities.Fight.Ranged.RangedFight;
+import Entities.Fight.Ranged.WizzardRanged;
 import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
 import Entities.FriendlyNPCs.MinigameNPC;
@@ -45,7 +47,7 @@ public class MyGame extends MainController {
     private ArrayList<MinigameNPC> minigameNPCS;
     private mainGui gui;
     private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, heroXp, deathScreen,
-        money;
+        money, skill1, skill2, skill3;
 
     public static Sound death, newLevel, walking, itemPickup, hit, lvlUp,
         talkNpc, stepTraps, useItem, openChest, equipItem, dropItem,backgroundMusic;
@@ -72,9 +74,13 @@ public class MyGame extends MainController {
         }
         if (gui.getChara() == 2) {
             hero = new Wizard(painter, batch);
+            this.rangedFight = new WizzardRanged(painter, batch, hero);
+            this.hero.setRangedFight(this.rangedFight);
         }
         if (gui.getChara() == 3) {
             hero = new Hunter(painter, batch);
+            this.rangedFight = new HunterRanged(painter, batch, hero);
+            this.hero.setRangedFight(this.rangedFight);
         }
         setup2();
     }
@@ -117,6 +123,7 @@ public class MyGame extends MainController {
             this.heroXp.setText(hero.getAttributes().getExp() + " / " + hero.getAttributes().getExpForLvlUp());
             deathScreen.setText("");
             money.setText("Money: " + hero.getMoney());
+            manageSkills();
         } else {
             levelHP.setText(hero.getAttributes().getCurrentHP() + " / " + hero.getAttributes().getMaxHP());
             deathScreen.setText("Gamer Over\n`r` to restart");
@@ -191,6 +198,27 @@ public class MyGame extends MainController {
         initMinigameNpc();
         this.rangedFight.setLevel(this.hero.getCurrentFloor());
         this.hero.setMonster(monster);
+    }
+
+    /**
+     * gibt im hud auskunft darüber ob ein skill gelernt wurde, einsatzbereit oder auf cooldown ist.
+     */
+    private void manageSkills(){
+        skill1();
+        skill2();
+        skill3();
+    }
+
+    private void skill1(){
+        this.skill1.setText("Skill 1: " + this.hero.getFightStatus());
+    }
+
+    private void skill2(){
+        this.skill2.setText("Skill 2:" + this.hero.getConvertStatus());
+    }
+
+    private void skill3(){
+        this.skill3.setText("Skill 3: "+ this.hero.getAuraStatus());
     }
 
     /**
@@ -297,6 +325,9 @@ public class MyGame extends MainController {
         this.deathScreen = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.RED, 40, 200, 200, 170, 150);
         this.heroXp = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 20, 20, 310, 0);
         this.heroXp.setAlignment(1);
+        this.skill1 = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 15, 20, 20, 425, 50);
+        this.skill2 = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 15, 20, 20, 425, 25);
+        this.skill3 = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 15, 20, 20, 425, 0);
         hudController.add(new HealthBar(hudPainter, hudBatch, new Point(0, -330)));
         hudController.add(new ManaBar(hudPainter, hudBatch, new Point(0, -290)));
         hudController.add(new ExpBar(hudPainter, hudBatch, new Point(200, 120)));

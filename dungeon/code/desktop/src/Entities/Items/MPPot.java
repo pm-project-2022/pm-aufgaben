@@ -17,6 +17,7 @@ public class MPPot extends Item{
         this.itemName = "Mana Potion";
         this.itemDescription = "Recharges MP";
         this.attributes = new ManaItems(50);
+        this.texture = "potions/flask_blue.png";
         setAnimation();
     }
 

@@ -24,6 +24,7 @@ public class Item extends BasicEntity {
     protected boolean pickUp;
     protected PointBooleanTransmitter viewDirection;
     protected float xOffset = 0.7f;
+    protected String texture = "";
 
     public Item(Painter painter, SpriteBatch batch) {
         super(painter, batch);
@@ -198,4 +199,7 @@ public class Item extends BasicEntity {
         return pickUp;
     }
 
+    public String getTexture(){
+        return texture;
+    }
 }

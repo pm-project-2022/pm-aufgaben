@@ -15,6 +15,7 @@ public class Sword extends Item {
         super(painter, batch);
         this.itemName = "Sword";
         this.itemDescription = "Standard sword for a knight.";
+        this.texture = "weapons/weapon_regular_sword_01.png";
         setAnimation();
     }
 

@@ -124,6 +124,19 @@ public class Inventory {
         return false;
     }
 
+    public boolean dropItem(int index) {
+            if (this.inventory[index] != null && this.inventory[index].getIsEquipped()) {
+                log.info("Item dropped: " + this.inventory[index].getItemName());
+                this.inventory[index].setRemoveOrConsume(true);
+                this.inventory[index] = null;
+                this.amount[index] = 0;
+                this.elements--;
+                return true;
+            }
+        return false;
+        }
+
+
     public void consume(Hero hero){
         for(int i = 0; i< this.inventory.length; i++) {
             if(this.inventory[i] != null && this.inventory[i].getIsEquipped() && this.amount[i] > 0 &&  this.inventory[i].getItemName().matches("Trapremover")) {
@@ -146,7 +159,7 @@ public class Inventory {
                 }else{
                     return;
                 }
-            
+
             }else if(this.inventory[i] != null && this.inventory[i].getIsEquipped() && this.amount[i] > 0 &&  this.inventory[i].getItemName().matches("HpEnhancer")){
                 if(100 <= hero.getAttributes().getCurrentMana()){
                     hero.getAttributes().setMaxHP(hero.getAttributes().getMaxHP() + this.inventory[i].getAttributes().getCurrentHP());
@@ -283,5 +296,17 @@ public class Inventory {
      */
     public void setActiveItem(Item item) {
         this.activeItem = item;
+    }
+
+    public String getFirstItem(){
+        return inventory[0].getTexture();
+    }
+
+    public String getSecondItem(){
+        return inventory[1].getTexture();
+    }
+
+    public String getThirdItem(){
+        return inventory[2].getTexture();
     }
 }
