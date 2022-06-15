@@ -9,8 +9,7 @@ import Entities.FriendlyNPCs.FriendlyNPC;
 import Entities.FriendlyNPCs.FriendlyNpcFactory;
 import Entities.FriendlyNPCs.MinigameNPC;
 import Entities.FriendlyNPCs.MinigameNpcFactory;
-import Entities.Items.Item;
-import Entities.Items.ItemFactory;
+import Entities.Items.*;
 import Entities.Moveable.Hero.Classes.Hunter;
 import Entities.Moveable.Hero.Classes.Knight;
 import Entities.Moveable.Hero.Classes.Wizard;
@@ -22,6 +21,7 @@ import HUD.LvlBar;
 import HUD.ExpBar;
 import HUD.HealthBar;
 import HUD.ManaBar;
+import Shop.ShopGui;
 import Traps.TrapFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -46,11 +46,12 @@ public class MyGame extends MainController {
     private ArrayList<FriendlyNPC> npcs;
     private ArrayList<MinigameNPC> minigameNPCS;
     private mainGui gui;
+    private ShopGui shopGui;
     private Label levelHP, levelMANA, levelCounter, heroStats, heroLevel, heroXp, deathScreen,
         money, skill1, skill2, skill3;
 
     public static Sound death, newLevel, walking, itemPickup, hit, lvlUp,
-        talkNpc, stepTraps, useItem, openChest, equipItem, dropItem,backgroundMusic;
+        talkNpc, stepTraps, useItem, openChest, equipItem, dropItem, backgroundMusic;
 
     @Override
     protected void setup() {
@@ -131,6 +132,8 @@ public class MyGame extends MainController {
                 restartGame();
             }
         }
+        talkToShopNpc();
+        updateShop();
     }
 
     /**
@@ -201,30 +204,64 @@ public class MyGame extends MainController {
     }
 
     /**
+     * opens the shop
+     */
+    private void talkToShopNpc() {
+        for (MinigameNPC npc : minigameNPCS) {
+            if (hero.getCurrentFloor().getTileAt(hero.getPosition().toCoordinate()) == npc.getCurrentFloor()
+                .getTileAt(npc.getPosition().toCoordinate())) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+                    shopGui = new ShopGui(hero, painter, batch);
+                    //new DialogGui().initGui();
+                }
+            }
+        }
+    }
+
+    /**
+     * updates items bought from shop
+     */
+    private void updateShop(){
+        try{
+            if(shopGui.getBoughtItem()!=null){
+                shopGui.getBoughtItem().setPickUp(true);
+                shopGui.getBoughtItem().setIsOnFloor(false);
+                shopGui.getBoughtItem().setPosition(hero.getPosition());
+                entityController.add(shopGui.getBoughtItem());
+                shopGui.setBoughtItem(null);
+            }
+        }
+        catch(NullPointerException ignored){
+
+        }
+
+    }
+
+    /**
      * gibt im hud auskunft darüber ob ein skill gelernt wurde, einsatzbereit oder auf cooldown ist.
      */
-    private void manageSkills(){
+    private void manageSkills() {
         skill1();
         skill2();
         skill3();
     }
 
-    private void skill1(){
+    private void skill1() {
         this.skill1.setText("Skill 1: " + this.hero.getFightStatus());
     }
 
-    private void skill2(){
+    private void skill2() {
         this.skill2.setText("Skill 2:" + this.hero.getConvertStatus());
     }
 
-    private void skill3(){
-        this.skill3.setText("Skill 3: "+ this.hero.getAuraStatus());
+    private void skill3() {
+        this.skill3.setText("Skill 3: " + this.hero.getAuraStatus());
     }
 
     /**
      * initiates sounds
      */
-    private void initSounds(){
+    private void initSounds() {
         death = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_deathscream_robot1.wav"));
         newLevel = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_sounds_interaction1.wav"));
         walking = Gdx.audio.newSound(Gdx.files.internal("Sounds/sfx_movement_footsteps1a.wav"));
@@ -316,7 +353,7 @@ public class MyGame extends MainController {
      * Initiiert das hud
      */
     private void initHud() {
-        money = hudController.drawText("","ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.YELLOW, 20,40,40,500,300);
+        money = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.YELLOW, 20, 40, 40, 500, 300);
         levelHP = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 440);
         levelMANA = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 20, 40, 40, 60, 400);
         levelCounter = hudController.drawText("", "ttf/DiaryOfAn8BitMage-lYDD.ttf", Color.WHITE, 40, 40, 40, 10, 0);
