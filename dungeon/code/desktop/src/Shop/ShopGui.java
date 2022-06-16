@@ -174,6 +174,7 @@ public class ShopGui {
                     hero.getInventory().addItem(mp);
                     hero.setMoney(hero.getMoney() - priceMP);
                     setBoughtItem(mp);
+                    log.info("Item gekauft");
                 }
                 //buy hppot
                 if (tfKaufen.getText().toLowerCase().matches("(.*)\\s?\\bhealthpotion\\b\\s?.*")
@@ -185,6 +186,7 @@ public class ShopGui {
                     hero.getInventory().addItem(hp);
                     hero.setMoney(hero.getMoney() - priceHP);
                     setBoughtItem(hp);
+                    log.info("Item gekauft");
                 }
                 //buy strengthorb
                 if (tfKaufen.getText().toLowerCase().matches("(.*)\\s?\\bstrengthorb\\b\\s?.*")
@@ -196,11 +198,13 @@ public class ShopGui {
                     hero.getInventory().addItem(orb);
                     hero.setMoney(hero.getMoney() - priceStr);
                     setBoughtItem(orb);
+                    log.info("Item gekauft");
                 }
                 if (tfKaufen.getText().toLowerCase().matches("(.*)\\s?\\bpreis\\b\\s?.*")) {
                     preisMP.setText(priceMP + " Coins");
                     preisHP.setText(priceHP + " Coins");
                     preisStr.setText(priceStr + " Coins");
+                    log.info("Preise angezeigt");
 
                 }
             }
@@ -221,6 +225,7 @@ public class ShopGui {
                         if (hero.getInventory().getFirstItem() != null) {
                             hero.getInventory().dropItem(0);
                             hero.setMoney(hero.getMoney() + 5);
+                            log.info("Item verkauft, Geld + 5");
                         }
 
                     }
@@ -232,6 +237,7 @@ public class ShopGui {
                         if (hero.getInventory().getSecondItem() != null) {
                             hero.getInventory().dropItem(1);
                             hero.setMoney(hero.getMoney() + 5);
+                            log.info("Item verkauft, Geld + 5");
                         }
 
                     }
@@ -243,6 +249,7 @@ public class ShopGui {
                         if (hero.getInventory().getThirdItem() != null) {
                             hero.getInventory().dropItem(2);
                             hero.setMoney(hero.getMoney() + 5);
+                            log.info("Item verkauft, Geld + 5");
                         }
                     }
                 } catch (NullPointerException ignored) {
@@ -280,6 +287,7 @@ public class ShopGui {
                     preisMP.setText(priceMP + " Coins");
                     preisHP.setText(priceHP + " Coins");
                     preisStr.setText(priceStr + " Coins");
+                    log.info("Preis feilschen");
                 }
             }
         });
