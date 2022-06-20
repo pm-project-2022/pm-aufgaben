@@ -1,8 +1,9 @@
 package multithreading;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-public class Bank {
-
+public class Bank{
     /**
      * Ueberweise Geld von einem Konto auf das andere
      *
@@ -11,6 +12,8 @@ public class Bank {
      */
     public static void ueberweisen(Konto von, Rechnung rechnung) {
         Transaktion transaktion = new Transaktion(von, rechnung);
-        transaktion.doTransaktion();
+        Executor executor = new ScheduledThreadPoolExecutor(5);
+        executor.execute(transaktion);
     }
+
 }
