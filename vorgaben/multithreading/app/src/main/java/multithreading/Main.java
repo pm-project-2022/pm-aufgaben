@@ -11,12 +11,13 @@ public class Main {
         // Kunden erstellen
         List<Kunde> kunden = new ArrayList<>();
         for (int i = 0; i < KUNDEN; i++) {
-            kunden.add(new Kunde());
+            kunden.add(new Kunde(i));
         }
+        
         // Threads starten
         for (Kunde k : kunden) {
             new Thread(k).start();
             new Thread(new Geldeintreiber(k, kunden)).start();
-        }
+        } 
     }
 }
