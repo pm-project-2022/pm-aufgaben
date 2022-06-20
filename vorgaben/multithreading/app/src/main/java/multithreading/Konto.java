@@ -3,6 +3,19 @@ package multithreading;
 
 public class Konto {
     private double kontostand = 1000;
+    private int id;
+
+    public Konto(int id){
+        this.id = id;
+    }
+
+    /**
+     * gibt die konto-id zurück
+     * @return konto-id
+     */
+    public int getId() {
+        return this.id;
+    }
 
     /**
      * Von diesem Konto soll Geld gesendet werden
