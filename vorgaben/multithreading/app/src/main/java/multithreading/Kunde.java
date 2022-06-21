@@ -5,7 +5,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
 
-public class Kunde implements Runnable{
+public class Kunde implements Runnable {
     private Konto konto;
     private Queue<Rechnung> offeneRechnungen;
     private Logger kundenLogger = Logger.getLogger(Kunde.class.getSimpleName());
@@ -35,11 +35,14 @@ public class Kunde implements Runnable{
      */
     public void empfangeRechnung(Rechnung rechnung) {
         offeneRechnungen.add(rechnung);
-        kundenLogger.info("Konto-ID " + this.konto.getId() + ": Rechnung von Geldeintreiber " + rechnung.empfaenger().getId() + " bekommen.\nBetrag: " + rechnung.betrag() + " Euro");
+        kundenLogger.info("Konto-ID " + this.konto.getId() + ": Rechnung von Geldeintreiber "
+                + rechnung.empfaenger().getId() + " bekommen.\nBetrag: " + rechnung.betrag() + " Euro");
+        invokeNotify();
     }
 
     /**
      * getter für das konto
+     * 
      * @return konto des kunden
      */
     public Konto getKonto() {
@@ -47,10 +50,11 @@ public class Kunde implements Runnable{
     }
 
     /**
-     * zahlt zahlt die oberste offene rechnung aus der queue offeneRechnung. ist die queue leer, wartet der thread
+     * zahlt zahlt die oberste offene rechnung aus der queue offeneRechnung. ist die
+     * queue leer, wartet der thread
      */
-    private synchronized void rechnungZahlen(){
-        while(offeneRechnungen.peek() == null){
+    private synchronized void rechnungZahlen() {
+        while (offeneRechnungen.peek() == null) {
             try {
                 kundenLogger.info("Alle Rechnung in Konto-ID " + this.konto.getId() + " bezahlt. Wait");
                 wait();
@@ -65,16 +69,14 @@ public class Kunde implements Runnable{
     /**
      * entfernt alle threads aus der warteschlange
      */
-    private synchronized void invokeNotify(){
+    private synchronized void invokeNotify() {
         notifyAll();
-        kundenLogger.info("Restlichen Kundenthreads werden aufgeweckt.");
     }
 
     @Override
     public void run() {
         while(true){
             rechnungZahlen();
-            invokeNotify();
         }
     }
 }
