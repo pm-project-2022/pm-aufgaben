@@ -7,7 +7,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
 
-public class Geldeintreiber extends Thread{
+public class Geldeintreiber implements Runnable{
     private Kunde k;
     private int id;
     private List<Kunde> kunden;
