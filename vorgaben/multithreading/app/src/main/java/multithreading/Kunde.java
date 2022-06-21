@@ -36,7 +36,6 @@ public class Kunde implements Runnable{
     public void empfangeRechnung(Rechnung rechnung) {
         offeneRechnungen.add(rechnung);
         kundenLogger.info("Konto-ID " + this.konto.getId() + ": Rechnung von Geldeintreiber " + rechnung.empfaenger().getId() + " bekommen.\nBetrag: " + rechnung.betrag() + " Euro");
-        invokeNotify();
     }
 
     /**
@@ -68,12 +67,14 @@ public class Kunde implements Runnable{
      */
     private synchronized void invokeNotify(){
         notifyAll();
+        kundenLogger.info("Restlichen Kundenthreads werden aufgeweckt.");
     }
 
     @Override
     public void run() {
         while(true){
             rechnungZahlen();
+            invokeNotify();
         }
     }
 }
