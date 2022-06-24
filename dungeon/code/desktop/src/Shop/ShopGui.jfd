@@ -1,0 +1,171 @@
+JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.14.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "mainFrame"
+			"visible": true
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Health Potion"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/potions/flask_red.png" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 135
+				"height": 90
+				"x": 135
+				"y": 0
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Strengthorb"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/buffEntity/StrengthbuffOrb.png" )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 130
+				"height": 90
+				"x": 270
+				"y": 0
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "anzahlMP"
+				"text": "text"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 50
+				"y": 55
+				"width": 35
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "anzahlHP"
+				"text": "text"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 35
+				"height": 16
+				"x": 155
+				"y": 55
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "anzahlStr"
+				"text": "text"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 35
+				"height": 16
+				"x": 290
+				"y": 55
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "tfKaufen"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 110
+				"width": 325
+				"height": 20
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "tfFeilschen"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 185
+				"width": 325
+				"height": 20
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "tfVerkaufen"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 325
+				"height": 20
+				"x": 30
+				"y": 145
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "kaufen"
+				"text": "Kaufen"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 30
+				"y": 90
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "verkaufen"
+				"text": "Verkaufen"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 70
+				"height": 16
+				"x": 30
+				"y": 130
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "feilschen"
+				"text": "Feilschen"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 70
+				"height": 16
+				"x": 30
+				"y": 170
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonKaufen"
+				"text": "Kaufen"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 35
+				"y": 220
+				"width": 100
+				"height": 25
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "preisHP"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 85
+				"height": 16
+				"x": 140
+				"y": 20
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "preisStr"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 85
+				"height": 16
+				"x": 270
+				"y": 20
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "buttonVerk"
+				"text": "Verkaufen"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 125
+				"height": 25
+				"x": 135
+				"y": 220
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "burronFeilschen"
+				"text": "Feilschen"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 93
+				"height": 25
+				"x": 260
+				"y": 220
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "preisMP"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 85
+				"height": 16
+				"x": 35
+				"y": 20
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "MP Potion"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/potions/flask_blue.png" )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 135
+				"height": 90
+				"x": 0
+				"y": 0
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 150, 50 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

@@ -13,9 +13,11 @@ import Inventory.Inventory;
 import Minigames.Hangman;
 import Minigames.RPS;
 import Minigames.TicTacToeMain;
+import Shop.ShopGui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import controller.EntityController;
 import desktop.MyGame;
 import graphic.Animation;
 import graphic.Painter;
@@ -74,7 +76,6 @@ public class Hero extends Moveable {
     protected int money;
 
     protected InventoryGui inventoryGui;
-
     public Hero(Painter painter, SpriteBatch batch) {
         super(painter, batch);
         this.viewDirection = true;
@@ -123,7 +124,7 @@ public class Hero extends Moveable {
             updateDead();
             manageSkills();
             updateStats();
-            talkToMinigameNpc();
+            //talkToMinigameNpc();
             updateMinigame();
         }
     }
@@ -388,17 +389,18 @@ public class Hero extends Moveable {
             }
         }
     }
-
+    /*
     private void talkToMinigameNpc() {
         for (MinigameNPC npc : minigameNPCS) {
             if (this.getCurrentFloor().getTileAt(this.currentPosition.toCoordinate()) == npc.getCurrentFloor()
                 .getTileAt(npc.getPosition().toCoordinate())) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {
-                    new DialogGui().initGui();
+                    new ShopGui(this);
+                    //new DialogGui().initGui();
                 }
             }
         }
-    }
+    }*/
 
     /*
     private void talkToMinigameNpc() {
@@ -501,7 +503,7 @@ public class Hero extends Moveable {
                 this.rangedFight.startRangedAttack();
                 this.attributes.setCurrentMana(this.attributes.getCurrentMana() - 5);
             } else {
-                
+
             }
         }
     }
@@ -511,7 +513,7 @@ public class Hero extends Moveable {
      */
     private void auraSkill() {
         if(this.attributes.getLevel() < this.aura.getAuraAttributes().getAuraLevel()){
-            this.auraStatus = "not learned"; 
+            this.auraStatus = "not learned";
         }else{
             if(this.auraStatus != "aura inactive" && this.auraStatus != "aura active"){
                 this.auraStatus = "aura inactive";
@@ -530,7 +532,7 @@ public class Hero extends Moveable {
                 }
             }
         }
-        
+
     }
 
     /**
@@ -547,7 +549,7 @@ public class Hero extends Moveable {
      */
     private void convertSkill() {
         if(this.attributes.getLevel() < this.convert.getConvertAttributes().getSkillLevel()){
-            this.convertStatus = "not learned"; 
+            this.convertStatus = "not learned";
         }else{
             if(this.convertStatus == "not learned"){
                 if(!this.convert.enoughRessources(this)){
@@ -569,14 +571,14 @@ public class Hero extends Moveable {
                     if (this.name.equals("Hunter")) {
                         this.convertDuration = this.convert.getConvertAttributes().getDuration();
                     }
-    
+
                 }
             }
-            
+
         }
 
 
-        
+
     }
 
     /**
